@@ -1,8 +1,8 @@
 # HCIProjekat02
 
----
+
 ##Uputstvo
----
+
 1. VisualStudio
 2. Obrisi sve iz Migrations direktorijuma (sem .gitkeep)
 3. Core -> Persistence -> Obrisi sve fajlove koji imaju .db u imenu
