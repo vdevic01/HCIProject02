@@ -1,4 +1,5 @@
-﻿using HCIProject02.GUI.Features.LoginAndRegister;
+﻿using HCIProject02.Core.Persistance;
+using HCIProject02.GUI.Features.LoginAndRegister;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace HCIProject02.Core.Ninject
     {
         public override void Load()
         {
-            Bind<LoginViewModel>().To<LoginViewModel>();
+            Bind<DatabaseContext>().To<DatabaseContext>().InSingletonScope().WithConstructorArgument(0);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCIProject02.Core.Persistance;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,12 @@ namespace HCIProject02
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            using (DatabaseContext db = new DatabaseContext(0))
+            {
+                //DatabaseContextSeed.Seed(db);
+            }
+        }
     }
 }
