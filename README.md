@@ -1,7 +1,7 @@
 # HCIProjekat02
 
 
-##Uputstvo
+## Uputstvo
 ---
 1. VisualStudio
 2. Obrisi sve iz Migrations direktorijuma (sem .gitkeep)
