@@ -36,6 +36,9 @@ bld/
 
 Migrations/*
 !Migrations/.gitkeep
+*.db-shm
+*.db-wal
+*.db
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
