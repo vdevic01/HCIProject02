@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.LoginAndRegister.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister"
+             mc:Ignorable="d"
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.625*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="../../../Resources/login_cover.jpg"
+               Grid.Column="0"
+               Stretch="UniformToFill"/>
+        <Border Padding="20px" Grid.Column="1" MaxWidth="500px">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ScrollViewer Grid.Row="0" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Label Content="Login"
+                       HorizontalAlignment="Center"
+                       Style="{StaticResource HeaderText}"
+                       FontSize="40px"/>
+                        <Label Content="Email"
+                       Margin="0 20 0 -5"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource DefaultText}"
+                       FontSize="15px"/>
+                        <TextBox FontSize="15px" Style="{StaticResource DefaultTextBoxStyle}"/>
+                        <Label Content="Password"
+                       Margin="0 10 0 -5"
+                       HorizontalAlignment="Left"
+                       Style="{StaticResource DefaultText}"
+                       FontSize="15px"/>
+                        <PasswordBox FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Orientation="Vertical" Grid.Row="1">
+                    <Button Height="40px"
+                        FontSize="20px"
+                        Content="Login"
+                        Style="{StaticResource DefaultButtonStyle}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Don't have an account?"
+                               FontSize="15"
+                               Style="{StaticResource DefaultText}"/>
+                        <Label Content="Sign up"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource LinkText}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
