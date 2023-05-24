@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Navigation
 {
-    internal class Navigator
+    public class Navigator
     {
         private static readonly IDictionary<ViewType, IList<Action>> _eventHandlers;
         private static readonly IDictionary<ViewType, IList<Action<object>>> _eventHandlersWithParameters;

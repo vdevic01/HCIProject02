@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Model
 {
-    internal class Agent : User
+    public class Agent : User
     {
         public Agent() { }
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Model
 {
-    internal abstract class User : BaseObservableEntity
+    public abstract class User : BaseObservableEntity
     {
 
         #region Properties

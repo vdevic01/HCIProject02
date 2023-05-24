@@ -9,8 +9,8 @@ namespace HCIProject02.GUI.ViewModel
 {
     class NavigableViewModel : ObservableEntity
     {
-        private object _currentViewModel;
-        public object CurrentViewModel { get => _currentViewModel; set => OnPropertyChanged(ref _currentViewModel, value); }
+        private object? _currentViewModel;
+        public object? CurrentViewModel { get => _currentViewModel; set => OnPropertyChanged(ref _currentViewModel, value); }
 
         public NavigableViewModel()
         {

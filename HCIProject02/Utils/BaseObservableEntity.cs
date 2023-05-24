@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Utils
 {
-    internal class BaseObservableEntity : ObservableEntity, IBaseEntity
+    public class BaseObservableEntity : ObservableEntity, IBaseEntity
     {
         #region Properties
         private Guid _id;

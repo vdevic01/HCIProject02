@@ -3,12 +3,17 @@
     <!--Fonts-->
     <FontFamily x:Key="StrongFont">pack://application:,,,/HCIProject02;Component/GUI/Fonts/#Fjalla One</FontFamily>
     <FontFamily x:Key="DefaultFont">pack://application:,,,/HCIProject02;Component/GUI/Fonts/#Noto Sans Light</FontFamily>
+    <FontFamily x:Key="PasswordFont">pack://application:,,,/HCIProject02;Component/GUI/Fonts/#Password</FontFamily>
     
     <!--Colors-->
     <SolidColorBrush x:Key="DefaultButtonColor" Color="#D89A80"/>
     <SolidColorBrush x:Key="DefaultButtonColorHover" Color="#E3A68D"/>
     <SolidColorBrush x:Key="DefaultButtonColorClick" Color="#E3B6A1"/>
+    <SolidColorBrush x:Key="DefaultButtonDisabledBackground" Color="#BF9E8F"/>
+    <SolidColorBrush x:Key="DefaultButtonDisabledForeground" Color="#EBEBEB"/>
+    
     <SolidColorBrush x:Key="TextLight" Color="White"/>
+    <SolidColorBrush x:Key="TextError" Color="#D12A2A"/>
     <SolidColorBrush x:Key="DefaultBackground" Color="White"/>
     <SolidColorBrush x:Key="TextDark" Color="#323228"/>
     <SolidColorBrush x:Key="BorderColor" Color="#ECE8E2"/>
@@ -34,6 +39,12 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{StaticResource DefaultButtonColorClick}"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource DefaultButtonDisabledBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource DefaultButtonDisabledForeground}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -50,6 +61,11 @@
     <Style TargetType="Label" x:Key="DefaultText">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="ErrorText">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextError}"/>
     </Style>
     
     <Style TargetType="Label" x:Key="HeaderText">
@@ -96,15 +112,15 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="PasswordBox" x:Key="DefaultPasswordBoxStyle">
-        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+    <Style TargetType="TextBox" x:Key="DefaultPasswordBoxStyle">
+        <Setter Property="FontFamily" Value="{StaticResource PasswordFont}"/>
         <Setter Property="Padding" Value="10px"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="PasswordBox">
+                <ControlTemplate TargetType="TextBox">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         Background="{TemplateBinding Background}"

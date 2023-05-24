@@ -38,7 +38,7 @@
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <PasswordBox FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                        <TextBox FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
                     </StackPanel>
                 </ScrollViewer>
                 <StackPanel Orientation="Vertical" Grid.Row="1">

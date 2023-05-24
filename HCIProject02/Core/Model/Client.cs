@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Model
 {
-    internal class Client : User
+    public class Client : User
     {
         public Client() { }
     }

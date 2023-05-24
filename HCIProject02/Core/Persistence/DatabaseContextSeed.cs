@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Persistance
 {
-    internal class DatabaseContextSeed
+    public class DatabaseContextSeed
     {
         public static void Seed(DatabaseContext context)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Navigation
 {
-    internal enum ViewType
+    public enum ViewType
     {
         LoginView,
         RegisterView

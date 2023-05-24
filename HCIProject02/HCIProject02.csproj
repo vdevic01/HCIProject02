@@ -13,6 +13,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="GUI\Fonts\NotoSans-Light.ttf" />
+    <None Remove="GUI\Fonts\password.ttf" />
     <None Remove="Resources\register_cover.jpg" />
   </ItemGroup>
   <ItemGroup>

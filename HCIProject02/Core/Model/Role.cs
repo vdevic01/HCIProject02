@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Model
 {
-    internal enum Role
+    public enum Role
     {
         Client, Agent
     }

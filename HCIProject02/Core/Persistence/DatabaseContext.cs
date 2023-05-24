@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Persistance
 {
-    internal class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public string DbPath { get; }
         private static string filename = "travelagency.db";
