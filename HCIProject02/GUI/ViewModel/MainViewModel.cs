@@ -1,4 +1,6 @@
-﻿using HCIProject02.GUI.Features.LoginAndRegister;
+﻿using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.Features.LoginAndRegister;
+using HCIProject02.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +21,17 @@ namespace HCIProject02.GUI.ViewModel
         }
         private void RegisterHandler()
         {
-
+            ViewModelBase viewModel;
+            Navigator.RegisterHandler(ViewType.RegisterView, () =>
+            {
+                viewModel = ServiceLocator.Get<RegisterViewModel>();
+                SwitchCurrentViewModel(viewModel);
+            });
+            Navigator.RegisterHandler(ViewType.LoginView, () =>
+            {
+                viewModel = ServiceLocator.Get<LoginViewModel>();
+                SwitchCurrentViewModel(viewModel);
+            });
         }
     }
 }

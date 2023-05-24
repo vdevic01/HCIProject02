@@ -88,7 +88,8 @@
                         <Label Content="Already have an account?"
                                FontSize="15"
                                Style="{StaticResource DefaultText}"/>
-                        <Label Content="Log in"
+                        <Button Content="Log in"
+                               Command="{Binding NavigateToLoginViewCommand}"
                                FontSize="15"
                                VerticalAlignment="Center"
                                Style="{StaticResource LinkText}"/>

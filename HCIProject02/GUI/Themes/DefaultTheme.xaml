@@ -57,13 +57,13 @@
         <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
     </Style>
 
-    <Style TargetType="Label" x:Key="LinkText">
+    <Style TargetType="Button" x:Key="LinkText">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource LinkColor}"/>
         
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Label">
+                <ControlTemplate TargetType="Button">
                     <TextBlock Text="{TemplateBinding Content}"
                            TextDecorations="Underline" />
                 </ControlTemplate>

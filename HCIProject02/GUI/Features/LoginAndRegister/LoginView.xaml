@@ -50,7 +50,8 @@
                         <Label Content="Don't have an account?"
                                FontSize="15"
                                Style="{StaticResource DefaultText}"/>
-                        <Label Content="Sign up"
+                        <Button Content="Sign up"
+                               Command="{Binding NavigateToRegisterViewCommand}"
                                FontSize="15"
                                VerticalAlignment="Center"
                                Style="{StaticResource LinkText}"/>
