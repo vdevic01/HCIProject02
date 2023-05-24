@@ -9,6 +9,8 @@ namespace HCIProject02.Navigation
     public enum ViewType
     {
         LoginView,
-        RegisterView
+        RegisterView,
+        ClientHome,
+        DestinationsView
     }
 }
