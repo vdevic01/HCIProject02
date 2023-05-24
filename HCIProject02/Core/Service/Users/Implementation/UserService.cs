@@ -1,5 +1,6 @@
 ﻿using HCIProject02.Core.Model;
 using HCIProject02.Core.Repository.Users;
+using HCIProject02.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,9 +50,28 @@ namespace HCIProject02.Core.Service.Users.Implementation
 
         public User Create(User user)
         {
+            User duplicate = userRepository.FindUserByEmail(user.EmailAddress);
+            if (duplicate != null)
+            {
+                throw new DuplicateEmailExcpetion();
+            }
             string hash = HashPassword(user.Password);
             user.Password = hash;
             return userRepository.Create(user);
+        }
+
+        public User? Authenticate(string email, string password)
+        {
+            User? user = userRepository.FindUserByEmail(email);
+            if (user == null)
+            {
+                return null;
+            }
+            if(!IsValidPassword(password, user.Password))
+            {
+                return null;
+            }
+            return user;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Commands;
+using HCIProject02.Core.Exceptions;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Users;
 using HCIProject02.GUI.ViewModel;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HCIProject02.GUI.Features.LoginAndRegister
@@ -127,7 +129,17 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
                 return;
             }
             User user = new Client { FirstName = FirstName, LastName = LastName, Password = Password, EmailAddress = Email };
-            userService.Create(user);
+            try
+            {
+                userService.Create(user);
+            }
+            catch (DuplicateEmailExcpetion)
+            {
+                ErrorMessage = "User with this email already exists";
+                return;
+            }
+            MessageBox.Show("Account created");
+            Navigator.FireEvent(ViewType.LoginView);
         }
 
         public RegisterViewModel(IUserService userService)

@@ -18,8 +18,9 @@
     <SolidColorBrush x:Key="TextDark" Color="#323228"/>
     <SolidColorBrush x:Key="BorderColor" Color="#ECE8E2"/>
     <SolidColorBrush x:Key="LinkColor" Color="#6993FF"/>
-    
-    
+    <SolidColorBrush x:Key="GraphicalElementsColor" Color="#8E735B"/>
+
+
     <Style TargetType="Button" x:Key="DefaultButtonStyle">
         <Setter Property="Background" Value="{StaticResource DefaultButtonColor}"/>
         <Setter Property="Foreground" Value="{StaticResource TextLight}"/>

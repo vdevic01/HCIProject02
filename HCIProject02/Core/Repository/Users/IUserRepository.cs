@@ -9,6 +9,6 @@ namespace HCIProject02.Core.Repository.Users
 {
     public interface IUserRepository : ICrudRepository<User>
     {
-        
+        User? FindUserByEmail(string email);
     }
 }

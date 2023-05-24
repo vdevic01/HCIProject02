@@ -10,5 +10,7 @@ namespace HCIProject02.Core.Service.Users
     public interface IUserService
     {
         public User Create(User user);
+
+        public User? Authenticate(string email, string password);
     }
 }

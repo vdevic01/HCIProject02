@@ -2,11 +2,17 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister"
              mc:Ignorable="d"
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.625*"/>
@@ -18,34 +24,42 @@
         <Border Padding="20px" Grid.Column="1" MaxWidth="500px">
             <Grid>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <ScrollViewer Grid.Row="0" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-                    <StackPanel Orientation="Vertical">
-                        <Label Content="Login"
+                <Label Content="Login"
+                       Grid.Row="0"
                        HorizontalAlignment="Center"
                        Style="{StaticResource HeaderText}"
                        FontSize="40px"/>
+                <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+
                         <Label Content="Email"
                        Margin="0 20 0 -5"
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Style="{StaticResource DefaultTextBoxStyle}"/>
+                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}"/>
                         <Label Content="Password"
                        Margin="0 10 0 -5"
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                        <TextBox FontSize="15px" Text="{Binding Password}" Style="{StaticResource DefaultPasswordBoxStyle}"/>
                     </StackPanel>
                 </ScrollViewer>
-                <StackPanel Orientation="Vertical" Grid.Row="1">
+                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                    <Label Content="{Binding ErrorMessage}"
+                           FontSize="15px"
+                           Style="{StaticResource ErrorText}"
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
                     <Button Height="40px"
-                        FontSize="20px"
-                        Content="Login"
-                        Style="{StaticResource DefaultButtonStyle}"/>
+                            Command="{Binding LoginUserCommand}"
+                            FontSize="20px"
+                            Content="Login"
+                            Style="{StaticResource DefaultButtonStyle}"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Label Content="Don't have an account?"
                                FontSize="15"
