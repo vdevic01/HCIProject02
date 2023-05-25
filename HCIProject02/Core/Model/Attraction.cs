@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Model
 {
-    public class Client : User
+    public class Attraction : PointOfInterest
     {
         private IList<Arrangement> _arrangements;
         public virtual IList<Arrangement> Arrangements { get => _arrangements; set => OnPropertyChanged(ref _arrangements, value); }
-        public Client() { }
+        public Attraction() { }
+        public Attraction(Attraction other) : base(other)
+        {
+            Arrangements = other.Arrangements;
+        }
     }
 }

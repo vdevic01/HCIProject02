@@ -1,4 +1,5 @@
-﻿using HCIProject02.Core.Ninject;
+﻿using HCIProject02.Core.Model;
+using HCIProject02.Core.Ninject;
 using HCIProject02.GUI.Features.ClientInterface;
 using HCIProject02.GUI.Features.LoginAndRegister;
 using HCIProject02.Navigation;
@@ -18,7 +19,7 @@ namespace HCIProject02.GUI.ViewModel
         public MainViewModel(LoginViewModel loginViewModel) {
             LoginViewModelLogin = loginViewModel;
             SwitchCurrentViewModel(loginViewModel);
-            RegisterHandler();
+            RegisterHandler();            
         }
         private void RegisterHandler()
         {
@@ -33,9 +34,11 @@ namespace HCIProject02.GUI.ViewModel
                 viewModel = ServiceLocator.Get<LoginViewModel>();
                 SwitchCurrentViewModel(viewModel);
             });
-            Navigator.RegisterHandler(ViewType.ClientHome, () =>
+            Navigator.RegisterHandler(ViewType.ClientHome, obj =>
             {
+                User user = (User)obj;
                 viewModel = ServiceLocator.Get<NavigationViewModel>();
+                ((NavigationViewModel)viewModel).AuthenticatedUser = user;
                 SwitchCurrentViewModel(viewModel);
             });
         }

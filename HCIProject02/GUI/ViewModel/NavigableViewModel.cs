@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.GUI.ViewModel
 {
-    class NavigableViewModel : ObservableEntity
+    public class NavigableViewModel : ObservableEntity
     {
         private object? _currentViewModel;
         public object? CurrentViewModel { get => _currentViewModel; set => OnPropertyChanged(ref _currentViewModel, value); }

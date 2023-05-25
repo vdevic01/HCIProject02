@@ -1,6 +1,7 @@
 ﻿using HCIProject02.Utils;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,7 @@ namespace HCIProject02.Core.Model
     public abstract class User : BaseObservableEntity
     {
 
-        #region Properties
-
+        #region Properties        
         private string _emailAddress;
         public string EmailAddress { get => _emailAddress; set => OnPropertyChanged(ref _emailAddress, value); }
 

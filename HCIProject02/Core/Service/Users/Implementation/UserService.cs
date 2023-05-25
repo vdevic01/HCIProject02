@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Service.Users.Implementation
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
 
@@ -27,7 +27,7 @@ namespace HCIProject02.Core.Service.Users.Implementation
             byte[] hashWithSalt = new byte[36];
             Array.Copy(salt, 0, hashWithSalt, 0, 16);
             Array.Copy(hash, 0, hashWithSalt, 16, 20);
-            string passwordHash = Convert.ToBase64String(hash);
+            string passwordHash = Convert.ToBase64String(hashWithSalt);
             return passwordHash;
         }
 
@@ -50,7 +50,7 @@ namespace HCIProject02.Core.Service.Users.Implementation
 
         public User Create(User user)
         {
-            User duplicate = userRepository.FindUserByEmail(user.EmailAddress);
+            User? duplicate = userRepository.FindUserByEmail(user.EmailAddress);
             if (duplicate != null)
             {
                 throw new DuplicateEmailExcpetion();

@@ -50,8 +50,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-
-        <Setter Property="Cursor" Value="Arrow" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Cursor" Value="Hand" />

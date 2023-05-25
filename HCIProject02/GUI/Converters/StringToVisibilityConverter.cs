@@ -9,7 +9,7 @@ using System.Windows.Data;
 
 namespace HCIProject02.GUI.Converters
 {
-    internal class StringToVisibilityConverter : IValueConverter
+    public class StringToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

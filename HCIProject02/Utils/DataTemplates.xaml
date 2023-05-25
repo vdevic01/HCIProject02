@@ -11,4 +11,7 @@
     <DataTemplate DataType="{x:Type clientInterface:NavigationViewModel}">
         <clientInterface:NavigationView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:DestinationsViewModel}">
+        <clientInterface:DestinationsView/>
+    </DataTemplate>
 </ResourceDictionary>
