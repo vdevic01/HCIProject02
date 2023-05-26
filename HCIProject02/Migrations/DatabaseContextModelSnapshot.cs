@@ -36,25 +36,13 @@ namespace HCIProject02.Migrations
                     b.ToTable("ArrangementAttraction");
                 });
 
-            modelBuilder.Entity("ArrangementClient", b =>
-                {
-                    b.Property<Guid>("ArrangementsId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<Guid>("PassengersId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ArrangementsId", "PassengersId");
-
-                    b.HasIndex("PassengersId");
-
-                    b.ToTable("ArrangementClient");
-                });
-
             modelBuilder.Entity("HCIProject02.Core.Model.Arrangement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid?>("ClientId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -76,6 +64,9 @@ namespace HCIProject02.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("IsAvailable")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -92,11 +83,46 @@ namespace HCIProject02.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ClientId");
+
                     b.HasIndex("DestinationId");
 
                     b.HasIndex("HotelId");
 
                     b.ToTable("Arrangments");
+                });
+
+            modelBuilder.Entity("HCIProject02.Core.Model.Booking", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("ArrangementId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("BookingTime")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("PassengerId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArrangementId");
+
+                    b.HasIndex("PassengerId");
+
+                    b.ToTable("Bookings");
                 });
 
             modelBuilder.Entity("HCIProject02.Core.Model.PointOfInterest", b =>
@@ -106,14 +132,12 @@ namespace HCIProject02.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Address")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Discriminator")
@@ -121,16 +145,15 @@ namespace HCIProject02.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Latitude")
+                    b.Property<double?>("Latitude")
                         .HasColumnType("REAL");
 
-                    b.Property<double>("Longitude")
+                    b.Property<double?>("Longitude")
                         .HasColumnType("REAL");
 
                     b.Property<string>("Name")
@@ -250,23 +273,12 @@ namespace HCIProject02.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ArrangementClient", b =>
-                {
-                    b.HasOne("HCIProject02.Core.Model.Arrangement", null)
-                        .WithMany()
-                        .HasForeignKey("ArrangementsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HCIProject02.Core.Model.Client", null)
-                        .WithMany()
-                        .HasForeignKey("PassengersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("HCIProject02.Core.Model.Arrangement", b =>
                 {
+                    b.HasOne("HCIProject02.Core.Model.Client", null)
+                        .WithMany("Arrangements")
+                        .HasForeignKey("ClientId");
+
                     b.HasOne("HCIProject02.Core.Model.Destination", "Destination")
                         .WithMany()
                         .HasForeignKey("DestinationId")
@@ -282,6 +294,30 @@ namespace HCIProject02.Migrations
                     b.Navigation("Destination");
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("HCIProject02.Core.Model.Booking", b =>
+                {
+                    b.HasOne("HCIProject02.Core.Model.Arrangement", "Arrangement")
+                        .WithMany()
+                        .HasForeignKey("ArrangementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HCIProject02.Core.Model.Client", "Passenger")
+                        .WithMany()
+                        .HasForeignKey("PassengerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Arrangement");
+
+                    b.Navigation("Passenger");
+                });
+
+            modelBuilder.Entity("HCIProject02.Core.Model.Client", b =>
+                {
+                    b.Navigation("Arrangements");
                 });
 #pragma warning restore 612, 618
         }

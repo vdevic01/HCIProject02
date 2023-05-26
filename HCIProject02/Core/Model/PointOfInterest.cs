@@ -12,20 +12,20 @@ namespace HCIProject02.Core.Model
         private string _name;
         public string Name { get => _name; set => OnPropertyChanged(ref _name, value); }
 
-        private string _description;
-        public string Description { get => _description; set => OnPropertyChanged(ref _description, value); }
+        private string? _description;
+        public string? Description { get => _description; set => OnPropertyChanged(ref _description, value); }
 
-        private double _latitude;
-        public double Latitude { get => _latitude; set => OnPropertyChanged(ref _latitude, value);}
+        private double? _latitude;
+        public double? Latitude { get => _latitude; set => OnPropertyChanged(ref _latitude, value);}
 
-        private double _longitude;
-        public double Longitude { get => _longitude; set => OnPropertyChanged(ref _longitude, value); }
+        private double? _longitude;
+        public double? Longitude { get => _longitude; set => OnPropertyChanged(ref _longitude, value); }
 
-        private string _address;
-        public string Address { get => _address; set => OnPropertyChanged(ref _address, value); }
+        private string? _address;
+        public string? Address { get => _address; set => OnPropertyChanged(ref _address, value); }
 
-        private string _imagePath;
-        public string ImagePath { get => _imagePath; set => OnPropertyChanged(ref _imagePath, value); }
+        private string? _imagePath;
+        public string? ImagePath { get => _imagePath; set => OnPropertyChanged(ref _imagePath, value); }
 
         public PointOfInterest() { }
         protected PointOfInterest(PointOfInterest other) : base(other)

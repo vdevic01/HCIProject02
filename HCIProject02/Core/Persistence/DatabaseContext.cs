@@ -21,7 +21,9 @@ namespace HCIProject02.Core.Persistance
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Hotel> Hotels { get; set; }
         public DbSet<Attraction> Attractions { get; set; }
+        public DbSet<Destination> Destinations { get; set; }
         public DbSet<Arrangement> Arrangments { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
         public DatabaseContext()
         {
             var folder = Directory.GetCurrentDirectory();

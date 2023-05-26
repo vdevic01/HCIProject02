@@ -38,8 +38,8 @@ namespace HCIProject02.Core.Model
         private string _tripPlan;
         public string TripPlan { get => _tripPlan; set => OnPropertyChanged(ref _tripPlan, value);}
 
-        private IList<Client> _passengers;
-        public virtual IList<Client> Passengers { get => _passengers; set => OnPropertyChanged(ref _passengers, value); }
+        private bool _isAvailable;  // if arrangement is not available it is not shown to the clients, it should still be shown in agent tables, do not confuse with isActive property
+        public bool IsAvailable { get => _isAvailable; set => OnPropertyChanged(ref _isAvailable, value); }
 
         public Arrangement()
         {
