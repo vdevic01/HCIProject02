@@ -34,7 +34,7 @@ bld/
 [Ll]og/
 [Ll]ogs/
 
-Migrations/*
+HCIProject02/Migrations/*
 !Migrations/.gitkeep
 *.db-shm
 *.db-wal
