@@ -11,6 +11,7 @@ namespace HCIProject02.Navigation
         LoginView,
         RegisterView,
         ClientHome,
-        DestinationsView
+        DestinationsView,
+        ArrangementView
     }
 }

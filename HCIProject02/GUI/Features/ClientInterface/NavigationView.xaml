@@ -54,6 +54,23 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+            <Button Visibility="{Binding ReturnButtonVisibility}" Style="{StaticResource NavigationButtonStyle}" HorizontalAlignment="Left" Command="{Binding ReturnCommand}">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Margin="15"  VerticalAlignment="Center" Kind="ArrowLeft"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#A68871"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6E5945"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
             <Button Content="☰ Navigation"
                     Grid.Row="0"
                     HorizontalAlignment="Right"

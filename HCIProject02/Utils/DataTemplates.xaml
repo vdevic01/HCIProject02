@@ -14,4 +14,7 @@
     <DataTemplate DataType="{x:Type clientInterface:DestinationsViewModel}">
         <clientInterface:DestinationsView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:ArrangementViewModel}">
+        <clientInterface:ArrangementView/>
+    </DataTemplate>
 </ResourceDictionary>
