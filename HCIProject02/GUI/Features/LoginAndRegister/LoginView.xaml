@@ -18,7 +18,7 @@
             <ColumnDefinition Width="0.625*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Image Source="../../../Resources/login_cover.jpg"
+        <Image Source="../../../Resources/Images/Static/login_cover.jpg"
                Grid.Column="0"
                Stretch="UniformToFill"/>
         <Border Padding="20px" Grid.Column="1" MaxWidth="500px">

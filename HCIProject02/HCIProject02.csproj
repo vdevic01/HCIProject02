@@ -15,11 +15,16 @@
     <None Remove="GUI\Fonts\NotoSans-Light.ttf" />
     <None Remove="GUI\Fonts\password.ttf" />
     <None Remove="Resources\register_cover.jpg" />
+    <None Remove="Resources\test_img.png" />
   </ItemGroup>
   <ItemGroup>
-	  <Content Include="Resources\*">
+	  <Content Include="Resources\**">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\Static\login_cover.jpg" />
+    <Content Include="Resources\Images\Static\register_cover.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MaterialDesignThemes" Version="4.9.0" />

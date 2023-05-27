@@ -61,7 +61,10 @@
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
     </Style>
-    
+    <Style TargetType="TextBlock" x:Key="DefaultTextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+    </Style>
     <Style TargetType="Label" x:Key="ErrorText">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource TextError}"/>

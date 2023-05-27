@@ -31,9 +31,8 @@ namespace HCIProject02.Core.Model
         private IList<Attraction> _attractions;
         public virtual IList<Attraction> Attractions { get => _attractions; set => OnPropertyChanged(ref _attractions, value); }
 
-        private Destination _destination;
-
-        public virtual Destination Destination { get => _destination; set => OnPropertyChanged(ref _destination, value); }
+        private string _imagePath;
+        public string ImagePath { get => _imagePath; set => OnPropertyChanged(ref _imagePath, value); }
 
         private string _tripPlan;
         public string TripPlan { get => _tripPlan; set => OnPropertyChanged(ref _tripPlan, value);}

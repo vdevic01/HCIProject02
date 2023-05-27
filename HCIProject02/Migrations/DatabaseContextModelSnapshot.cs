@@ -55,10 +55,11 @@ namespace HCIProject02.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("DestinationId")
+                    b.Property<Guid>("HotelId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("HotelId")
+                    b.Property<string>("ImagePath")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("IsActive")
@@ -84,8 +85,6 @@ namespace HCIProject02.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("DestinationId");
 
                     b.HasIndex("HotelId");
 
@@ -220,13 +219,6 @@ namespace HCIProject02.Migrations
                     b.HasDiscriminator().HasValue("Attraction");
                 });
 
-            modelBuilder.Entity("HCIProject02.Core.Model.Destination", b =>
-                {
-                    b.HasBaseType("HCIProject02.Core.Model.PointOfInterest");
-
-                    b.HasDiscriminator().HasValue("Destination");
-                });
-
             modelBuilder.Entity("HCIProject02.Core.Model.Hotel", b =>
                 {
                     b.HasBaseType("HCIProject02.Core.Model.PointOfInterest");
@@ -279,19 +271,11 @@ namespace HCIProject02.Migrations
                         .WithMany("Arrangements")
                         .HasForeignKey("ClientId");
 
-                    b.HasOne("HCIProject02.Core.Model.Destination", "Destination")
-                        .WithMany()
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("HCIProject02.Core.Model.Hotel", "Hotel")
                         .WithMany()
                         .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Destination");
 
                     b.Navigation("Hotel");
                 });

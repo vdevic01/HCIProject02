@@ -45,13 +45,13 @@
                         <Border BorderBrush="{StaticResource BorderColor}"
                                 BorderThickness="1.5"
                                 CornerRadius="3"
-                                Margin="10"
                                 Padding="10">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.5*"/>
                                     <ColumnDefinition Width="0.5*"/>
                                 </Grid.ColumnDefinitions>
+
                                 <StackPanel Grid.Column="0" Orientation="Vertical">
                                     <Label FontSize="18" Content="{Binding Name}" Style="{StaticResource HeaderText}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding DepartureTime, Converter={StaticResource DepartureConverter}}"/>
@@ -84,11 +84,14 @@
                                         </Button.Template>
                                     </Button>
                                 </StackPanel>
-                                <Image Grid.Column="1" Source="Destination.ImagePath" Width="80" Height="80">
-                                    <Image.Clip>
-                                        <EllipseGeometry Center="40,40" RadiusX="40" RadiusY="40"/>
-                                    </Image.Clip>
-                                </Image>
+                                <Path Height="150" Width="150" Grid.Column="1">
+                                    <Path.Fill>
+                                        <ImageBrush ImageSource="{Binding ImagePath}" Stretch="UniformToFill" />
+                                    </Path.Fill>
+                                    <Path.Data>
+                                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                                    </Path.Data>
+                                </Path>
                             </Grid>
                         </Border>
                     </DataTemplate>

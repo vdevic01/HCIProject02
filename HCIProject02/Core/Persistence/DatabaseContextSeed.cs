@@ -14,18 +14,17 @@ namespace HCIProject02.Core.Persistance
             var attraction01 = new Attraction { Address = "address 01", Name = "attraction01", Description = "desc", Latitude = 1, Longitude = 1, ImagePath = null };
             var attraction02 = new Attraction { Address = "address 02", Name = "attraction02", Description = "desc", Latitude = 1, Longitude = 1, ImagePath = null };
             var hotel01 = new Hotel { Address = "address 03", Name = "Hotel Name", ImagePath=null};
-            var destination01 = new Destination { ImagePath= null, Name="Belgrade"};
             List<Attraction> attractions = new List<Attraction>();
             attractions.Add(attraction01);
             attractions.Add(attraction02);
             var arrangement = new Arrangement
             {
                 Attractions = attractions,
-                Name = "arrengment01",
+                Name = "Arrangement01",
                 DepartureTime = DateTime.Now,
                 ReturnTime = DateTime.Now,
                 Description = "desc",
-                Destination = destination01,
+                ImagePath = "../../../Resources/Images/Dynamic/Arrangements/belgrade.jpg",
                 Price = 112.1,
                 IsAvailable = true,
                 Hotel = hotel01,
@@ -41,7 +40,6 @@ namespace HCIProject02.Core.Persistance
             context.Attractions.Add(attraction01);
             context.Attractions.Add(attraction02);
             context.Hotels.Add(hotel01);
-            context.Destinations.Add(destination01);
             context.Arrangments.Add(arrangement);
             context.SaveChanges();
         }
