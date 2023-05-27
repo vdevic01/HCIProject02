@@ -16,7 +16,7 @@ namespace HCIProject02.Core.Repository.Users.Implementation
         }
 
         public User? FindUserByEmail(string email)
-        {            
+        {
             return _entities.FirstOrDefault(user => user.EmailAddress == email);
         }
     }
