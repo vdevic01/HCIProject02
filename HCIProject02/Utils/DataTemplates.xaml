@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clientInterface="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+                    xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
         <loginAndRegister:LoginView/>
@@ -16,5 +17,8 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:ArrangementViewModel}">
         <clientInterface:ArrangementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
+        <dialogs:YesNoDialogView/>
     </DataTemplate>
 </ResourceDictionary>

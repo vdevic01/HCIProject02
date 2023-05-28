@@ -7,6 +7,7 @@ using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
 using HCIProject02.Core.Service.Users;
 using HCIProject02.Core.Service.Users.Implementation;
+using HCIProject02.GUI.Dialog;
 using HCIProject02.GUI.Features.LoginAndRegister;
 using Ninject.Modules;
 using System;
@@ -26,11 +27,14 @@ namespace HCIProject02.Core.Ninject
             #region Repository
             Bind(typeof(IUserRepository)).To(typeof(UserRepository));
             Bind(typeof(IArrangementRepository)).To(typeof(ArrangementRepository));
+            Bind(typeof(IBookingRepository)).To(typeof(BookingRepository));
             #endregion
 
             #region Service
             Bind(typeof(IUserService)).To(typeof(UserService));
             Bind(typeof(IArrangementService)).To(typeof(ArrangementService));
+            Bind(typeof(IDialogService)).To(typeof(DialogService));
+            Bind(typeof(IBookingService)).To(typeof(BookingService));
             #endregion
         }
     }

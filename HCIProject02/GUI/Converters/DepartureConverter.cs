@@ -14,7 +14,7 @@ namespace HCIProject02.GUI.Converters
         {
             DateTime date = (DateTime)value;
             CultureInfo serbianLatinCulture = new CultureInfo("sr-Latn-RS");
-            return "departure: " + date.ToString("d", serbianLatinCulture);
+            return "Departure: " + date.ToString("d", serbianLatinCulture);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

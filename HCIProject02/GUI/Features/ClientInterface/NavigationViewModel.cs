@@ -63,7 +63,6 @@ namespace HCIProject02.GUI.Features.ClientInterface
             object viewModel;
             Navigator.RegisterHandler(ViewType.DestinationsView, () =>
             {
-                ReturnButtonVisibility = Visibility.Collapsed;
                 viewModel = ServiceLocator.Get<DestinationsViewModel>();
                 SwitchCurrentViewModel(viewModel);
             });
@@ -72,12 +71,14 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 ReturnButtonVisibility = Visibility.Visible;
                 ReturnCommand = new RelayCommand(obj =>
                 {
+                    ReturnButtonVisibility = Visibility.Collapsed;
                     DestinationsViewModel destinationsViewModel = ServiceLocator.Get<DestinationsViewModel>();
                     SwitchCurrentViewModel(destinationsViewModel);
                 });
                 Arrangement arrangement = (Arrangement) obj;
                  viewModel = ServiceLocator.Get<ArrangementViewModel>();
                 ((ArrangementViewModel)viewModel).Arrangement = arrangement;
+                ((ArrangementViewModel)viewModel).AuthenticatedUser = AuthenticatedUser;
                 SwitchCurrentViewModel(viewModel);
             });
         }

@@ -12,7 +12,7 @@ namespace HCIProject02.GUI.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return "price: " + value + " EUR";
+            return "Price: " + value + " EUR";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
