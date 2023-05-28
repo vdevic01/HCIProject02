@@ -21,4 +21,7 @@
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type dialogs:OkDialogViewModel}">
+        <dialogs:OkDialogView/>
+    </DataTemplate>
 </ResourceDictionary>

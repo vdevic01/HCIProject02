@@ -47,8 +47,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
             _dialogService = dialogService;
             BookCommand = new RelayCommand(obj =>
             {
-                var dialog = new YesNoDialogViewModel("Arrangement booking confirmation", "Are you sure you want to book this arrangement?");
-                _dialogService.ShowDialog(dialog, result =>
+                var yesNoDialog = new YesNoDialogViewModel("Arrangement booking confirmation", "Are you sure you want to book this arrangement?");
+                _dialogService.ShowDialog(yesNoDialog, result =>
                 {
                     if(result == null)
                     {
@@ -56,14 +56,17 @@ namespace HCIProject02.GUI.Features.ClientInterface
                     }
                     if ((bool)result)
                     {
+                        OkDialogViewModel okDialog;
                         try
                         {
                             _bookingService.BookArrangement(Arrangement, (Client)AuthenticatedUser);
+                            okDialog = new OkDialogViewModel("Message", "Booking was successful.");
                         }
-                        catch (ArrangementAlreadyBookedException e)
+                        catch (ArrangementAlreadyBookedException)
                         {
-
+                            okDialog = new OkDialogViewModel("Message", "You have already booked this arrangement.");
                         }
+                        _dialogService.ShowDialog(okDialog, result => { }, true);
                     }
                 }, true);
             });
