@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:HCIProject02"
         xmlns:ninject="clr-namespace:HCIProject02.Core.Ninject"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Icon="/Resources/Images/Static/serbia.png">
     
     <Window.Resources>
         <ninject:ServiceLocator x:Key="ServiceLocator"/>
