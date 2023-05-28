@@ -2,6 +2,7 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Users;
+using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
 using MaterialDesignThemes.Wpf;
@@ -46,7 +47,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
             {
                 ICommand command = new RelayCommand(obj =>
                 {
-                    Navigator.FireEvent(ViewType.ArrangementView, arrangement);
+                    NavigatorEventDTO dto = new NavigatorEventDTO(arrangement, ViewType.DestinationsView);
+                    Navigator.FireEvent(ViewType.ArrangementView, dto);
                 });
                 ArrangementCardDTO card = new ArrangementCardDTO(arrangement, command);
                 return card;

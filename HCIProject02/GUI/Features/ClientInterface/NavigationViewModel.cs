@@ -1,6 +1,7 @@
 ﻿using HCIProject02.Commands;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
 using System;
@@ -28,11 +29,13 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 OnPropertyChanged(nameof(ReturnButtonVisibility));
             }
         }
-
+        
         #endregion
 
         #region Commands
         public ICommand LogoutCommand { get; }
+        public ICommand MyBookingsCommand {get;}
+        public ICommand DestinationsCommand { get; }
 
         private ICommand _returnCommand;
         public ICommand ReturnCommand
@@ -51,32 +54,54 @@ namespace HCIProject02.GUI.Features.ClientInterface
             AuthenticatedUser = null;
             Navigator.FireEvent(ViewType.LoginView);
         }
+        private void NavigateToMyBookingsView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            MyBookingsViewModel viewModel = ServiceLocator.Get<MyBookingsViewModel>();
+            viewModel.AuthenticatedUser = AuthenticatedUser;
+            SwitchCurrentViewModel(viewModel);
+        }
+        private void NavigateToDestinationsView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            DestinationsViewModel viewModel = ServiceLocator.Get<DestinationsViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
         public NavigationViewModel()
         {
             _returnButtonVisibility = Visibility.Collapsed;
             RegisterHandlers();
-            Navigator.FireEvent(ViewType.DestinationsView);
+            NavigateToDestinationsView();
+            DestinationsCommand = new RelayCommand(obj => NavigateToDestinationsView());
+            MyBookingsCommand = new RelayCommand(obj => NavigateToMyBookingsView());
             LogoutCommand = new RelayCommand(obj => LogoutUser());
         }
         private void RegisterHandlers()
-        {
-            object viewModel;
-            Navigator.RegisterHandler(ViewType.DestinationsView, () =>
-            {
-                viewModel = ServiceLocator.Get<DestinationsViewModel>();
-                SwitchCurrentViewModel(viewModel);
-            });
+        {            
             Navigator.RegisterHandler(ViewType.ArrangementView, (obj) =>
             {
+                if(obj == null)
+                {
+                    return;
+                }
                 ReturnButtonVisibility = Visibility.Visible;
-                ReturnCommand = new RelayCommand(obj =>
+                NavigatorEventDTO navigatorEventDTO = (NavigatorEventDTO)obj;
+                Arrangement arrangement = (Arrangement)navigatorEventDTO.Payload;
+                ViewType eventInvoker = navigatorEventDTO.EventInvoker;
+                ReturnCommand = new RelayCommand(param =>
                 {
                     ReturnButtonVisibility = Visibility.Collapsed;
-                    DestinationsViewModel destinationsViewModel = ServiceLocator.Get<DestinationsViewModel>();
-                    SwitchCurrentViewModel(destinationsViewModel);
+                    switch (eventInvoker)
+                    {
+                        case ViewType.DestinationsView:
+                            NavigateToDestinationsView();
+                            break;
+                        case ViewType.MyBookingsView:
+                            NavigateToMyBookingsView();
+                            break;
+                    }
                 });
-                Arrangement arrangement = (Arrangement) obj;
-                 viewModel = ServiceLocator.Get<ArrangementViewModel>();
+                ArrangementViewModel viewModel = ServiceLocator.Get<ArrangementViewModel>();
                 ((ArrangementViewModel)viewModel).Arrangement = arrangement;
                 ((ArrangementViewModel)viewModel).AuthenticatedUser = AuthenticatedUser;
                 SwitchCurrentViewModel(viewModel);

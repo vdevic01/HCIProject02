@@ -27,5 +27,10 @@ namespace HCIProject02.Core.Service.Travel.Implementation
             throw new ArrangementAlreadyBookedException();
             
         }
+
+        public List<Booking> GetBookingsForUser(Client user)
+        {
+            return _bookingRepository.GetBookingsForPassenger(user);
+        }
     }
 }

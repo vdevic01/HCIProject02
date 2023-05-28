@@ -12,6 +12,7 @@ namespace HCIProject02.Navigation
         RegisterView,
         ClientHome,
         DestinationsView,
-        ArrangementView
+        ArrangementView,
+        MyBookingsView
     }
 }

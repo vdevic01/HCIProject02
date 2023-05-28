@@ -18,6 +18,9 @@
     <DataTemplate DataType="{x:Type clientInterface:ArrangementViewModel}">
         <clientInterface:ArrangementView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:MyBookingsViewModel}">
+        <clientInterface:MyBookingsView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
     </DataTemplate>

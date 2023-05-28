@@ -10,5 +10,6 @@ namespace HCIProject02.Core.Service.Travel
     public interface IBookingService
     {
         public Booking BookArrangement(Arrangement arrangement, Client passenger);
+        public List<Booking> GetBookingsForUser(Client user);
     }
 }
