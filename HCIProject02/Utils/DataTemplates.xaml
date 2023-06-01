@@ -27,4 +27,7 @@
     <DataTemplate DataType="{x:Type dialogs:OkDialogViewModel}">
         <dialogs:OkDialogView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:NewHotelViewModel}">
+        <clientInterface:NewHotelView/>
+    </DataTemplate>
 </ResourceDictionary>

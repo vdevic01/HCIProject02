@@ -18,7 +18,7 @@ namespace HCIProject02
         {
             using (DatabaseContext db = new DatabaseContext(0))
             {
-                //DatabaseContextSeed.Seed(db);
+              //  DatabaseContextSeed.Seed(db);
             }
         }
     }
