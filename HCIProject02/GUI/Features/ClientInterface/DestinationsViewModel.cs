@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HCIProject02.GUI.Features.ClientInterface
@@ -31,17 +32,38 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private readonly IArrangementService arrangementService;
 
         private List<ArrangementCardDTO> _arrangements;
-        public List<ArrangementCardDTO> Arrangements
+        private List<ArrangementCardDTO> _filteredArrangements;
+        public List<ArrangementCardDTO> FilteredArrangements
         {
-            get => _arrangements;
+            get => _filteredArrangements;
             set
             {
-                _arrangements = value;
-                OnPropertyChanged(nameof(Arrangements));
+                _filteredArrangements = value;
+                OnPropertyChanged(nameof(FilteredArrangements));
             }
         }
+
+        private String? _searchText;
+        public String? SearchText
+        {
+            get => _searchText;
+            set
+            {
+                _searchText = value;
+                OnPropertyChanged(nameof(SearchText));
+                if (value != null)
+                {
+                    FilteredArrangements = _arrangements.Where(arrangementDTO => arrangementDTO.Arrangement.Name.ToLower().StartsWith(value.ToLower())).ToList();
+                }
+            }
+        }
+        public ICommand ClearSearchBoxCommand { get; }
         public DestinationsViewModel(IArrangementService arrangementService)
         {
+            ClearSearchBoxCommand = new RelayCommand(obj =>
+            {
+                SearchText = "";
+            });
             this.arrangementService = arrangementService;
             _arrangements = arrangementService.GetAll().Select(arrangement =>
             {
@@ -53,6 +75,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 ArrangementCardDTO card = new ArrangementCardDTO(arrangement, command);
                 return card;
             }).ToList();
+            _filteredArrangements = _arrangements;
         }
     }
 }
