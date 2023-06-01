@@ -24,9 +24,9 @@ U Solution Explorer-u, desnim klikom na projekat otvoriti meni konteksta i izabr
 zatim u Browse tabu pretraziti "Microsoft.Maps.MapControl.WPF" i instlirati taj paket.
 
 Radi rukovanja sa privatnim kljucem za mape, potrebno je kreirati App.config fajl na sledeci nacin:<br/>
-1.U Solution Explorer-u, desnik klikom na projekat otvoriti meni konteksta i izabrati opciju "Add" > "New item".<br/>
-2.Izabrati opciju "Application Configuration File" ili "App.config" i kliknuti na dugme "Add".
-3.Otvorice se novi fajl App.congif u kome treba napisati konfiguraciju:
+1. U Solution Explorer-u, desnik klikom na projekat otvoriti meni konteksta i izabrati opciju "Add" > "New item".<br/>
+2. Izabrati opciju "Application Configuration File" ili "App.config" i kliknuti na dugme "Add". <br/>
+3. Otvorice se novi fajl App.congif u kome treba napisati konfiguraciju:
 	<?xml version="1.0" encoding="utf-8" ?>
 	<configuration>
 	<appSettings>
