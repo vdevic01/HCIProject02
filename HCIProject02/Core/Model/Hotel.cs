@@ -15,9 +15,16 @@ namespace HCIProject02.Core.Model
         {
 
         }
+
+
         public Hotel(Hotel other) : base(other)
         {
             NumberOfStars = other.NumberOfStars;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

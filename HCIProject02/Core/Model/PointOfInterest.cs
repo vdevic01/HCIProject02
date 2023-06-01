@@ -37,5 +37,15 @@ namespace HCIProject02.Core.Model
             Address = other.Address;
             ImagePath = other.ImagePath;
         }
+
+        public override string ToString()
+        {
+            return $"Name ({Name})\n" +
+                $"Description ({Description})\n" +
+                $"Latitude ({Latitude})\n" +
+                $"Longitude ({Longitude})\n" +
+                $"Address ({Address})\n" +
+                $"ImagePath ({ImagePath})\n";
+        }
     }
 }
