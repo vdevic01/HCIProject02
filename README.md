@@ -27,12 +27,15 @@ Radi rukovanja sa privatnim kljucem za mape, potrebno je kreirati App.config faj
 1. U Solution Explorer-u, desnik klikom na projekat otvoriti meni konteksta i izabrati opciju "Add" > "New item".<br/>
 2. Izabrati opciju "Application Configuration File" ili "App.config" i kliknuti na dugme "Add". <br/>
 3. Otvorice se novi fajl App.congif u kome treba napisati konfiguraciju:
-	"<?xml version="1.0" encoding="utf-8" ?>
+	```xml
+<?xml version="1.0" encoding="utf-8" ?>
 	<configuration>
 	<appSettings>
 		<add key="MapKey" value="NAVESTI VREDNOST KLJUCA"/>
 	</appSettings>
-	</configuration>"
+	</configuration>
+	```xml
+
 pri cemu treba navesti vrednost kljuca.
 
 Kada zelimo da mape koristimo u nasem xaml fajlu moramo:
