@@ -23,6 +23,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using System.Xml.Linq;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using HCIProject02.GUI.ViewModel;
+using HCIProject02.Navigation;
+using HCIProject02.Core.Ninject;
+using Ninject;
+using HCIProject02.Core.Service.Travel.Implementation;
+using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.Features.LoginAndRegister;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -35,10 +42,15 @@ namespace HCIProject02.GUI.Features.ClientInterface
     {
 
         private string mapKey { get; set; }
+        private NewHotelViewModel newHotelViewModel { get; set; }   
 
         public NewHotelView()
         {
             InitializeComponent();
+
+            NewHotelViewModel viewModel = ServiceLocator.Get<NewHotelViewModel>();
+            this.newHotelViewModel = viewModel;
+            DataContext = viewModel;
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
             myMap.Center = new Location(44.7866, 20.4489);  // Koordinate za Beograd
@@ -57,6 +69,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Pushpin pin = new Pushpin();
             pin.Location = clickedLocation;
             myMap.Children.Add(pin);
+            newHotelViewModel.Latitude = clickedLocation.Latitude;
+            newHotelViewModel.Longitude = clickedLocation.Longitude;
 
             string requestUrl = $"https://dev.virtualearth.net/REST/v1/Locations/{clickedLocation.Latitude},{clickedLocation.Longitude}?key={mapKey}";
 
@@ -91,11 +105,14 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
                 // Assuming you only want to handle a single image drop, you can access the first file
                 string imagePath = files[0];
+                newHotelViewModel.FilePath = imagePath;
 
                 // Postavite izvor slike na dodatu sliku
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
                 DropText.Visibility = Visibility.Collapsed;
+        
+
             }
         }
 
