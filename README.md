@@ -38,11 +38,17 @@ pri cemu treba navesti vrednost kljuca.
 
 Kada zelimo da mape koristimo u nasem xaml fajlu moramo:
 1. Navesti u zaglavlju nase UserControl sledeci namespace:
+```
 	  xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
           xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
+```	  
 2. Mapa se u nasem GRID-u dodaje kao:
+```
 	   <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap"/>
+```
    pri cemu NE TREBA umesto YOUR_MAP_KEY staviti vrednost kljuca, to ce se obaviti kroz logiku klase koja 
-implementira XAML.
-3. Za primer rukovanja sa mapom i kako se postavlja kljuc iz konfiguracionog fajla u varijablu, pogledati klasu NewHotelView.xaml.cs.
+implementira XAML. <br/>
+
+3. Za primer rukovanja sa mapom i kako se postavlja kljuc iz konfiguracionog fajla u varijablu, pogledati klasu NewHotelView.xaml.cs. <br/>
+
 4. Za dobavljanje adrese na osnovu koordinata salje se HTTP zahtev preko Newtonsoft.Json.Linq, pa ce verovatno trebati da se uradi install tog paketa
