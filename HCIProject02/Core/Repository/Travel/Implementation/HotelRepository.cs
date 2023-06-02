@@ -15,6 +15,11 @@ namespace HCIProject02.Core.Repository.Travel.Implementation
         {
         }
 
-     
+        public Hotel? FindHotelByName(string name)
+        {
+            return _entities.FirstOrDefault(hotel => hotel.Name == name);
+        }
+
+
     }
 }
