@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Persistance;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -15,7 +16,11 @@ namespace HCIProject02
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
+
         {
+            Log.Logger = new LoggerConfiguration()
+            .WriteTo.File("log.txt")
+            .CreateLogger();
             using (DatabaseContext db = new DatabaseContext(0))
             {
               //  DatabaseContextSeed.Seed(db);
