@@ -13,30 +13,86 @@
     </UserControl.Resources>
     
     <Grid>
+
         <Grid.RowDefinitions>
-
-
-            <RowDefinition Height="Auto"/>
-            <!-- Peti redak za zvezdice -->
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        
+        <Grid Grid.Row="0">
+            <Label Content="{Binding Hotel.Name}"
+            Style="{StaticResource HeaderText}"
+                   FontSize="20"
+                     HorizontalAlignment="Center"
+                   Padding="0, 15, 0, 0">
+            </Label>
+        </Grid>
 
-        <!-- Zvezdice -->
-        <!-- Zvezdice -->
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10">
-            <TextBlock Text="Zvezdice: " FontWeight="Bold"/>
-            <ItemsControl ItemsSource="{Binding Hotel.NumberOfStars, Converter={StaticResource RangeConverter}}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="★" Foreground="Gold" Margin="2" FontSize="50"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            
+
+            <Border Padding="5px" Grid.Column="1" MaxWidth="500px">
+
+                <Grid Grid.Column ="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!-- STARS -->
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+                        <ItemsControl ItemsSource="{Binding Hotel.NumberOfStars, Converter={StaticResource RangeConverter}}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="★" Foreground="Gold" Margin="2" FontSize="40" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+
+                    <!-- IMAGE OF HOTEL -->
+                    <Image Source="{Binding Hotel.ImagePath}"
+                     Grid.Row="1"
+                     Stretch="UniformToFill"/>
+                </Grid>
+
+            </Border>
+
+            <Border Padding="5px" Grid.Column="0" MaxWidth="500px">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="0.2*"/> <!-- Naslov adrese -->
+                        <RowDefinition Height="*"/> <!-- Opis hotela -->
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Row="0"></Label>
+                    <Label Content="{Binding Hotel.Address}"
+                           Grid.Row="1"
+                           FontWeight="Bold"
+                           FontSize="14"/>
+
+                    <TextBox Text="{Binding Hotel.Description}"
+                     Margin="10"
+                             Grid.Row="2"
+                     TextWrapping="Wrap"
+                     VerticalScrollBarVisibility="Auto"/>
+
+
+                </Grid>
+            </Border>
+
+        </Grid>
     </Grid>
 </UserControl>
