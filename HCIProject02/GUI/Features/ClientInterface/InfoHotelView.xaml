@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.ClientInterface.InfoHotelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+             mc:Ignorable="d" 
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <converters:RangeConverter x:Key="RangeConverter"/>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+
+
+            <RowDefinition Height="Auto"/>
+            <!-- Peti redak za zvezdice -->
+        </Grid.RowDefinitions>
+
+
+        <!-- Zvezdice -->
+        <!-- Zvezdice -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Zvezdice: " FontWeight="Bold"/>
+            <ItemsControl ItemsSource="{Binding Hotel.NumberOfStars, Converter={StaticResource RangeConverter}}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="★" Foreground="Gold" Margin="2" FontSize="50"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Grid>
+</UserControl>

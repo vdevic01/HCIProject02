@@ -24,6 +24,9 @@
     <DataTemplate DataType="{x:Type clientInterface:UpdateHotelViewModel}">
         <clientInterface:UpdateHotelView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:InfoHotelViewModel}">
+        <clientInterface:InfoHotelView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
     </DataTemplate>
