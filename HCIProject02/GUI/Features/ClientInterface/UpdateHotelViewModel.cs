@@ -50,9 +50,9 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
     #endregion
 
-        #region Commands
-    public ICommand UpdateHotelCommand { get; }
-        #endregion
+     #region Commands
+     public ICommand UpdateHotelCommand { get; }
+    #endregion
 
         #region Services
         private IHotelService hotelService;
