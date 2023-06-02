@@ -150,12 +150,6 @@ namespace HCIProject02.GUI.Features.ClientInterface
         }
 
         
-/*        public NewHotelViewModel(string imagePath)
-        {
-            FilePath = imagePath;
-            AddNewHotelCommand = new RelayCommand(obj => AddNewHotel());
-        }*/
-
 
     }
 }
