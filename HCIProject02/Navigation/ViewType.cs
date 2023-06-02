@@ -15,6 +15,7 @@ namespace HCIProject02.Navigation
         ArrangementView,
         MyBookingsView,
         NewHotelView,
-        UpdateHotelView
+        UpdateHotelView,
+        InfoHotelView
     }
 }
