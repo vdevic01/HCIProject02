@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Persistance;
+using HCIProject02.Core.Repository;
 using HCIProject02.Core.Repository.Travel;
 using HCIProject02.Core.Repository.Travel.Implementation;
 using HCIProject02.Core.Repository.Users;
@@ -29,6 +30,7 @@ namespace HCIProject02.Core.Ninject
             Bind(typeof(IArrangementRepository)).To(typeof(ArrangementRepository));
             Bind(typeof(IBookingRepository)).To(typeof(BookingRepository));
             Bind(typeof(IHotelRepository)).To(typeof(HotelRepository));
+            Bind(typeof(IRestaurantRepository)).To(typeof(RestaurantRepository));
             #endregion
 
             #region Service
@@ -37,6 +39,7 @@ namespace HCIProject02.Core.Ninject
             Bind(typeof(IDialogService)).To(typeof(DialogService));
             Bind(typeof(IBookingService)).To(typeof(BookingService));
             Bind(typeof(IHotelService)).To(typeof(HotelService));
+            Bind(typeof(IRestaurantService)).To(typeof(RestaurantService));
             #endregion
         }
     }
