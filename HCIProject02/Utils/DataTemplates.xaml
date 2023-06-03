@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clientInterface="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+                    xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
@@ -26,6 +27,12 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:InfoHotelViewModel}">
         <clientInterface:InfoHotelView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type restaurants:NewRestaurantViewModel}">
+        <restaurants:NewRestaurantView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type restaurants:UpdateRestaurantViewModel}">
+        <restaurants:UpdateRestaurantView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
