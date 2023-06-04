@@ -9,6 +9,6 @@ namespace HCIProject02.Core.Repository.Travel
 {
     public interface IHotelRepository : ICrudRepository<Hotel>
     {
-
+        public Hotel? FindHotelByName(string name);
     }
 }

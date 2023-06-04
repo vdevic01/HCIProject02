@@ -23,5 +23,14 @@ namespace HCIProject02.Core.Service.Travel.Implementation
         { 
             return hotelRepository.Create(hotel);
         }
+        public Hotel? Update(Hotel hotel)
+        {
+            return hotelRepository.Update(hotel);
+        }
+
+        public Hotel GetHotelByName(string name)
+        {
+            return hotelRepository.FindHotelByName(name);
+        }
     }
 }
