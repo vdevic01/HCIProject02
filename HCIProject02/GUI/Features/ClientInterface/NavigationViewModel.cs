@@ -35,6 +35,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
         #region Commands
         public ICommand LogoutCommand { get; }
         public ICommand MyBookingsCommand {get;}
+        public ICommand MapCommand{ get; }
         public ICommand DestinationsCommand { get; }
 
         private ICommand _returnCommand;
@@ -61,6 +62,13 @@ namespace HCIProject02.GUI.Features.ClientInterface
             viewModel.AuthenticatedUser = AuthenticatedUser;
             SwitchCurrentViewModel(viewModel);
         }
+        private void NavigateToMapView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            MapViewModel viewModel = ServiceLocator.Get<MapViewModel>();
+            viewModel.AuthenticatedUser = AuthenticatedUser;
+            SwitchCurrentViewModel(viewModel);
+        }
         private void NavigateToDestinationsView()
         {
             ReturnButtonVisibility = Visibility.Collapsed;
@@ -74,6 +82,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
             NavigateToDestinationsView();
             DestinationsCommand = new RelayCommand(obj => NavigateToDestinationsView());
             MyBookingsCommand = new RelayCommand(obj => NavigateToMyBookingsView());
+            MapCommand = new RelayCommand(obj => NavigateToMapView());
             LogoutCommand = new RelayCommand(obj => LogoutUser());
         }
         private void RegisterHandlers()
@@ -98,6 +107,9 @@ namespace HCIProject02.GUI.Features.ClientInterface
                             break;
                         case ViewType.MyBookingsView:
                             NavigateToMyBookingsView();
+                            break;
+                        case ViewType.MapView:
+                            NavigateToMapView();
                             break;
                     }
                 });

@@ -73,7 +73,16 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
                 ErrorMessage = "Email or Password is not correct";
                 return;
             }
-            Navigator.FireEvent(ViewType.ClientHome, user);
+            if(user.Role == Role.Client)
+            {
+                Navigator.FireEvent(ViewType.ClientHome, user);
+            }
+            else
+            {
+                Navigator.FireEvent(ViewType.AgentHome, user);
+            }
+
+       
         }
 
         private void NavigateToRegisterView()
