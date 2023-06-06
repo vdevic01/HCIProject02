@@ -4,9 +4,72 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+               mc:Ignorable="d" 
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+
     <Grid>
-            
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+        <Grid Grid.Row="0">
+            <Label Content="{Binding Restaurant.Name}"
+            Style="{StaticResource HeaderText}"
+                   FontSize="20"
+                     HorizontalAlignment="Center"
+                   Padding="0, 15, 0, 0">
+            </Label>
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Padding="5px" Grid.Column="1" MaxWidth="500px">
+
+                <Grid Grid.Column ="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+      
+                    <Image Source="{Binding Restaurant.ImagePath}"
+                     Grid.Row="1"
+                     Stretch="UniformToFill"/>
+                </Grid>
+
+            </Border>
+
+            <Border Padding="5px" Grid.Column="0" MaxWidth="500px">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.2*"/> 
+                        <RowDefinition Height="*"/> 
+                    </Grid.RowDefinitions>
+
+
+
+                    <TextBox x:Name="addressTextBox" FontSize="14" FontWeight="Bold" Grid.Row="0" Text="{Binding Restaurant.Address}" VerticalScrollBarVisibility="Auto"  TextWrapping="Wrap"
+                        IsReadOnly="True"
+                             BorderThickness="0"/>
+
+                    <TextBox Text="{Binding Restaurant.Description}"
+                        Grid.Row="1"
+                        TextWrapping="Wrap"
+                        IsReadOnly="True"
+                             BorderThickness="0"
+                        VerticalScrollBarVisibility="Auto"/>
+
+                </Grid>
+            </Border>
+
+        </Grid>
     </Grid>
 </UserControl>

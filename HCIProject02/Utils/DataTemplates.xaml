@@ -34,6 +34,9 @@
     <DataTemplate DataType="{x:Type restaurants:UpdateRestaurantViewModel}">
         <restaurants:UpdateRestaurantView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type restaurants:InfoRestaurantViewModel}">
+        <restaurants:InfoRestaurantView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
     </DataTemplate>

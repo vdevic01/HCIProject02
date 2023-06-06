@@ -87,6 +87,7 @@
                      Margin="10"
                              Grid.Row="2"
                      TextWrapping="Wrap"
+                              IsReadOnly="True"
                      VerticalScrollBarVisibility="Auto"/>
 
 
