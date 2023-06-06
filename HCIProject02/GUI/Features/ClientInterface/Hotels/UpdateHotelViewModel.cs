@@ -48,21 +48,22 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
-    #endregion
+        #endregion
 
-     #region Commands
-     public ICommand UpdateHotelCommand { get; }
-    #endregion
+        #region Commands
+        public ICommand UpdateHotelCommand { get; }
+        #endregion
 
         #region Services
         private IHotelService hotelService;
         #endregion
 
+
         private void UpdateHotel()
         {
             Log.Information(Hotel.ToString());
-            Hotel? hotel = this.hotelService.Update(Hotel);
-           if (hotel != null)
+            Hotel? hotel = hotelService.Update(Hotel);
+            if (hotel != null)
             {
                 MessageBox.Show("Hotel updated.");
             }
@@ -72,7 +73,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-           
+
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -80,8 +81,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
         {
             this.hotelService = hotelService;
             UpdateHotelCommand = new RelayCommand(obj => UpdateHotel());
-         
-            
+
+
         }
 
 

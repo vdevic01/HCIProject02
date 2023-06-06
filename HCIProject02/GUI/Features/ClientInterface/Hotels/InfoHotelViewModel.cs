@@ -15,7 +15,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         #region Properties
 
-       
+
 
         private Hotel? _hotel;
         public Hotel? Hotel

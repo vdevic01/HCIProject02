@@ -1,27 +1,23 @@
-﻿using System;
+﻿using HCIProject02.Commands;
+using HCIProject02.Core.Model;
+using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.ViewModel;
+using Microsoft.Maps.MapControl.WPF;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using HCIProject02.Commands;
-using HCIProject02.Core.Model;
-using HCIProject02.Core.Service.Users;
-using HCIProject02.GUI.ViewModel;
-using HCIProject02.Navigation;
-
-using System.Windows.Input;
-using Microsoft.Win32;
-using System.Windows.Media.Imaging;
 using System.Windows;
-using Serilog;
-using HCIProject02.Core.Service.Travel;
+using System.Windows.Input;
+using System.Xml.Linq;
 
-namespace HCIProject02.GUI.Features.ClientInterface
+namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 {
-    internal class NewHotelViewModel : ViewModelBase
+    internal class NewRestaurantViewModel : ViewModelBase
     {
         #region Properties
-
         private string? _filePath;
         public string? FilePath
         {
@@ -76,12 +72,6 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
-        private int _rating;
-        public int Rating
-        {
-            get => _rating;
-            set { _rating = value; OnPropertyChanged(nameof(Rating)); }
-        }
 
         private double _longitude;
         public double Longitude
@@ -99,19 +89,18 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         #endregion
 
-        #region Commands
-        public ICommand AddNewHotelCommand { get; }
-        #endregion
 
         #region Services
-        private IHotelService hotelService;
+        private IRestaurantService restaurantService;
+        #endregion
+
+        #region Commands
+        public ICommand AddNewRestaurantCommand { get; }
         #endregion
 
 
-
-        private void AddNewHotel()
+        private void AddNewRestaurant()
         {
-
             if (string.IsNullOrEmpty(Name))
             {
                 ErrorMessage = "Field (Name) is required";
@@ -129,27 +118,39 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
             if (string.IsNullOrEmpty(FilePath))
             {
-                ErrorMessage = "Image of hotel is required";
+                ErrorMessage = "Image of Restaurant is required";
                 return;
             }
 
+            Restaurant restaurant = new Restaurant
+            {
+                Address = Address,
+                Description = Description,
+                Name = Name,
+                ImagePath = FilePath,
+                Longitude = Longitude,
+                Latitude = Latitude
+            };
+            Restaurant? r = restaurantService.Create(restaurant);
+            if (r != null)
+            {
+                MessageBox.Show("Restaurant created");
+            }
 
-            Hotel hotel = new Hotel { NumberOfStars = Rating, Address = Address, Description = Description, Name = Name,
-                                    ImagePath = FilePath, Longitude = Longitude, Latitude = Latitude};
 
-            hotelService.Create(hotel);
-            MessageBox.Show("Hotel created");
-
-        }
-
-        public NewHotelViewModel(IHotelService hotelService)
-        {
-            this.hotelService = hotelService;
-            AddNewHotelCommand = new RelayCommand(obj => AddNewHotel());
-           
-        }
 
         
+
+        }
+
+        public NewRestaurantViewModel(IRestaurantService restaurantService)
+        {
+            this.restaurantService = restaurantService;
+
+            AddNewRestaurantCommand = new RelayCommand(obj => AddNewRestaurant());
+
+        }
+
 
     }
 }
