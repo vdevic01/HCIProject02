@@ -2,6 +2,8 @@
 using HCIProject02.Core.Exceptions;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Users;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
 using System;
@@ -20,6 +22,7 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
 
         #region Services
         private readonly IUserService userService;
+        private readonly IDialogService _dialogService;
         #endregion
 
         #region Properties
@@ -138,15 +141,18 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
                 ErrorMessage = "User with this email already exists";
                 return;
             }
-            MessageBox.Show("Account created");
+
+            OkDialogViewModel dialog = new OkDialogViewModel("Message", "Account created.");
+            _dialogService.ShowDialog(dialog, result => { }, true);
             Navigator.FireEvent(ViewType.LoginView);
         }
 
-        public RegisterViewModel(IUserService userService)
+        public RegisterViewModel(IUserService userService, IDialogService dialogService)
         {
             NavigateToLoginViewCommand = new RelayCommand(obj => NavigateToLoginView());
             RegisterUserCommand = new RelayCommand(obj => RegisterUser());
             this.userService = userService;
+            _dialogService = dialogService;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace HCIProject02
             .CreateLogger();
             using (DatabaseContext db = new DatabaseContext(0))
             {
-              //  DatabaseContextSeed.Seed(db);
+                //DatabaseContextSeed.Seed(db);
             }
         }
     }
