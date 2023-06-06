@@ -18,6 +18,7 @@ namespace HCIProject02.Navigation
         AgentHome,
         MapView,
         UpdateHotelView,
-        InfoHotelView
+        InfoHotelView,
+        HotelManagementView
     }
 }

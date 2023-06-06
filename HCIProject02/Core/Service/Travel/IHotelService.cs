@@ -12,6 +12,7 @@ namespace HCIProject02.Core.Service.Travel
         public Hotel Create(Hotel hotel);
         public Hotel? Update(Hotel hotel);
         public Hotel? GetHotelByName(string name);
-
+        public List<Hotel> GetAll();
+        public Hotel Delete(Hotel hotel);
     }
 }

@@ -20,6 +20,9 @@ namespace HCIProject02.Core.Repository.Travel.Implementation
             return _entities.FirstOrDefault(hotel => hotel.Name == name);
         }
 
-
+        public List<Hotel> GetAllHotels()
+        {
+            return _entities.ToList();
+        }
     }
 }
