@@ -16,7 +16,7 @@ namespace HCIProject02.Navigation
             _eventHandlers = new Dictionary<ViewType, IList<Action>>();
             _eventHandlersWithParameters = new Dictionary<ViewType, IList<Action<object>>>();
         }
-        public static void RemoveHangler(ViewType view)
+        public static void RemoveHandler(ViewType view)
         {
             _eventHandlers.Remove(view);
             _eventHandlersWithParameters.Remove(view);

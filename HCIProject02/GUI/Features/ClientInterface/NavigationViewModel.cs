@@ -52,7 +52,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private void LogoutUser()
         {
             AuthenticatedUser = null;
-            Navigator.RemoveHangler(ViewType.ArrangementView);
+            Navigator.RemoveHandler(ViewType.ArrangementView);
             Navigator.FireEvent(ViewType.LoginView);
         }
         private void NavigateToMyBookingsView()
