@@ -20,116 +20,118 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.880*"/>
-            </Grid.ColumnDefinitions>
-            <Border Padding="20px" Grid.Column="1" MaxWidth="500px">
 
-                <Grid Grid.Column ="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition Height="0.95*"/>
-                        <RowDefinition Height="0.09*"/>
-                        <RowDefinition Height="0.15*"/>
-                    </Grid.RowDefinitions>
-                    <Grid Grid.Row="0">
-                        <Label FontSize="15" Style="{StaticResource DefaultText}">Choose Location:</Label>
-                    </Grid>
+            <Grid MaxWidth="800px">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="0.880*"/>
+                </Grid.ColumnDefinitions>
+                <Border Padding="20px" Grid.Column="1" MaxWidth="500px">
+
+                    <Grid Grid.Column ="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="0.95*"/>
+                            <RowDefinition Height="0.09*"/>
+                            <RowDefinition Height="0.15*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <Label FontSize="15" Style="{StaticResource DefaultText}">Choose Location:</Label>
+                        </Grid>
                     <Grid Grid.Row="1">
-                        <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                            <m:Pushpin Location="{Binding PinLocation}"></m:Pushpin>
+                        <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <m:Pushpin x:Name="PushPin" Location="{Binding PinLocation }" ></m:Pushpin>
 
                         </m:Map>
 
                     </Grid>
                     <Grid Grid.Row="2">
-                        <Label Content="{Binding ErrorMessage}"
+                            <Label Content="{Binding ErrorMessage}"
                        
                            Style="{StaticResource ErrorText}"
                                FontSize="10"
                            Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}">
 
-                        </Label>
-                    </Grid>
-                    <Grid Grid.Row="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="0.925*"/>
-                            <ColumnDefinition Width="0.925*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0"></Grid>
-                        <Grid Grid.Column="1">
+                            </Label>
+                        </Grid>
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="0.925*"/>
+                                <ColumnDefinition Width="0.925*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0"></Grid>
+                            <Grid Grid.Column="1">
 
-                            <Button Height="30px"
+                                <Button Height="30px"
                         FontSize="20px"
                         Content="Update"
                         Style="{StaticResource DefaultButtonStyle}"
                        Command="{Binding UpdateRestaurantCommand}"
                          />
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Border>
-            <Border Padding="20px" Grid.Column="0" MaxWidth="500px">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
+                </Border>
+                <Border Padding="20px" Grid.Column="0" MaxWidth="500px">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
 
-                    </Grid.RowDefinitions>
-                    <Label Content="Update Restaurant"
+                        </Grid.RowDefinitions>
+                        <Label Content="Update Restaurant"
                        Grid.Row="0"
                                HorizontalAlignment="Center"
                                Style="{StaticResource HeaderText}"
                                FontSize="30px"/>
-                    <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
-                        <StackPanel Orientation="Vertical">
-                            <Label Content="Name*"
+                        <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                            <StackPanel Orientation="Vertical">
+                                <Label Content="Name*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
-                            <Label Content="Description*"
+                                <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                                <Label Content="Description*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                            <Label Content="Address*"
+                                <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <Label Content="Address*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
 
-                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
-                                <Viewbox>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10">
-                                            <Border.Background>
-                                                <ImageBrush x:Name="imageBrush" ImageSource="{Binding Restaurant.ImagePath, UpdateSourceTrigger=Explicit}" />
-                                            </Border.Background>
-                                            <StackPanel VerticalAlignment="Bottom">
-                                                <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
-                                                    <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
-                                                </Button>
-                                            </StackPanel>
-                                        </Border>
-                                    </Grid>
-                                </Viewbox>
+                                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                                    <Viewbox>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10">
+                                                <Border.Background>
+                                                    <ImageBrush x:Name="imageBrush" ImageSource="{Binding Restaurant.ImagePath, UpdateSourceTrigger=Explicit}" />
+                                                </Border.Background>
+                                                <StackPanel VerticalAlignment="Bottom">
+                                                    <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
+                                                        <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
+                                                    </Button>
+                                                </StackPanel>
+                                            </Border>
+                                        </Grid>
+                                    </Viewbox>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </ScrollViewer>
+                        </ScrollViewer>
 
-                </Grid>
-            </Border>
-        </Grid>
+                    </Grid>
+                </Border>
+            </Grid>
+
     </Grid>
 </UserControl>
