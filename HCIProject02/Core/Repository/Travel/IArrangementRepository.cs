@@ -9,5 +9,8 @@ namespace HCIProject02.Core.Repository.Travel
 {
     public interface IArrangementRepository : ICrudRepository<Arrangement>
     {
+        public Arrangement? FindArrangementByName(string name);
     }
+
+
 }
