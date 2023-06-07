@@ -13,5 +13,10 @@ namespace HCIProject02.Core.Repository.Travel.Implementation
         public ArrangementRepository(DatabaseContext context) : base(context)
         {
         }
+
+        public Arrangement? FindArrangementByName(string name)
+        {
+            return _entities.FirstOrDefault(arrangement => arrangement.Name == name);
+        }
     }
 }

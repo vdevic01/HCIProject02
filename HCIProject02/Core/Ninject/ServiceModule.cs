@@ -31,6 +31,7 @@ namespace HCIProject02.Core.Ninject
             Bind(typeof(IBookingRepository)).To(typeof(BookingRepository));
             Bind(typeof(IHotelRepository)).To(typeof(HotelRepository));
             Bind(typeof(IRestaurantRepository)).To(typeof(RestaurantRepository));
+            Bind(typeof(IAttractionRepository)).To(typeof(AttractionRepository));
             #endregion
 
             #region Service
@@ -40,6 +41,7 @@ namespace HCIProject02.Core.Ninject
             Bind(typeof(IBookingService)).To(typeof(BookingService));
             Bind(typeof(IHotelService)).To(typeof(HotelService));
             Bind(typeof(IRestaurantService)).To(typeof(RestaurantService));
+            Bind(typeof(IAttractionService)).To(typeof(AttractionService));
             #endregion
         }
     }

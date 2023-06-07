@@ -21,5 +21,10 @@ namespace HCIProject02.Core.Service.Travel.Implementation
         {
             return arrangementRepository.GetAll().ToList();
         }
+
+        public Arrangement? GetArrangementByName(string name)
+        {
+            return this.arrangementRepository.FindArrangementByName(name);
+        }
     }
 }
