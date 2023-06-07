@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -19,45 +20,43 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
+namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 {
     /// <summary>
-    /// Interaction logic for UpdateRestaurantView.xaml
+    /// Interaction logic for NewAttractionView.xaml
     /// </summary>
-    public partial class UpdateRestaurantView : UserControl
+    public partial class NewAttractionView : UserControl
     {
 
-        private UpdateRestaurantViewModel viewModel { get; set; }
         private string mapKey { get; set; }
-        public UpdateRestaurantView()
+        private NewAttractionViewModel newAttractionViewModel { get; set; }
+
+        public NewAttractionView()
         {
             InitializeComponent();
-            UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
-            this.viewModel = viewModel;
 
+            NewAttractionViewModel viewModel = ServiceLocator.Get<NewAttractionViewModel>();
+            this.newAttractionViewModel = viewModel;
+            DataContext = viewModel;
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
-         
+            myMap.Center = new Location(44.7866, 20.4489);  // Koordinate za Beograd
+            myMap.ZoomLevel = 12;  // Nivo zumiranja za prikaz Beograda
 
         }
 
         private async void MapMouseClick(object sender, MouseButtonEventArgs e)
         {
+
             Point mousePosition = e.GetPosition(myMap);
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
 
-     
-
-            if (myMap.DataContext is UpdateRestaurantViewModel viewModel)
-            {
-                // Pristupite viewModel.PinLocation i postavite vrijednost
-                viewModel.PinLocation = clickedLocation;
-
-                // Ažurirajte Pushpin lokaciju
-                PushPin.Location = clickedLocation;
-            }
-
+            Pushpin pin = new Pushpin();
+            pin.Location = clickedLocation;
+            myMap.Children.Add(pin);
+            newAttractionViewModel.Latitude = clickedLocation.Latitude;
+            newAttractionViewModel.Longitude = clickedLocation.Longitude;
 
             string requestUrl = $"https://dev.virtualearth.net/REST/v1/Locations/{clickedLocation.Latitude},{clickedLocation.Longitude}?key={mapKey}";
 
@@ -76,7 +75,13 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
                 }
             }
+
         }
+
+
+
+
+
 
         private void OnImageDropped(object sender, DragEventArgs e)
         {
@@ -84,17 +89,19 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
+                // Assuming you only want to handle a single image drop, you can access the first file
                 string imagePath = files[0];
+                newAttractionViewModel.FilePath = imagePath;
 
-                imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
-                if (DataContext is UpdateRestaurantViewModel viewModel)
-                {
-                    viewModel.Restaurant.ImagePath = imagePath;
-                }
+                // Postavite izvor slike na dodatu sliku
+                ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
+                ImageButton.Visibility = Visibility.Collapsed;
+                DropText.Visibility = Visibility.Collapsed;
 
 
             }
         }
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
@@ -103,18 +110,14 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
             if (openFileDialog.ShowDialog() == true)
             {
-
+                // Dobijte putanju do izabrane slike
                 string imagePath = openFileDialog.FileName;
 
-                imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
-                if (DataContext is UpdateRestaurantViewModel viewModel)
-                {
-                    viewModel.Restaurant.ImagePath = imagePath;
-
-                    
-                  
-                    
-                }
+                // Postavite izvor slike na odabranu putanju
+                //((Image)((Button)sender).Content).Source = new BitmapImage(new Uri(imagePath));
+                ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
+                ImageButton.Visibility = Visibility.Collapsed;
+                DropText.Visibility = Visibility.Collapsed;
 
             }
         }

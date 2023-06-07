@@ -48,6 +48,17 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
+        private Location _mapCenter;
+        public Location MapCenter
+        {
+            get => _mapCenter;
+            set
+            {
+                _mapCenter = value;
+                OnPropertyChanged(nameof(MapCenter));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -62,6 +73,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private void UpdateHotel()
         {
             Log.Information(Hotel.ToString());
+            Hotel.Latitude = PinLocation.Latitude;
+            Hotel.Longitude = PinLocation.Longitude;
             Hotel? hotel = hotelService.Update(Hotel);
             if (hotel != null)
             {
@@ -69,20 +82,12 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged(string propertyName)
-        {
-
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public UpdateHotelViewModel(IHotelService hotelService)
         {
             this.hotelService = hotelService;
             UpdateHotelCommand = new RelayCommand(obj => UpdateHotel());
-
-
+            
         }
 
 

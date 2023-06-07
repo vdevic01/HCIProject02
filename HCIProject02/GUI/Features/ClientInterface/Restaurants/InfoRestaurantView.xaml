@@ -3,10 +3,73 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+            xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+               mc:Ignorable="d" 
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:DepartureConverter x:Key="DepartureConverter"/>
+            <converters:ReturnConverter x:Key="ReturnConverter"/>
+            <converters:PriceConverter x:Key="PriceConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
-            
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="15 0 15 15">
+            <Grid MaxWidth="650px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="{Binding Restaurant.Name}" Style="{StaticResource HeaderText}" 
+                       HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Path VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Height="130" Width="130">
+                        <Path.Fill>
+                            <ImageBrush ImageSource="{Binding Restaurant.ImagePath}" Stretch="UniformToFill" />
+                        </Path.Fill>
+                        <Path.Data>
+                            <EllipseGeometry Center="65,65" RadiusX="65" RadiusY="65" />
+                        </Path.Data>
+                    </Path>
+                    <TextBlock FontSize="14" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Padding="15 0" TextWrapping="Wrap" Style="{StaticResource DefaultTextBlock}" Text="{Binding Restaurant.Description}"/>
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Height="1.5" Margin="0 15 0 10" Background="{StaticResource GraphicalElementsColor}"/>
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+
+                    </Grid.RowDefinitions>
+
+
+                    <StackPanel Orientation="Vertical"  Grid.Row="1" >
+                        <Label FontSize="14" Content="Address" Style="{StaticResource DefaultText}"/>
+                        <Border BorderBrush="{StaticResource BorderColor}"
+                                BorderThickness="1.5"
+                                CornerRadius="3"
+                                Padding="10">
+                            <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Restaurant.Address}" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+
     </Grid>
+
 </UserControl>

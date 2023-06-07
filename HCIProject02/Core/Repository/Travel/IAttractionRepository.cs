@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace HCIProject02.Core.Repository.Travel
 {
-    public interface IArrangementRepository : ICrudRepository<Arrangement>
+    public interface IAttractionRepository : ICrudRepository<Attraction>
     {
-        public Arrangement? FindArrangementByName(string name);
+        public Attraction? FindAttractionByName(string name);
     }
-
-
 }

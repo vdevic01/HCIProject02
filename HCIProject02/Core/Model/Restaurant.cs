@@ -9,8 +9,15 @@ namespace HCIProject02.Core.Model
     public class Restaurant : PointOfInterest
     {
         public Restaurant() { }
+
+
         public Restaurant(Restaurant other) : base(other)
         {
+        }
+
+        public  override string ToString()
+        {
+            return base.ToString();
         }
     }
 }
