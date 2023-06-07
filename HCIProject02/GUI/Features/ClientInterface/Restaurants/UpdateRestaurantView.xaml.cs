@@ -47,14 +47,18 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
 
-            Pushpin pin = new Pushpin();
-            pin.Location = clickedLocation;
-            myMap.Children.Add(pin);
-            if (this.viewModel.Restaurant != null)
+     
+
+            if (myMap.DataContext is UpdateRestaurantViewModel viewModel)
             {
-                this.viewModel.Restaurant.Latitude = clickedLocation.Latitude;
-                this.viewModel.Restaurant.Longitude = clickedLocation.Longitude;
+                // Pristupite viewModel.PinLocation i postavite vrijednost
+                viewModel.PinLocation = clickedLocation;
+
+                // Ažurirajte Pushpin lokaciju
+                PushPin.Location = clickedLocation;
             }
+
+
             string requestUrl = $"https://dev.virtualearth.net/REST/v1/Locations/{clickedLocation.Latitude},{clickedLocation.Longitude}?key={mapKey}";
 
             using (HttpClient client = new HttpClient())

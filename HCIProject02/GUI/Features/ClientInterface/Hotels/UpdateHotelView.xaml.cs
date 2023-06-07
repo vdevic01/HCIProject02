@@ -38,10 +38,11 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
             UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
             this.viewModel = viewModel;
+           
 
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
-            myMap.Center = new Location(44.7866, 20.4489);
+         
 
         }
 
@@ -53,15 +54,18 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Point mousePosition = e.GetPosition(myMap);
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
+ 
 
-            Pushpin pin = new Pushpin();
-            pin.Location = clickedLocation;
-            myMap.Children.Add(pin);
-            if (this.viewModel.Hotel != null)
+            if (myMap.DataContext is UpdateHotelViewModel viewModel)
             {
-                this.viewModel.Hotel.Latitude = clickedLocation.Latitude;
-                this.viewModel.Hotel.Longitude = clickedLocation.Longitude;
+                // Pristupite viewModel.PinLocation i postavite vrijednost
+                viewModel.PinLocation = clickedLocation;
+
+                // Ažurirajte Pushpin lokaciju
+                PushPin.Location = clickedLocation;
             }
+            
+
             string requestUrl = $"https://dev.virtualearth.net/REST/v1/Locations/{clickedLocation.Latitude},{clickedLocation.Longitude}?key={mapKey}";
 
             using (HttpClient client = new HttpClient())
@@ -95,6 +99,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
             }
         }
+
+
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
