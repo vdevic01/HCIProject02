@@ -1,12 +1,11 @@
-﻿<UserControl x:Class="HCIProject02.GUI.Features.AgentInterface.HotelManagementView"
+﻿<UserControl x:Class="HCIProject02.GUI.Features.AgentInterface.Management.ArrangementManagementView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.AgentInterface"
-             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              mc:Ignorable="d" 
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
@@ -21,9 +20,10 @@
                 <Setter Property="HorizontalContentAlignment" Value="Center"/>
             </Style>
             <converters:DateConverter x:Key="DateConverter"/>
+            <converters:AvailibleConverter x:Key="AvailibleConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Grid KeyDown="OnKeyDown" >
+    <Grid  >
         <Border Padding="15 0 15 15">
             <Grid>
                 <Grid.RowDefinitions>
@@ -31,13 +31,13 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Hotel Management" Style="{StaticResource HeaderText}" 
+                <Label Grid.Row="0" Content="Arrangement Management" Style="{StaticResource HeaderText}" 
                        HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
                 <Grid Grid.Row="1" HorizontalAlignment="Center"
                       >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/> 
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
@@ -56,9 +56,9 @@
                           Background="{StaticResource DefaultBackground}"
                           AutoGenerateColumns="False"
                           SelectionMode="Single"
-                          ItemsSource="{Binding Hotels}"
+                          ItemsSource="{Binding Arrangements}"
                           IsReadOnly="True"
-                           SelectedItem="{Binding SelectedHotel}">
+                           SelectedItem="{Binding SelectedArrangement}">
                     <DataGrid.RowStyle>
                         <Style TargetType="DataGridRow">
                             <Style.Triggers>
@@ -70,8 +70,10 @@
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Width="*" Binding="{Binding Name}"/>
-                        <DataGridTextColumn Header="Address" Width="*" Binding="{Binding Address}"/>
-                        <DataGridTextColumn Header="Stars" Width="*" Binding="{Binding NumberOfStars}"/>
+                        <DataGridTextColumn Header="Departure" Width="*" Binding="{Binding DepartureTime,Converter={StaticResource DateConverter}}"/>
+                        <DataGridTextColumn Header="Return" Width="*" Binding="{Binding ReturnTime,Converter={StaticResource DateConverter}}" />
+                        <DataGridTextColumn Header="Price (EUR)" Width="*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Availible" Width="*" Binding="{Binding IsAvailable,Converter={StaticResource AvailibleConverter}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

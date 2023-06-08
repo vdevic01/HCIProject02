@@ -2,6 +2,8 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
 using HCIProject02.GUI.DTO;
+using HCIProject02.GUI.Features.AgentInterface.Arrangements;
+using HCIProject02.GUI.Features.AgentInterface.Management;
 using HCIProject02.GUI.Features.ClientInterface;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
@@ -31,6 +33,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
         #region Commands
         public ICommand LogoutCommand { get; }
         public ICommand HotelManagementCommand { get; }
+        public ICommand ArrangementManagementCommand { get; }
+        public ICommand MapCommand { get; }
+
         private ICommand _returnCommand;
         public ICommand ReturnCommand
         {
@@ -54,11 +59,28 @@ namespace HCIProject02.GUI.Features.AgentInterface
             HotelManagementViewModel viewModel = ServiceLocator.Get<HotelManagementViewModel>();
             SwitchCurrentViewModel(viewModel);
         }
+
+        private void NavigateToArrangementManagementView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            ArrangementManagementViewModel viewModel = ServiceLocator.Get<ArrangementManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
+        private void NavigateToMapView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            AgentMapViewModel viewModel = ServiceLocator.Get<AgentMapViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
         public AgentNavigationViewModel() {
             RegisterHandlers();
             _returnButtonVisibility = Visibility.Collapsed;
             LogoutCommand = new RelayCommand(obj => LogoutUser());
             HotelManagementCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+            ArrangementManagementCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            MapCommand = new RelayCommand(obj => NavigateToMapView());
+            NavigateToMapView();
         }
 
         private void RegisterHandlers()
@@ -88,7 +110,22 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 SwitchCurrentViewModel(viewModel);
                 ReturnCommand = new RelayCommand(obj => NavigateToHotelManagementView());
             });
-            
+            Navigator.RegisterHandler(ViewType.ArrangementView, obj =>
+            {
+                NavigatorEventDTO arrangementInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                ArrangementViewModel viewModel = ServiceLocator.Get<ArrangementViewModel>();
+                viewModel.Arrangement = (Arrangement?)arrangementInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.NewArrangementView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewArrangementViewModel viewModel = ServiceLocator.Get<NewArrangementViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            });
         }
     }
 }

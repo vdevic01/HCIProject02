@@ -108,10 +108,10 @@
             <Button Grid.Row="2" Content="Attractions" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click" Height="50px"/>
             <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="3" Content="Arrangements" Command="{Binding MyBookingsCommand}" Click="AgentNavigationButton_Click" Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="3" Content="Arrangements" Command="{Binding ArrangementManagementCommand}"   Click="AgentNavigationButton_Click" Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="3" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="4" Content="Map" Style="{StaticResource AgentNavigationButtonStyle}"  Click="AgentNavigationButton_Click"  Height="50px"/>
+            <Button Grid.Row="4" Content="Map" Command="{Binding MapCommand}" Style="{StaticResource AgentNavigationButtonStyle}"  Click="AgentNavigationButton_Click"  Height="50px"/>
             <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
             
             <Button Grid.Row="5" Content="Reports" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click"  Height="50px"/>

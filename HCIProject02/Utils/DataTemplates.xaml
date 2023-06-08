@@ -2,6 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clientInterface="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
                     xmlns:agentInterface="clr-namespace:HCIProject02.GUI.Features.AgentInterface"
+                    xmlns:management="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Management"
+                    xmlns:arrangement="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements"
+                    xmlns:attrdnd="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop"
                     xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
@@ -53,4 +56,18 @@
     <DataTemplate DataType="{x:Type agentInterface:HotelManagementViewModel}">
         <agentInterface:HotelManagementView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type agentInterface:AgentMapViewModel}">
+        <agentInterface:AgentMapView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type management:ArrangementManagementViewModel}">
+        <management:ArrangementManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type arrangement:NewArrangementViewModel}">
+        <arrangement:NewArrangementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type attrdnd:AttractionListingViewModel}">
+        <attrdnd:AttractionListingView/>
+    </DataTemplate>
+
+
 </ResourceDictionary>
