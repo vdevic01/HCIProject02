@@ -6,6 +6,7 @@
                     xmlns:arrangement="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements"
                     xmlns:attrdnd="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop"
                     xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
+                    xmlns:attractions="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Attractions"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
@@ -38,6 +39,20 @@
     <DataTemplate DataType="{x:Type restaurants:UpdateRestaurantViewModel}">
         <restaurants:UpdateRestaurantView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type restaurants:InfoRestaurantViewModel}">
+        <restaurants:InfoRestaurantView/>
+    </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type attractions:NewAttractionViewModel}">
+        <attractions:NewAttractionView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type attractions:UpdateAttractionViewModel}">
+        <attractions:UpdateAttractionView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type attractions:InfoAttractionViewModel}">
+        <attractions:InfoAttractionView/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type dialogs:YesNoDialogViewModel}">
         <dialogs:YesNoDialogView/>
     </DataTemplate>

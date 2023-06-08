@@ -13,5 +13,6 @@ namespace HCIProject02.Core.Service.Travel
         public Arrangement Create(Arrangement arrangement);
         public Arrangement? Update(Arrangement arrangement);
         public Arrangement Delete(Arrangement arrangement);
+        public Arrangement? GetArrangementByName(string name);
     }
 }

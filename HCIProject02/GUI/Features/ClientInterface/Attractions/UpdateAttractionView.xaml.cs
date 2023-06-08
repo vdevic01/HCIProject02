@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
@@ -19,26 +20,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
+namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 {
     /// <summary>
-    /// Interaction logic for UpdateRestaurantView.xaml
+    /// Interaction logic for UpdateAttractionView.xaml
     /// </summary>
-    public partial class UpdateRestaurantView : UserControl
+    public partial class UpdateAttractionView : UserControl
     {
 
-        private UpdateRestaurantViewModel viewModel { get; set; }
+        private UpdateAttractionViewModel viewModel { get; set; }
         private string mapKey { get; set; }
-        public UpdateRestaurantView()
+        public UpdateAttractionView()
         {
             InitializeComponent();
-            UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
+            UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
             this.viewModel = viewModel;
 
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
-         
-
         }
 
         private async void MapMouseClick(object sender, MouseButtonEventArgs e)
@@ -47,9 +46,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
 
-     
 
-            if (myMap.DataContext is UpdateRestaurantViewModel viewModel)
+            if (myMap.DataContext is UpdateAttractionViewModel viewModel)
             {
                 // Pristupite viewModel.PinLocation i postavite vrijednost
                 viewModel.PinLocation = clickedLocation;
@@ -111,9 +109,9 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
                 {
                     viewModel.Restaurant.ImagePath = imagePath;
 
-                    
-                  
-                    
+
+
+
                 }
 
             }

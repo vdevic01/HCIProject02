@@ -8,6 +8,7 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
              xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
              mc:Ignorable="d" 
+          
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
@@ -19,7 +20,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
-        <Grid>
+        <Grid MaxWidth="800px">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="0.880*"/>
@@ -37,8 +38,8 @@
                         <Label FontSize="15" Style="{StaticResource DefaultText}">Choose Location:</Label>
                     </Grid>
                     <Grid Grid.Row="1">
-                        <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
-                            <m:Pushpin Location="{Binding PinLocation}"></m:Pushpin>
+                            <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <m:Pushpin x:Name="PushPin" Location="{Binding PinLocation }" ></m:Pushpin>
                            
                             </m:Map>
 
@@ -129,7 +130,7 @@
                                             </Border.Background>
                                             <StackPanel VerticalAlignment="Bottom">
                                                 <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
-                                                    <Image Source="../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
+                                                    <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
                                                 </Button>
                                             </StackPanel>
                                         </Border>
