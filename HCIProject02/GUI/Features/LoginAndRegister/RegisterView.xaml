@@ -46,7 +46,16 @@
                                    HorizontalAlignment="Left"
                                    Style="{StaticResource DefaultText}"
                                    FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                                <TextBox FontSize="15px" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"
+                                         >
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                            Enter your first name.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10 0 0 0">
                                 <Label Content="Last Name*"
@@ -54,7 +63,15 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                                <TextBox FontSize="15px" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter your last name.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                             </StackPanel>
                         </Grid>
                         <Label Content="Email*"
@@ -62,7 +79,15 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}">
+                            <TextBox.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label  >
+                                        Enter your email.
+                                    </Label>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
                         <Grid Margin="0 10 0 0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
@@ -74,7 +99,15 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox Text="{Binding Password}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                                <TextBox Text="{Binding Password}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter your password.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10 0 0 0">
                                 <Label Content="Confirm Password*"
@@ -82,7 +115,15 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox Text="{Binding PasswordConfirm}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                                <TextBox Text="{Binding PasswordConfirm}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Re-enter your password.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                             </StackPanel>
                         </Grid>
                     </StackPanel>
@@ -105,7 +146,9 @@
                                Command="{Binding NavigateToLoginViewCommand}"
                                FontSize="15"
                                VerticalAlignment="Center"
-                               Style="{StaticResource LinkText}"/>
+                               Style="{StaticResource LinkText}">
+                            
+                        </Button>
                     </StackPanel>
                 </StackPanel>
             </Grid>
