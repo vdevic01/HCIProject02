@@ -2,6 +2,8 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using Serilog;
@@ -51,6 +53,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
         #region Services
         private IAttractionService attractionService;
+        private readonly IDialogService _dialogService;
         #endregion
 
 
@@ -60,12 +63,13 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             Attraction? attraction = attractionService.Update(Attraction);
             if (attraction != null)
             {
-                MessageBox.Show("Attraction updated.");
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Attraction updated.");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
             }
 
         }
 
-        public UpdateAttractionViewModel(IAttractionService attractionService)
+        public UpdateAttractionViewModel(IAttractionService attractionService, IDialogService dialogService)
         {
             this.attractionService = attractionService;
 

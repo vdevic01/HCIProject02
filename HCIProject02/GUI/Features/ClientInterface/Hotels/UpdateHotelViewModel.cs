@@ -15,6 +15,8 @@ using System.Windows.Media;
 using Castle.DynamicProxy;
 using System.ComponentModel;
 using Serilog;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -67,6 +69,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         #region Services
         private IHotelService hotelService;
+        private readonly IDialogService _dialogService;
         #endregion
 
 
@@ -78,12 +81,13 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Hotel? hotel = hotelService.Update(Hotel);
             if (hotel != null)
             {
-                MessageBox.Show("Hotel updated.");
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel updated.");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
             }
         }
 
 
-        public UpdateHotelViewModel(IHotelService hotelService)
+        public UpdateHotelViewModel(IHotelService hotelService, IDialogService dialogService)
         {
             this.hotelService = hotelService;
             UpdateHotelCommand = new RelayCommand(obj => UpdateHotel());

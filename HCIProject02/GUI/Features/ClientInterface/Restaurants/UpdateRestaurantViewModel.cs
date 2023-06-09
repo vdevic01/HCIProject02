@@ -2,6 +2,8 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using Serilog;
@@ -52,6 +54,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         #region Services
         private IRestaurantService restaurantService;
+        private readonly IDialogService _dialogService;
         #endregion
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void NotifyPropertyChanged(string propertyName)
@@ -65,13 +68,14 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             Restaurant? restaurant = restaurantService.Update(Restaurant);
             if (restaurant != null)
             {
-                MessageBox.Show("Restaurant updated.");
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Restaurant updated.");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
             }
             
         }
         
 
-        public UpdateRestaurantViewModel(IRestaurantService restaurantService)
+        public UpdateRestaurantViewModel(IRestaurantService restaurantService, IDialogService dialogService)
         {
             this.restaurantService = restaurantService;
   

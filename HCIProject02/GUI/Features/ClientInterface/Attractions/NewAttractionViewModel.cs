@@ -145,7 +145,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
                 Arrangements = _arrangements
             };
 
-            Log.Information(attraction.ToString());
+         
 
             Attraction? a = attractionService.Create(attraction);
             if (a != null)
