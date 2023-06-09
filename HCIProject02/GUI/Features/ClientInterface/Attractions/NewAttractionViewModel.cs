@@ -2,6 +2,8 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using Serilog;
 using System;
@@ -97,6 +99,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
         #region Services
         private IAttractionService attractionService;
         private IArrangementService arrangementService;
+        private readonly IDialogService _dialogService;
         #endregion
 
         #region Commands
@@ -124,7 +127,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             }
             if (string.IsNullOrEmpty(FilePath))
             {
-                ErrorMessage = "Image of Restaurant is required";
+                ErrorMessage = "Image of attraction is required";
                 return;
             }
 
@@ -147,7 +150,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             Attraction? a = attractionService.Create(attraction);
             if (a != null)
             {
-                MessageBox.Show("Attraction created");
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Attraction created.");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
             }
 
 
@@ -155,10 +159,12 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
 
 
-        public NewAttractionViewModel(IAttractionService attractionService, IArrangementService arrangementService)
+        public NewAttractionViewModel(IAttractionService attractionService, IArrangementService arrangementService,
+            IDialogService dialogService)
         {
             this.attractionService = attractionService;
             this.arrangementService = arrangementService;
+            this._dialogService = dialogService;
             this._arrangements = new List<Arrangement>();
             AddNewAttractionCommand = new RelayCommand(obj => AddNewAttraction());
         }
