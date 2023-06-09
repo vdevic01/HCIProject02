@@ -64,6 +64,13 @@
                                 Padding="10">
                             <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Restaurant.Address}" TextWrapping="Wrap"/>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Address of this restaurant.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
                 </Grid>

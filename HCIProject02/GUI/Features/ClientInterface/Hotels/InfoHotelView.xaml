@@ -76,6 +76,13 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                        <Grid.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Rating of the hotel by visitors.
+                                </Label>
+                            </StackPanel>
+                        </Grid.ToolTip>
                     </Grid>
 
 
@@ -87,6 +94,13 @@
                                 Padding="8">
                             <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Hotel.Address}" TextWrapping="Wrap"/>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Address of this hotel.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
                 </Grid>

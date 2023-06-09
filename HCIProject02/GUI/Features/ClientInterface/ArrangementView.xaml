@@ -44,7 +44,15 @@
                             <EllipseGeometry Center="65,65" RadiusX="65" RadiusY="65" />
                         </Path.Data>
                     </Path>
-                    <Button Content="Book" Style="{StaticResource DefaultButtonStyle}" Command="{Binding BookCommand}" Grid.Column="0" Grid.Row="1" Height="30px" FontSize="18" VerticalAlignment="Bottom"/>
+                    <Button Content="Book" Style="{StaticResource DefaultButtonStyle}" Command="{Binding BookCommand}" Grid.Column="0" Grid.Row="1" Height="30px" FontSize="18" VerticalAlignment="Bottom">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Click the button to book this arrangement.
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
                     <TextBlock FontSize="14" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Padding="15 0" TextWrapping="Wrap" Style="{StaticResource DefaultTextBlock}" Text="{Binding Arrangement.Description}"/>
                     <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Height="1.5" Margin="0 15 0 10" Background="{StaticResource GraphicalElementsColor}"/>
 
@@ -71,6 +79,13 @@
                                 <StackPanel Orientation="Horizontal">
                                     <Label FontSize="14" Style="{StaticResource DefaultText}" Content="Hotel: "/>
                                     <Button VerticalAlignment="Center" FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Arrangement.Hotel.Name}"/>
+                                    <StackPanel.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                The hotel where you are staying.
+                                            </Label>
+                                        </StackPanel>
+                                    </StackPanel.ToolTip>
                                 </StackPanel>
                             </StackPanel>
                         </Border>
@@ -89,6 +104,13 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Attractions that this arrangement includes.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="20 0 0 0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
                         <Label FontSize="14" Content="Trip plan" Style="{StaticResource DefaultText}"/>

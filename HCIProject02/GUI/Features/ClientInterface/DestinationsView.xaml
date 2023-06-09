@@ -34,13 +34,22 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Grid.Column="0" Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
+
                     <TextBox Grid.Column="1"
                              FontFamily="{StaticResource DefaultFont}"
                              FontSize="14"
                              BorderThickness="0"
                              Padding="10 0 10 0"
                              Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                             Foreground="{StaticResource TextDark}"/>
+                             Foreground="{StaticResource TextDark}">
+                        <TextBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                   Search destinations
+                                </Label>
+                            </StackPanel>
+                        </TextBox.ToolTip>
+                    </TextBox>
                     <Button Grid.Column="2" Padding="5"
                             Background="Transparent"
                             BorderThickness="0"
@@ -65,6 +74,13 @@
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Clear search
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
                         <materialDesign:PackIcon Width="20" Height="20" Kind="WindowClose" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>

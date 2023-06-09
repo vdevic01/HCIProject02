@@ -39,7 +39,14 @@
                         </Grid>
                         <Grid Grid.Row="1">
                             <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick"/>
-
+                            <Grid.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock TextWrapping="Wrap" Margin="5" MaxWidth="100">
+                                        Select the location of attraction by double clicking on the desired place.
+                                        The address of the attraction will change automatically
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid.ToolTip>
                         </Grid>
                         <Grid Grid.Row="2">
                             <Label Content="{Binding ErrorMessage}"
@@ -63,8 +70,15 @@
                         FontSize="20px"
                         Content="Create"
                         Style="{StaticResource DefaultButtonStyle}"
-                       Command="{Binding AddNewRestaurantCommand}"
-                         />
+                       Command="{Binding AddNewRestaurantCommand}">
+                                    <Button.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Click the button to add the new restaurant to the system.
+                                            </Label>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -88,19 +102,43 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Enter name of new restaurant.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                                 <Label Content="Description*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Describe the restaurant in a few sentences.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                                 <Label Content="Address*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Address}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Address}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Enter address of new restaurant, or choose location on map.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
 
 
                                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
@@ -117,6 +155,13 @@
                                                     </Button>
                                                     <Label x:Name="DropText" HorizontalContentAlignment="Center">Choose image or drag here</Label>
                                                 </StackPanel>
+                                                <Border.ToolTip>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label>
+                                                            Choose image of restaurant by click on button, or drag it here.
+                                                        </Label>
+                                                    </StackPanel>
+                                                </Border.ToolTip>
                                             </Border>
                                         </Grid>
                                     </Viewbox>

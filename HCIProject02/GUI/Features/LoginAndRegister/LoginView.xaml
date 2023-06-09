@@ -41,13 +41,29 @@
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}">
+                            <TextBox.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label  >
+                                        Enter your email.
+                                    </Label>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
                         <Label Content="Password"
                        Margin="0 10 0 -5"
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Text="{Binding Password}" Style="{StaticResource DefaultPasswordBoxStyle}"/>
+                        <TextBox FontSize="15px" Text="{Binding Password}" Style="{StaticResource DefaultPasswordBoxStyle}">
+                            <TextBox.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label  >
+                                        Enter your password.
+                                    </Label>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
                     </StackPanel>
                 </ScrollViewer>
                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">

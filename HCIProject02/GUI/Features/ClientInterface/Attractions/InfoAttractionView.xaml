@@ -69,6 +69,13 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Arrangements which involving this location.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
 
@@ -80,6 +87,13 @@
                                 Padding="10">
                             <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Attraction.Address}" TextWrapping="Wrap"/>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Address of this attraction.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
                 </Grid>
