@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCIProject02.HelpSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,20 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
         public RegisterView()
         {
             InitializeComponent();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("SignUp", Window.GetWindow(this));
+            }
         }
     }
 }

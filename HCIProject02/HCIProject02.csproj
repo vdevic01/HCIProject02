@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+	<Target Name="CopyHelpFiles" AfterTargets="Build">
+		<ItemGroup>
+			<HelpFiles Include="Help\**" />
+		</ItemGroup>
+		<Copy SourceFiles="@(HelpFiles)" DestinationFolder="$(TargetDir)\%(RecursiveDir)" SkipUnchangedFiles="true" />
+	</Target>
   <ItemGroup>
 	<Content Include="GUI\Fonts\*.ttf">
 	<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -45,11 +51,32 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Help\Images\Navigation.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\Images\SearchDestinations.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\LoginForm.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\LoginWarning.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\Navigation.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\SearchDestinations.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Help\SignUp.htm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
   </Target>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
   </Target>
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="XCOPY &quot;$(SolutionDir)Help&quot; &quot;$(TargetDir)\Help\&quot; /S /Y" />
-  </Target>
+
 </Project>

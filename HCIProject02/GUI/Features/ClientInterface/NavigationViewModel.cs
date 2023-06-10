@@ -72,24 +72,24 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
             ReturnButtonVisibility = Visibility.Collapsed;
 
-            /*            UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
-                        Attraction? res = attractionService.GetAttractionByName("Hram Svetog Save");
-                        viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
-                        viewModel.Attraction = res;
-                        SwitchCurrentViewModel(viewModel);*/
+            UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
+            Attraction? res = attractionService.GetAttractionByName("Hram Svetog Save");
+            viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
+            viewModel.Attraction = res;
+            SwitchCurrentViewModel(viewModel);
 
-            /*            NewAttractionViewModel viewModel = ServiceLocator.Get<NewAttractionViewModel>();
+            /*            NewRestaurantViewModel viewModel = ServiceLocator.Get<NewRestaurantViewModel>();
                         SwitchCurrentViewModel(viewModel);*/
 
             /*            InfoAttractionViewModel viewModel = ServiceLocator.Get<InfoAttractionViewModel>();
                         Attraction? res = attractionService.GetAttractionByName("Hram Svetog Save");
                         viewModel.Attraction = res;*/
-
-            UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
-            Hotel? res = hotelService.GetHotelByName("Reks hotel");
-            viewModel.Hotel = res;
-            viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
-
+            /*
+                        UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
+                        Hotel? res = hotelService.GetHotelByName("Reks hotel");
+                        viewModel.Hotel = res;
+                        viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
+            */
             SwitchCurrentViewModel(viewModel);
 
         }
