@@ -7,6 +7,7 @@
                     xmlns:attrdnd="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop"
                     xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
                     xmlns:attractions="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Attractions"
+                    xmlns:report="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Report"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
@@ -89,5 +90,7 @@
     <DataTemplate DataType="{x:Type management:AttractionManagementViewModel}">
         <management:AttractionManagementView/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type report:ReportViewModel}">
+        <report:ReportView/>
+    </DataTemplate>
 </ResourceDictionary>

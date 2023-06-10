@@ -168,9 +168,9 @@
                             </MyControls:FilteredComboBox>
 
 
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding DepartureDate}" />
-                            
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding ReturnDate}" />
+                            <DatePicker Grid.Row="0" SelectedDate="{Binding DepartureDate, Mode=TwoWay}" />
+
+                            <DatePicker Grid.Row="0" SelectedDate="{Binding ReturnDate, Mode=TwoWay}" />
                             <Label Content="Price*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"

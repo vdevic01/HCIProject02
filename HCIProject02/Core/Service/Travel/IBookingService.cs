@@ -11,5 +11,9 @@ namespace HCIProject02.Core.Service.Travel
     {
         public Booking BookArrangement(Arrangement arrangement, Client passenger);
         public List<Booking> GetBookingsForUser(Client user);
+
+        public List<Booking> GetBookingsByArrangement(Arrangement arrangement);
+
+        public List<Booking> GetBookingByMonth(DateTime dateTime);
     }
 }

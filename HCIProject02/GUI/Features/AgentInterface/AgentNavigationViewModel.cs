@@ -4,6 +4,7 @@ using HCIProject02.Core.Ninject;
 using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.Features.AgentInterface.Arrangements;
 using HCIProject02.GUI.Features.AgentInterface.Management;
+using HCIProject02.GUI.Features.AgentInterface.Report;
 using HCIProject02.GUI.Features.ClientInterface;
 using HCIProject02.GUI.Features.ClientInterface.Attractions;
 using HCIProject02.GUI.Features.ClientInterface.Restaurants;
@@ -40,6 +41,8 @@ namespace HCIProject02.GUI.Features.AgentInterface
         public ICommand ArrangementManagementCommand { get; }
         public ICommand RestaurantManagementCommand { get; }
         public ICommand MapCommand { get; }
+
+        public ICommand ReportCommand { get; }
 
         private ICommand _returnCommand;
         public ICommand ReturnCommand
@@ -92,6 +95,13 @@ namespace HCIProject02.GUI.Features.AgentInterface
             AgentMapViewModel viewModel = ServiceLocator.Get<AgentMapViewModel>();
             SwitchCurrentViewModel(viewModel);
         }
+
+        private void NavigateToReportView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            ReportViewModel viewModel = ServiceLocator.Get<ReportViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
         public AgentNavigationViewModel() {
             RegisterHandlers();
             _returnButtonVisibility = Visibility.Collapsed;
@@ -101,6 +111,7 @@ namespace HCIProject02.GUI.Features.AgentInterface
             ArrangementManagementCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
             AttractionManagementCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
             MapCommand = new RelayCommand(obj => NavigateToMapView());
+            ReportCommand = new RelayCommand(obj => NavigateToReportView());
             NavigateToMapView();
         }
 

@@ -113,8 +113,8 @@
 
             <Button Grid.Row="4" Content="Map" Command="{Binding MapCommand}" Style="{StaticResource AgentNavigationButtonStyle}"  Click="AgentNavigationButton_Click"  Height="50px"/>
             <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
-            
-            <Button Grid.Row="5" Content="Reports" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click"  Height="50px"/>
+
+            <Button Grid.Row="5" Content="Reports" Command="{Binding ReportCommand}" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click"  Height="50px"/>
             <StackPanel Grid.Row="5" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
 

@@ -221,7 +221,8 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 allAttractionsViewModel.AddAttractionItem(new AttractionItemViewModel(attraction));
             }
             AllAttractions = allAttractionsViewModel;
-            
+            ReturnDate = DateTime.Today;
+            DepartureDate = DateTime.Today;
 
         }
 
