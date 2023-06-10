@@ -17,6 +17,7 @@ using System.ComponentModel;
 using Serilog;
 using HCIProject02.GUI.Dialog;
 using HCIProject02.GUI.Dialog.Implementations;
+using HCIProject02.Core.Service.Travel.Implementation;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -75,21 +76,42 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         private void UpdateHotel()
         {
-            Log.Information(Hotel.ToString());
+ 
             Hotel.Latitude = PinLocation.Latitude;
             Hotel.Longitude = PinLocation.Longitude;
-            Hotel? hotel = hotelService.Update(Hotel);
-            if (hotel != null)
+
+
+
+            var yesNoDialog = new YesNoDialogViewModel("Hotel updating confirmation", "Are you sure you want to update this hotel ?");
+
+            _dialogService.ShowDialog(yesNoDialog, result =>
             {
-                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel updated.");
-                _dialogService.ShowDialog(okDialog, result => { }, true);
-            }
+                if (result == null)
+                {
+                    return;
+                }
+                if ((bool)result)
+                {
+
+                    Hotel? hotel = hotelService.Update(Hotel);
+                    if (hotel != null)
+                    {
+                        OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel updated.");
+                        _dialogService.ShowDialog(okDialog, result => { }, true);
+                    }
+                }
+            }, true);
+
+
+
+         
         }
 
 
         public UpdateHotelViewModel(IHotelService hotelService, IDialogService dialogService)
         {
             this.hotelService = hotelService;
+            _dialogService = dialogService;
             UpdateHotelCommand = new RelayCommand(obj => UpdateHotel());
             
         }

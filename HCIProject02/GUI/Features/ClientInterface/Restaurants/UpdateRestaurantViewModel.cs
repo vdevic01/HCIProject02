@@ -56,6 +56,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
         private IRestaurantService restaurantService;
         private readonly IDialogService _dialogService;
         #endregion
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void NotifyPropertyChanged(string propertyName)
         {
@@ -64,21 +66,33 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         private void UpdateRestaurant()
         {
-            Log.Information(Restaurant.ToString());
-            Restaurant? restaurant = restaurantService.Update(Restaurant);
-            if (restaurant != null)
+            var yesNoDialog = new YesNoDialogViewModel("Restaurant updating confirmation", "Are you sure you want to update this restaurant ?");
+
+            _dialogService.ShowDialog(yesNoDialog, result =>
             {
-                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Restaurant updated.");
-                _dialogService.ShowDialog(okDialog, result => { }, true);
-            }
-            
+                if (result == null)
+                {
+                    return;
+                }
+                if ((bool)result)
+                {
+
+                    Restaurant? restaurant = restaurantService.Update(Restaurant);
+                    if (restaurant != null)
+                    {
+                        OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Restaurant updated.");
+                        _dialogService.ShowDialog(okDialog, result => { }, true);
+                    }
+                }
+            }, true);
+          
         }
         
 
         public UpdateRestaurantViewModel(IRestaurantService restaurantService, IDialogService dialogService)
         {
             this.restaurantService = restaurantService;
-  
+            _dialogService = dialogService;
             UpdateRestaurantCommand = new RelayCommand(obj => UpdateRestaurant());
 
 
