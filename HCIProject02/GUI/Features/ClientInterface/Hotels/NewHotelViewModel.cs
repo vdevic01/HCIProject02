@@ -151,7 +151,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Hotel? h = hotelService.Create(hotel);
             if (h != null)
             {
-                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel created.");
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel created");
                 _dialogService.ShowDialog(okDialog, result => { }, true);
             }
 

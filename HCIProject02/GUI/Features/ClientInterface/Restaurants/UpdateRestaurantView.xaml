@@ -41,9 +41,15 @@
                     <Grid Grid.Row="1">
                         <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <m:Pushpin x:Name="PushPin" Location="{Binding PinLocation }" ></m:Pushpin>
-
                         </m:Map>
-
+                        <Grid.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock TextWrapping="Wrap" Margin="5" MaxWidth="100">
+                                        Select the location of restaurant by double clicking on the desired place.
+                                        The address of the attraction will change automatically
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid.ToolTip>
                     </Grid>
                     <Grid Grid.Row="2">
                             <Label Content="{Binding ErrorMessage}"
@@ -63,13 +69,20 @@
                             <Grid Grid.Column="0"></Grid>
                             <Grid Grid.Column="1">
 
-                                <Button Height="30px"
+                            <Button Height="30px"
                         FontSize="20px"
                         Content="Update"
                         Style="{StaticResource DefaultButtonStyle}"
-                       Command="{Binding UpdateRestaurantCommand}"
-                         />
-                            </Grid>
+                       Command="{Binding UpdateRestaurantCommand}">
+                                <Button.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>
+                                            Click the button to update restaurant
+                                        </Label>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                            </Button>
+                        </Grid>
                         </Grid>
                     </Grid>
                 </Border>
@@ -92,21 +105,45 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
-                                <Label Content="Description*"
+                                <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                                <TextBox.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>
+                                            Click to update the name.
+                                        </Label>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="Description*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
-                                <Label Content="Address*"
+                                <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                                <TextBox.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>
+                                            Click to update the description.
+                                        </Label>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
+                            <Label Content="Address*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                                <TextBox.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label>
+                                            Click to update the address.
+                                        </Label>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
 
-                                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
                                     <Viewbox>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
@@ -122,7 +159,14 @@
                                                         <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
                                                     </Button>
                                                 </StackPanel>
-                                            </Border>
+                                            <Border.ToolTip>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Label>
+                                                        Choose image or drag it here.
+                                                    </Label>
+                                                </StackPanel>
+                                            </Border.ToolTip>
+                                        </Border>
                                         </Grid>
                                     </Viewbox>
                                 </StackPanel>
