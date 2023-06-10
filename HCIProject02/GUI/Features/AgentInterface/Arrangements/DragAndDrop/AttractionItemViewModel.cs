@@ -1,4 +1,5 @@
-﻿using HCIProject02.GUI.ViewModel;
+﻿using HCIProject02.Core.Model;
+using HCIProject02.GUI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,23 +10,23 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop
 {
     public class AttractionItemViewModel : ViewModelBase
     {
-        private string _description;
-        public string Description
+        private Attraction _attractionItem;
+        public Attraction AttractionItem
         {
             get
             {
-                return _description;
+                return _attractionItem;
             }
             set
             {
-                _description = value;
-                OnPropertyChanged(nameof(Description));
+                _attractionItem = value;
+                OnPropertyChanged(nameof(AttractionItem));
             }
         }
 
-        public AttractionItemViewModel(string description)
+        public AttractionItemViewModel(Attraction attraction)
         {
-            Description = description;
+            AttractionItem = attraction;
         }
     }
 }

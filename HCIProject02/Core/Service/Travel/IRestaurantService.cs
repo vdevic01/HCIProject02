@@ -11,7 +11,10 @@ namespace HCIProject02.Core.Service.Travel
     {
         public Restaurant Create(Restaurant restaurant);
         public Restaurant? Update(Restaurant restaurant);
+
+        public List<Restaurant> GetAll();
         public Restaurant? GetRestaurantByName(string name);
+        public Restaurant Delete(Restaurant restaurant);
 
     }
 }

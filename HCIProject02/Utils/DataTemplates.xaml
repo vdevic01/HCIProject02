@@ -83,6 +83,11 @@
     <DataTemplate DataType="{x:Type attrdnd:AttractionListingViewModel}">
         <attrdnd:AttractionListingView/>
     </DataTemplate>
-
+    <DataTemplate DataType="{x:Type management:RestaurantManagementViewModel}">
+        <management:RestaurantManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type management:AttractionManagementViewModel}">
+        <management:AttractionManagementView/>
+    </DataTemplate>
 
 </ResourceDictionary>

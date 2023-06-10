@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,13 +26,18 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
         public NewArrangementView()
         {
             NewArrangementViewModel viewModel = ServiceLocator.Get<NewArrangementViewModel>();
-            this.NewArrangementViewModel = viewModel;
+            NewArrangementViewModel = viewModel;
             DataContext = viewModel;
 
             InitializeComponent();
 
         }
 
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
 
         private void OnImageDropped(object sender, DragEventArgs e)

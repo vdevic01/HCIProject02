@@ -8,6 +8,7 @@
              xmlns:DragAndDrop="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop"
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:MyControls="clr-namespace:HCIProject02.GUI.MyControls"
+             xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
              d:DataContext="{d:DesignInstance Type=local:NewArrangementViewModel}"
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
@@ -56,7 +57,7 @@
                             <DragAndDrop:AttractionListingView
                                 Grid.Row="1"
                                 Margin="0 10 0 0"
-                                DataContext="{Binding InProgressAttractionItemListingViewModel}"
+                                DataContext="{Binding AllAttractions}"
                                 IncomingAttractionItem="{Binding IncomingAttractionItemViewModel}"
                                 InsertedAttractionItem="{Binding InsertedAttractionItemViewModel}"
                                 RemovedAttractionItem="{Binding RemovedAttractionItemViewModel}"
@@ -80,7 +81,7 @@
                             <DragAndDrop:AttractionListingView
                             Grid.Row="1"
                             Margin="0 10 0 0"
-                            DataContext="{Binding CompletedAttractionItemListingViewModel}"
+                            DataContext="{Binding ChosenAttractions}"
                             IncomingAttractionItem="{Binding IncomingAttractionItemViewModel}"
                             InsertedAttractionItem="{Binding InsertedAttractionItemViewModel}"
                             RemovedAttractionItem="{Binding RemovedAttractionItemViewModel}"
@@ -167,9 +168,15 @@
                             </MyControls:FilteredComboBox>
 
 
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}" />
+                            <DatePicker Grid.Row="0" SelectedDate="{Binding DepartureDate}" />
                             
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding SelectedDate}" />
+                            <DatePicker Grid.Row="0" SelectedDate="{Binding ReturnDate}" />
+                            <Label Content="Price*"
+                               Margin="0 10 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px"/>
+                            <TextBox Name="NumberTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding Price}" Style="{StaticResource DefaultTextBoxStyle}"/>
                             <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
                                 <Viewbox>
                                     <Grid>

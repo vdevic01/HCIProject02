@@ -22,7 +22,7 @@
             </ListView.ItemContainerStyle>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Description}" />
+                    <TextBlock Text="{Binding AttractionItem.Name}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -101,11 +101,11 @@
 
             <Button Grid.Row="0" Content="Hotels" Click="AgentNavigationButton_Click" Command="{Binding HotelManagementCommand}" Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="0" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
-            
-            <Button Grid.Row="1" Content="Restaurants" Click="AgentNavigationButton_Click" Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>
+
+            <Button Grid.Row="1" Content="Restaurants" Click="AgentNavigationButton_Click" Command="{Binding RestaurantManagementCommand}"  Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="1" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="2" Content="Attractions" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click" Height="50px"/>
+            <Button Grid.Row="2" Content="Attractions" Command="{Binding AttractionManagementCommand}" Style="{StaticResource AgentNavigationButtonStyle}" Click="AgentNavigationButton_Click" Height="50px"/>
             <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
             <Button Grid.Row="3" Content="Arrangements" Command="{Binding ArrangementManagementCommand}"   Click="AgentNavigationButton_Click" Style="{StaticResource AgentNavigationButtonStyle}" Height="50px"/>

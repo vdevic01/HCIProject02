@@ -5,6 +5,8 @@ using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.Features.AgentInterface.Arrangements;
 using HCIProject02.GUI.Features.AgentInterface.Management;
 using HCIProject02.GUI.Features.ClientInterface;
+using HCIProject02.GUI.Features.ClientInterface.Attractions;
+using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
 using System.Windows;
@@ -33,7 +35,10 @@ namespace HCIProject02.GUI.Features.AgentInterface
         #region Commands
         public ICommand LogoutCommand { get; }
         public ICommand HotelManagementCommand { get; }
+
+        public ICommand AttractionManagementCommand { get; }
         public ICommand ArrangementManagementCommand { get; }
+        public ICommand RestaurantManagementCommand { get; }
         public ICommand MapCommand { get; }
 
         private ICommand _returnCommand;
@@ -60,6 +65,20 @@ namespace HCIProject02.GUI.Features.AgentInterface
             SwitchCurrentViewModel(viewModel);
         }
 
+        private void NavigateToAttractionManagementView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            AttractionManagementViewModel viewModel = ServiceLocator.Get<AttractionManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
+        private void NavigateToRestaurantManagementView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            RestaurantManagementViewModel viewModel = ServiceLocator.Get<RestaurantManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
         private void NavigateToArrangementManagementView()
         {
             ReturnButtonVisibility = Visibility.Collapsed;
@@ -78,7 +97,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
             _returnButtonVisibility = Visibility.Collapsed;
             LogoutCommand = new RelayCommand(obj => LogoutUser());
             HotelManagementCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+            RestaurantManagementCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
             ArrangementManagementCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            AttractionManagementCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
             MapCommand = new RelayCommand(obj => NavigateToMapView());
             NavigateToMapView();
         }
@@ -125,6 +146,56 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 NewArrangementViewModel viewModel = ServiceLocator.Get<NewArrangementViewModel>();
                 SwitchCurrentViewModel(viewModel);
                 ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.NewRestaurantView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewRestaurantViewModel viewModel = ServiceLocator.Get<NewRestaurantViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateRestaurantView, obj =>
+            {
+                NavigatorEventDTO restaurantInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
+                viewModel.Restaurant = (Restaurant?)restaurantInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.InfoRestaurantView, obj =>
+            {
+                NavigatorEventDTO restaurantInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                InfoRestaurantViewModel viewModel = ServiceLocator.Get<InfoRestaurantViewModel>();
+                viewModel.Restaurant = (Restaurant)restaurantInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.NewAttractionView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewAttractionViewModel viewModel = ServiceLocator.Get<NewAttractionViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateAttractionView, obj =>
+            {
+                NavigatorEventDTO attractionInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
+                viewModel.Attraction = (Attraction?)attractionInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.InfoAttractionView, obj =>
+            {
+                NavigatorEventDTO attractionInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                InfoAttractionViewModel viewModel = ServiceLocator.Get<InfoAttractionViewModel>();
+                viewModel.Attraction = (Attraction)attractionInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
             });
         }
     }

@@ -95,6 +95,39 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
             }
         }
 
+        private string _price;
+        public string Price
+        {
+            get => _price;
+            set
+            {
+                _price = value;
+                OnPropertyChanged(nameof(Price));
+            }
+        }
+
+        private DateTime _returnDate;
+        public DateTime ReturnDate
+        {
+            get => _returnDate;
+            set
+            {
+                _returnDate = value;
+                OnPropertyChanged(nameof(ReturnDate));
+            }
+        }
+
+        private DateTime _departureDate;
+        public DateTime DepartureDate
+        {
+            get => _departureDate;
+            set
+            {
+                _departureDate = value;
+                OnPropertyChanged(nameof(DepartureDate));
+            }
+        }
+
         private string? _errorMessage;
         public string? ErrorMessage
         {
@@ -114,6 +147,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
         #region Services
         private IArrangementService _arrangementService;
         private IHotelService _hotelService;
+        private IAttractionService _attractionService;
         #endregion
 
         private void AddNewArrangement()
@@ -129,6 +163,28 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 ErrorMessage = "Field (Description) is required";
                 return;
             }
+            if (string.IsNullOrEmpty(TripPlan))
+            {
+                ErrorMessage = "Field (Trip Plan) is required";
+                return;
+            }
+            if (string.IsNullOrEmpty(FilePath))
+            {
+                ErrorMessage = "Image is required";
+                return;
+            }
+            if (string.IsNullOrEmpty(SelectedHotel.Name))
+            {
+                ErrorMessage = "Pick a hotel";
+                return;
+            }
+
+            List<Attraction> attractions = new List<Attraction>();
+            foreach (var attraction in ChosenAttractions.AttractionItemViewModels)
+            {
+                attractions.Add(attraction.AttractionItem);
+            }
+
 
             Arrangement arrangement = new Arrangement
             {
@@ -136,35 +192,35 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 Description = Description,
                 TripPlan = TripPlan,
                 ImagePath = FilePath,
-                DepartureTime = new DateTime(),
-                ReturnTime = new DateTime(),
-                Price = 50,
-                Hotel = _hotelService.GetHotelByName("aa"),
-                Attractions = new List<Attraction>()
-                
+                DepartureTime = DepartureDate,
+                ReturnTime = ReturnDate,
+                Price = double.Parse(Price),
+                Hotel = SelectedHotel,
+                Attractions = attractions
             };
-            Console.WriteLine(this.FilePath);
-            Console.WriteLine(this.SelectedHotel);
             _arrangementService.Create(arrangement);
-            MessageBox.Show("Hotel created");
+            MessageBox.Show("Arrangement created");
 
         }
 
 
 
-        public NewArrangementViewModel(IArrangementService arrangementService, IHotelService hotelService)
+        public NewArrangementViewModel(IArrangementService arrangementService, IHotelService hotelService, IAttractionService attractionService)
         {
             _arrangementService = arrangementService;
             _hotelService = hotelService;
-            AllHotels = hotelService.GetAll();
+            _attractionService = attractionService;
+            AllHotels = _hotelService.GetAll();
             FilteredHotels = AllHotels;
             AddNewArrangementCommand = new RelayCommand(obj => AddNewArrangement());
-
-            AttractionListingViewModel allAttractions = new AttractionListingViewModel();
-            
             ChosenAttractions = new AttractionListingViewModel();
-
-            this.AllAttractions = allAttractions;
+            AttractionListingViewModel allAttractionsViewModel = new AttractionListingViewModel();
+            List<Attraction> attractions = _attractionService.GetAll();
+            foreach(var attraction in attractions)
+            {
+                allAttractionsViewModel.AddAttractionItem(new AttractionItemViewModel(attraction));
+            }
+            AllAttractions = allAttractionsViewModel;
             
 
         }

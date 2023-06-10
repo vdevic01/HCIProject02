@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HCIProject02.GUI.Features.AgentInterface
+namespace HCIProject02.GUI.Features.AgentInterface.Management
 {
     /// <summary>
     /// Interaction logic for RestaurantManagementView.xaml
