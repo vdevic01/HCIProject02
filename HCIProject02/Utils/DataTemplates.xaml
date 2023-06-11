@@ -78,9 +78,6 @@
     <DataTemplate DataType="{x:Type clientInterface:MapViewModel}">
         <clientInterface:MapView/>
     </DataTemplate>
-    <DataTemplate DataType="{x:Type agentInterface:AgentNavigationViewModel}">
-        <agentInterface:AgentNavigationView/>
-    </DataTemplate>
     <DataTemplate DataType="{x:Type agentInterface:HotelManagementViewModel}">
         <agentInterface:HotelManagementView/>
     </DataTemplate>
