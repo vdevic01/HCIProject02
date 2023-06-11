@@ -43,14 +43,14 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
 
 
 
-        private bool _monthlyReport;
-        public bool MonthlyReport
+        private bool _showChart;
+        public bool ShowChart
         {
-            get => _monthlyReport;
+            get => _showChart;
             set
             {
-                _monthlyReport = value;
-                OnPropertyChanged(nameof(MonthlyReport));
+                _showChart = value;
+                OnPropertyChanged(nameof(ShowChart));
             }
         }
 
@@ -201,22 +201,33 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
             {
                 profit += booking.Price;
             }
-            TotalProfits = "Total profits: " + profit;
-            Arrangement? mostCommonArrangement = bookings
-               .GroupBy(booking => booking.Arrangement)
-               .OrderByDescending(group => group.Count())
-               .Select(group => group.Key)
-               .FirstOrDefault();
-            MostPopular = "Most popular arrangement: " + mostCommonArrangement.Name;
-            ReportTitle = "Report for " + SelectedDate.Month.ToString() + " of " + SelectedDate.Year.ToString();
-            GenerateMonthlyChartData(bookings);
-            MonthlyReport = true;
+            TotalProfits = "Total profits: " + profit + " EUR";
+            if(bookings.Count > 0) {
+               Arrangement? mostCommonArrangement = bookings
+              .GroupBy(booking => booking.Arrangement)
+              .OrderByDescending(group => group.Count())
+              .Select(group => group.Key)
+              .FirstOrDefault();
+                MostPopular = "Most popular arrangement: " + mostCommonArrangement.Name;
+                GenerateMonthlyChartData(bookings);
+                ShowChart = true;
+            }
+            else
+            {
+                MostPopular = "";
+                ShowChart = false;
+            }
+           
+            ReportTitle = "Report for " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(SelectedDate.Month) + " of " + SelectedDate.Year.ToString() + ".";
             ShowReportGrid = true;
-            ArrangementReport = false;
         }
 
         private void GenerateArrangementReport()
         {
+            if (SelectedArrangement == null)
+            {
+                return;
+            }
             Arrangement arrangement = _arrangementService.GetArrangementByName(SelectedArrangement);
             List<Booking> bookings = _bookingService.GetBookingsByArrangement(arrangement);
             TotalNumberSold = "Sold arrangements: " + bookings.Count();
@@ -226,19 +237,24 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
             {
                 profit += booking.Price;
             }
-            TotalProfits = "Total profits: " + profit;
-
-            // Find the most popular month and year
-            var groupedBookings = bookings
+            TotalProfits = "Total profits: " + profit + " EUR";
+            if(bookings.Count > 0)
+            {
+                var groupedBookings = bookings
                 .GroupBy(booking => new { Month = booking.BookingTime.Month, Year = booking.BookingTime.Year })
                 .OrderByDescending(group => group.Count())
                 .FirstOrDefault();
-            MostPopular = "Most popular month: " + groupedBookings.Key.Month.ToString() + " of " + groupedBookings.Key.Year.ToString();
+                MostPopular = "Most popular month: " + CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(groupedBookings.Key.Month) + " of " + groupedBookings.Key.Year.ToString() + ".";
+                GenerateArrangementChartData(bookings);
+                ShowChart = true;
+            }
+            else
+            {
+                MostPopular = "";
+                ShowChart = false;
+            }
             ReportTitle = "Report for " + SelectedArrangement;
-            GenerateArrangementChartData(bookings);
-            ArrangementReport = true;
             ShowReportGrid = true;
-            MonthlyReport = false;
 
         }
 
@@ -309,7 +325,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
             _bookingService = bookingService;
             AllArrangements = arrangementService.GetAll().Select(arrangement => arrangement.Name).ToList();
             SelectedDate = DateTime.Today;
-            MonthlyReport = false;
+            ShowChart = false;
             ArrangementReport = false;
             ShowReportGrid = false;
             MonthlyReportCommand = new RelayCommand(obj => GenerateMonthlyReport());

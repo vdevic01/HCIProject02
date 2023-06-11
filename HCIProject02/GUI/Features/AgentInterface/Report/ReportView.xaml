@@ -42,18 +42,19 @@
                     <Grid Grid.Row="0" Grid.Column="0">
                         <DatePicker MyControls:DatePickerCalendar.IsMonthYear="True" 
                         MyControls:DatePickerDateFormat.DateFormat="MMM-yyyy"
-                        Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}"></DatePicker>
+                        Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" IsTodayHighlighted="True">
+                        </DatePicker>
                     </Grid>
                     <Button  Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
 
-                    <Button Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
+                    <Button Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
 
                     <MyControls:FilteredComboBox ItemsSource="{Binding AllArrangements}"
                                                  SelectedItem="{Binding SelectedArrangement}"
                                 IsEditable="True" 
                                 IsTextSearchEnabled="False" 
                                 StaysOpenOnEdit="True"
-                                                 Grid.Column="3" Grid.Row="0" Width="100px">
+                                                 Grid.Column="2" Grid.Row="0" Width="100px">
 
                         <MyControls:FilteredComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -89,7 +90,7 @@
 
                     </Grid>
 
-                    <lvc:CartesianChart Series="{Binding ChartSeries}" Grid.Column="1"  Width="500px" Visibility="{Binding ShowReportGrid, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <lvc:CartesianChart Series="{Binding ChartSeries}" Grid.Column="1"  Width="500px" Visibility="{Binding ShowChart, Converter={StaticResource BoolToVisibilityConverter}}">
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis Labels="{Binding XAxisValues}" />
                         </lvc:CartesianChart.AxisX>
