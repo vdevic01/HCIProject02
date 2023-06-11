@@ -1,12 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clientInterface="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+                    xmlns:agentInterface="clr-namespace:HCIProject02.GUI.Features.AgentInterface"
                     xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
                     xmlns:attractions="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Attractions"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
         <loginAndRegister:LoginView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type agentInterface:AgentNavigationViewModel}">
+        <agentInterface:AgentNavigationView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type loginAndRegister:RegisterViewModel}">
         <loginAndRegister:RegisterView/>

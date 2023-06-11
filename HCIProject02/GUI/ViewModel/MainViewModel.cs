@@ -1,6 +1,7 @@
 ﻿using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
 using HCIProject02.GUI.Features.ClientInterface;
+using HCIProject02.GUI.Features.AgentInterface;
 using HCIProject02.GUI.Features.LoginAndRegister;
 using HCIProject02.Navigation;
 using System;
@@ -39,6 +40,13 @@ namespace HCIProject02.GUI.ViewModel
                 User user = (User)obj;
                 viewModel = ServiceLocator.Get<NavigationViewModel>();
                 ((NavigationViewModel)viewModel).AuthenticatedUser = user;
+                SwitchCurrentViewModel(viewModel);
+            });
+            Navigator.RegisterHandler(ViewType.AgentHome, obj =>
+            {
+                User user = (User)obj;
+                viewModel = ServiceLocator.Get<AgentNavigationViewModel>();
+                ((AgentNavigationViewModel)viewModel).AuthenticatedUser = user;
                 SwitchCurrentViewModel(viewModel);
             });
         }

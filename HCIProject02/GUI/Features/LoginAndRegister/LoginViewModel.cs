@@ -20,7 +20,9 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
         #endregion
 
         #region Properties
-        private string? _email = "veljkobubnjevic01@gmail.com";
+
+        private string? _email = "client@email.com";
+
         public string? Email
         {
             get => _email;
@@ -73,7 +75,14 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
                 ErrorMessage = "Email or Password is not correct";
                 return;
             }
-            Navigator.FireEvent(ViewType.ClientHome, user);
+            if(user.Role == Role.Client)
+            {
+                Navigator.FireEvent(ViewType.ClientHome, user);
+            }
+            else
+            {
+                Navigator.FireEvent(ViewType.AgentHome, user);
+            }
         }
 
         private void NavigateToRegisterView()

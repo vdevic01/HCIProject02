@@ -41,7 +41,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Path VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Height="130" Width="130">
+                    <Path VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Height="130" Width="130" Margin="0 0 0 50">
                         <Path.Fill>
                             <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" />
                         </Path.Fill>
@@ -49,7 +49,8 @@
                             <EllipseGeometry Center="65,65" RadiusX="65" RadiusY="65" />
                         </Path.Data>
                     </Path>
-                    <Button Content="Book" Style="{StaticResource DefaultButtonStyle}" Command="{Binding BookCommand}" Grid.Column="0" Grid.Row="1" Height="30px" FontSize="18" VerticalAlignment="Bottom">
+
+                    <Button Visibility="{Binding BookButtonVisibility}" Content="Book" Style="{StaticResource DefaultButtonStyle}" Command="{Binding BookCommand}" Grid.Column="0" Grid.Row="1" Height="30px" FontSize="18" VerticalAlignment="Bottom">
                         <Button.ToolTip>
                             <StackPanel Orientation="Horizontal">
                                 <Label>
@@ -58,6 +59,7 @@
                             </StackPanel>
                         </Button.ToolTip>
                     </Button>
+
                     <TextBlock FontSize="14" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Padding="15 0" TextWrapping="Wrap" Style="{StaticResource DefaultTextBlock}" Text="{Binding Arrangement.Description}"/>
                     <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Height="1.5" Margin="0 15 0 10" Background="{StaticResource GraphicalElementsColor}"/>
 

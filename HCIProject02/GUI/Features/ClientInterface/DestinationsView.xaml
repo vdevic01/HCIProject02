@@ -118,7 +118,9 @@
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.DepartureTime, Converter={StaticResource DepartureConverter}}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.ReturnTime, Converter={StaticResource ReturnConverter}}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.Price, Converter={StaticResource PriceConverter}}"/>
-                                    <Button FontSize="18px" Command="{Binding BookCommand}" Content="Book" Margin="0 10 0 0" Style="{StaticResource DefaultButtonStyle}"  l:HelpProvider.HelpKey="Destinations">
+
+                                    <Button FontSize="18px" Command="{Binding BookCommand}" Content="Details" Margin="0 10 0 0" Style="{StaticResource DefaultButtonStyle}" l:HelpProvider.HelpKey="Destinations">
+
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border x:Name="border"                            
