@@ -140,7 +140,10 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 InfoHotelViewModel viewModel = ServiceLocator.Get<InfoHotelViewModel>();
                 viewModel.Hotel = (Hotel)hoteInfo.Payload;
                 SwitchCurrentViewModel(viewModel);
-                ReturnCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+                ReturnCommand = hoteInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToHotelManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
+
             });
             Navigator.RegisterHandler(ViewType.ArrangementView, obj =>
             {
@@ -181,7 +184,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 InfoRestaurantViewModel viewModel = ServiceLocator.Get<InfoRestaurantViewModel>();
                 viewModel.Restaurant = (Restaurant)restaurantInfo.Payload;
                 SwitchCurrentViewModel(viewModel);
-                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+                ReturnCommand = restaurantInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToRestaurantManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
             });
             Navigator.RegisterHandler(ViewType.NewAttractionView, () =>
             {
@@ -206,7 +211,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 InfoAttractionViewModel viewModel = ServiceLocator.Get<InfoAttractionViewModel>();
                 viewModel.Attraction = (Attraction)attractionInfo.Payload;
                 SwitchCurrentViewModel(viewModel);
-                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+                ReturnCommand = attractionInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToAttractionManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
             });
         }
     }
