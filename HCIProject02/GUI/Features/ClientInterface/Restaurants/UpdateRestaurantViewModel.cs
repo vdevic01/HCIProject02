@@ -2,6 +2,8 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using Serilog;
@@ -52,7 +54,10 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         #region Services
         private IRestaurantService restaurantService;
+        private readonly IDialogService _dialogService;
         #endregion
+
+
         public event PropertyChangedEventHandler? PropertyChanged;
         protected virtual void NotifyPropertyChanged(string propertyName)
         {
@@ -61,20 +66,33 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         private void UpdateRestaurant()
         {
-            Log.Information(Restaurant.ToString());
-            Restaurant? restaurant = restaurantService.Update(Restaurant);
-            if (restaurant != null)
+            var yesNoDialog = new YesNoDialogViewModel("Restaurant updating confirmation", "Are you sure you want to update this restaurant ?");
+
+            _dialogService.ShowDialog(yesNoDialog, result =>
             {
-                MessageBox.Show("Restaurant updated.");
-            }
-            
+                if (result == null)
+                {
+                    return;
+                }
+                if ((bool)result)
+                {
+
+                    Restaurant? restaurant = restaurantService.Update(Restaurant);
+                    if (restaurant != null)
+                    {
+                        OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Restaurant updated.");
+                        _dialogService.ShowDialog(okDialog, result => { }, true);
+                    }
+                }
+            }, true);
+          
         }
         
 
-        public UpdateRestaurantViewModel(IRestaurantService restaurantService)
+        public UpdateRestaurantViewModel(IRestaurantService restaurantService, IDialogService dialogService)
         {
             this.restaurantService = restaurantService;
-  
+            _dialogService = dialogService;
             UpdateRestaurantCommand = new RelayCommand(obj => UpdateRestaurant());
 
 

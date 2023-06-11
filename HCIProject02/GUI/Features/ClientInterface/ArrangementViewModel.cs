@@ -31,7 +31,25 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
-        public User AuthenticatedUser { get; set; }
+        public Visibility BookButtonVisibility { get; set; }
+
+        private User _authenticatedUser;
+        public User AuthenticatedUser
+        {
+            get => _authenticatedUser;
+            set
+            {
+                _authenticatedUser = value;
+                if(value.Role == Role.Agent)
+                {
+                    BookButtonVisibility = Visibility.Hidden;
+                }
+                else
+                {
+                    BookButtonVisibility = Visibility.Visible;
+                }
+            }
+        }
         #endregion
 
         #region Commands

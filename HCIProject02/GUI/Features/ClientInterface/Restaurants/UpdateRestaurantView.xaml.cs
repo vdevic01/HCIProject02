@@ -1,7 +1,9 @@
 ﻿using HCIProject02.Core.Ninject;
+using HCIProject02.HelpSystem;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -118,5 +120,25 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
             }
         }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+
+                if (str == "index")
+                    HelpProvider.ShowHelp("UpdateRestaurant01", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("UpdateRestaurant01", Window.GetWindow(this));
+            }
+        }
+
     }
 }

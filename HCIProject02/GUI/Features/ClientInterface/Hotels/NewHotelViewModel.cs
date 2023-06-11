@@ -15,6 +15,8 @@ using System.Windows.Media.Imaging;
 using System.Windows;
 using Serilog;
 using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -105,6 +107,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         #region Services
         private IHotelService hotelService;
+        private readonly IDialogService _dialogService;
         #endregion
 
 
@@ -145,14 +148,19 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 Latitude = Latitude
             };
 
-            hotelService.Create(hotel);
-            MessageBox.Show("Hotel created");
+            Hotel? h = hotelService.Create(hotel);
+            if (h != null)
+            {
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Hotel created");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
+            }
 
         }
 
-        public NewHotelViewModel(IHotelService hotelService)
+        public NewHotelViewModel(IHotelService hotelService, IDialogService dialogService)
         {
             this.hotelService = hotelService;
+            this._dialogService = dialogService;
             AddNewHotelCommand = new RelayCommand(obj => AddNewHotel());
 
         }

@@ -20,7 +20,9 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
         #endregion
 
         #region Properties
-        private string? _email = "example@email.com";
+
+        private string? _email = "client@email.com";
+
         public string? Email
         {
             get => _email;

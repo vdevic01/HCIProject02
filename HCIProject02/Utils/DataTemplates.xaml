@@ -13,6 +13,9 @@
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
         <loginAndRegister:LoginView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type agentInterface:AgentNavigationViewModel}">
+        <agentInterface:AgentNavigationView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type loginAndRegister:RegisterViewModel}">
         <loginAndRegister:RegisterView/>
     </DataTemplate>

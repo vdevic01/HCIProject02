@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Attractions"
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
-
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="NewAttraction01"
               xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
@@ -19,6 +20,9 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="15 0 15 1">
             <Grid MaxWidth="900px">
@@ -40,7 +44,14 @@
                         </Grid>
                         <Grid Grid.Row="1">
                             <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick"/>
-
+                            <Grid.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock TextWrapping="Wrap" Margin="5" MaxWidth="100">
+                                        Select the location of attraction by double clicking on the desired place.
+                                        The address of the attraction will change automatically
+                                    </TextBlock>
+                                </StackPanel>
+                            </Grid.ToolTip>
                         </Grid>
                         <Grid Grid.Row="2">
                             <Label Content="{Binding ErrorMessage}"
@@ -62,10 +73,19 @@
 
                                 <Button Height="30px"
                         FontSize="20px"
+                                        l:HelpProvider.HelpKey="MapCreate"
                         Content="Create"
                         Style="{StaticResource DefaultButtonStyle}"
-                       Command="{Binding AddNewAttractionCommand}"
-                         />
+                       Command="{Binding AddNewAttractionCommand}">
+                                    <Button.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Click the button to add the new attraction to the system.
+                                            </Label>
+                                        </StackPanel>
+                                    </Button.ToolTip>
+
+                                </Button>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -89,19 +109,45 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" 
+                                          l:HelpProvider.HelpKey="NewAttraction01" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Enter name of new attraction.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                                 <Label Content="Description*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox  l:HelpProvider.HelpKey="NewAttraction01"  FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Describe the attraction in a few sentences.
+                                               
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
                                 <Label Content="Address*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"/>
+                                <TextBox  l:HelpProvider.HelpKey="NewAttraction01"  x:Name="addressTextBox" FontSize="15px" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                Enter Address of new attraction, or choose location on map.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
 
                                 <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
                                     <Viewbox>
@@ -110,13 +156,23 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Background="#E3B6A1" Grid.ColumnSpan="2" CornerRadius="10">
+                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1"   l:HelpProvider.HelpKey="NewPhoto"
+                                                    Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Background="#E3B6A1" Grid.ColumnSpan="2" CornerRadius="10">
                                                 <StackPanel VerticalAlignment="Center">
-                                                    <Button x:Name="ImageButton" Background="#E3B6A1" Width="62" Height="30" Click="Button_Click">
+                                                    <Button x:Name="ImageButton"
+                                                            l:HelpProvider.HelpKey="NewPhoto"
+                                                            Background="#E3B6A1" Width="62" Height="30" Click="Button_Click">
                                                         <Image Source="../../../../Resources/Images/Static/cloud.png" Height="30" Width="Auto"/>
                                                     </Button>
                                                     <Label x:Name="DropText" HorizontalContentAlignment="Center">Choose image or drag here</Label>
                                                 </StackPanel>
+                                                <Border.ToolTip>
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <Label>
+                                                            Choose image of attraction by click on button, or drag it here.
+                                                        </Label>
+                                                    </StackPanel>
+                                                </Border.ToolTip>
                                             </Border>
                                         </Grid>
                                     </Viewbox>

@@ -41,6 +41,12 @@ namespace HCIProject02.Core.Persistance
             context.Attractions.Add(attraction02);
             context.Hotels.Add(hotel01);
             context.Arrangments.Add(arrangement);
+
+            // sifra je test123
+            Agent agent01 = new Agent { FirstName = "Pera", LastName = "Peric", EmailAddress = "agent@email.com", Role = Role.Agent, Password = "6Xgd0k90o3V5SFUI9ou6RZzRDxXEujfZcZS1TKtkd3sF4D/C" };
+            Client client01 = new Client { FirstName = "Marko", LastName = "Markovic", EmailAddress = "client@email.com", Role = Role.Client, Password = "6Xgd0k90o3V5SFUI9ou6RZzRDxXEujfZcZS1TKtkd3sF4D/C" };
+            context.Agents.Add(agent01);
+            context.Clients.Add(client01);
             context.SaveChanges();
         }
     }

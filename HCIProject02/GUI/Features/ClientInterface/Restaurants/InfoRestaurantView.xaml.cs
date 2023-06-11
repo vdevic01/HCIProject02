@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCIProject02.HelpSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +25,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
         {
             InitializeComponent();
         }
+
+
+
     }
 }

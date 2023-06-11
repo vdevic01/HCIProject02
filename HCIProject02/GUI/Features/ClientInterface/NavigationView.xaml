@@ -6,6 +6,8 @@
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="Navigation"
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
@@ -44,6 +46,9 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -71,13 +76,27 @@
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Button.Template>
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>
+                            Go back
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
             </Button>
             <Button Content="☰ Navigation"
                     Grid.Row="0"
                     HorizontalAlignment="Right"                      
                     Style="{StaticResource NavigationButtonStyle}"
                     Width="150px"
-                    Click="NavigationButton_Click">
+                    Click="NavigationButton_Click"  l:HelpProvider.HelpKey="Navigation">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>
+                            Main menu
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
             </Button>
             <StackPanel Grid.Row="1" Height="1" Background="{StaticResource BorderColor}"/>
         </Grid>
@@ -141,6 +160,13 @@
                             </ControlTemplate.Triggers>
                         </ControlTemplate>
                     </Button.Template>
+                    <Button.ToolTip>
+                        <StackPanel Orientation="Horizontal">
+                            <Label  >
+                                Sign out
+                            </Label>
+                        </StackPanel>
+                    </Button.ToolTip>
                 </Button>
             </StackPanel>
 

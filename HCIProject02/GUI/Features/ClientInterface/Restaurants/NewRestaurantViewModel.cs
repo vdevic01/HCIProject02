@@ -1,6 +1,8 @@
 ﻿using HCIProject02.Commands;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.ViewModel;
 using Microsoft.Maps.MapControl.WPF;
 using System;
@@ -92,6 +94,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         #region Services
         private IRestaurantService restaurantService;
+        private readonly IDialogService _dialogService;
         #endregion
 
         #region Commands
@@ -118,7 +121,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             }
             if (string.IsNullOrEmpty(FilePath))
             {
-                ErrorMessage = "Image of Restaurant is required";
+                ErrorMessage = "Image of restaurant is required";
                 return;
             }
 
@@ -134,7 +137,9 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             Restaurant? r = restaurantService.Create(restaurant);
             if (r != null)
             {
-                MessageBox.Show("Restaurant created");
+                
+                OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Restaurant created.");
+                _dialogService.ShowDialog(okDialog, result => { }, true);
             }
 
 
@@ -143,9 +148,10 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         }
 
-        public NewRestaurantViewModel(IRestaurantService restaurantService)
+        public NewRestaurantViewModel(IDialogService dialogService, IRestaurantService restaurantService)
         {
             this.restaurantService = restaurantService;
+            this._dialogService = dialogService;
 
             AddNewRestaurantCommand = new RelayCommand(obj => AddNewRestaurant());
 
