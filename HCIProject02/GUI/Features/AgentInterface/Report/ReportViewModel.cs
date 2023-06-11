@@ -2,8 +2,12 @@
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.ViewModel;
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +44,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
 
 
         private bool _monthlyReport;
-        public bool MonthlyReport 
+        public bool MonthlyReport
         {
             get => _monthlyReport;
             set
@@ -105,19 +109,65 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
             }
         }
 
-
-        private List<Arrangement> _arrangements;
-        public List<Arrangement> Arrangements
+        private List<string> _monthlyReportValues;
+        public List<string> MonthlyReportValues
         {
-            get => _arrangements;
+            get => _monthlyReportValues;
             set
             {
-                _arrangements = value;
-                OnPropertyChanged(nameof(Arrangements));
+                _monthlyReportValues = value;
+                OnPropertyChanged(nameof(MonthlyReportValues));
             }
         }
-        private Arrangement _selectedArrangement;
-        public Arrangement SelectedArrangement
+
+        private List<string> _xAxisValues;
+        public List<string> XAxisValues
+        {
+            get => _xAxisValues;
+            set
+            {
+                _xAxisValues= value;
+                OnPropertyChanged(nameof(XAxisValues));
+            }
+        }
+
+        private SeriesCollection _chartSeries;
+        public SeriesCollection ChartSeries
+        {
+            get => _chartSeries;
+            set
+            {
+                _chartSeries = value;
+                OnPropertyChanged(nameof(ChartSeries));
+            }
+        }
+
+        private Func<double, string> _formatter;
+        public Func<double, string> Formatter
+        {
+            get => _formatter;
+            set
+            {
+                _formatter = value;
+                OnPropertyChanged(nameof(Formatter));
+            }
+        }
+
+
+
+
+        private List<string> _allArrangements;
+        public List<string> AllArrangements
+        {
+            get => _allArrangements;
+            set
+            {
+                _allArrangements = value;
+                OnPropertyChanged(nameof(AllArrangements));
+            }
+        }
+        private string _selectedArrangement;
+        public string SelectedArrangement
         {
             get => _selectedArrangement;
             set
@@ -159,14 +209,16 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
                .FirstOrDefault();
             MostPopular = "Most popular arrangement: " + mostCommonArrangement.Name;
             ReportTitle = "Report for " + SelectedDate.Month.ToString() + " of " + SelectedDate.Year.ToString();
+            GenerateMonthlyChartData(bookings);
             MonthlyReport = true;
             ShowReportGrid = true;
+            ArrangementReport = false;
         }
 
         private void GenerateArrangementReport()
         {
-            Console.WriteLine(this._selectedArrangement) ;
-            List<Booking> bookings = _bookingService.GetBookingsByArrangement(SelectedArrangement);
+            Arrangement arrangement = _arrangementService.GetArrangementByName(SelectedArrangement);
+            List<Booking> bookings = _bookingService.GetBookingsByArrangement(arrangement);
             TotalNumberSold = "Sold arrangements: " + bookings.Count();
             double profit = 0;
 
@@ -182,9 +234,71 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
                 .OrderByDescending(group => group.Count())
                 .FirstOrDefault();
             MostPopular = "Most popular month: " + groupedBookings.Key.Month.ToString() + " of " + groupedBookings.Key.Year.ToString();
-            ReportTitle = "Report for " + SelectedArrangement.Name;
+            ReportTitle = "Report for " + SelectedArrangement;
+            GenerateArrangementChartData(bookings);
             ArrangementReport = true;
             ShowReportGrid = true;
+            MonthlyReport = false;
+
+        }
+
+        private void GenerateArrangementChartData(List<Booking> bookings)
+        {
+            var groupedBookings = bookings
+                .GroupBy(booking => new { Month = booking.BookingTime.Month, Year = booking.BookingTime.Year })
+                .OrderBy(group => group.Key.Year)
+                .ThenBy(group => group.Key.Month)
+                .ToList();
+            List<string> xAxisValues = groupedBookings
+                .Select(group => $"{CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(group.Key.Month)} {group.Key.Year}")
+                .ToList();
+            List<int> yAxisValues = groupedBookings
+                .Select(group => group.Count())
+                .ToList();
+            var series = new SeriesCollection
+    {
+        new LineSeries
+        {
+            Title = "Sold Arrangements",
+            Values = new ChartValues<int>(yAxisValues)
+        }
+    };
+            ChartSeries = series;
+            XAxisValues = xAxisValues;
+
+            // Formatter for y-axis labels
+            Formatter = value => value.ToString();
+
+            OnPropertyChanged(nameof(ChartSeries));
+            OnPropertyChanged(nameof(XAxisValues));
+        }
+
+
+        private void GenerateMonthlyChartData(List<Booking> bookings)
+        {
+            var arrangementCounts = bookings
+                .GroupBy(booking => booking.Arrangement)
+                .Select(group => new { Arrangement = group.Key, Count = group.Count() })
+                .ToList();
+            List<string>? arrangementNames = arrangementCounts.Select(item => item.Arrangement.Name).ToList();
+            List<int>? counts = arrangementCounts.Select(item => item.Count).ToList();
+
+            SeriesCollection? series = new SeriesCollection
+        {
+            new ColumnSeries
+            {
+                Title = "Sold Arrangements",
+                Values = new ChartValues<ObservableValue>(counts.Select(count => new ObservableValue(count)))
+            }
+        };
+            ChartSeries = series;
+            XAxisValues = arrangementNames;
+
+            // Formatter for y-axis labels
+            Formatter = value => value.ToString();
+
+            OnPropertyChanged(nameof(ChartSeries));
+            OnPropertyChanged(nameof(XAxisValues));
         }
 
 
@@ -193,14 +307,16 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
         {
             _arrangementService = arrangementService;
             _bookingService = bookingService;
-            _arrangements = arrangementService.GetAll();
+            AllArrangements = arrangementService.GetAll().Select(arrangement => arrangement.Name).ToList();
             SelectedDate = DateTime.Today;
             MonthlyReport = false;
             ArrangementReport = false;
             ShowReportGrid = false;
             MonthlyReportCommand = new RelayCommand(obj => GenerateMonthlyReport());
             ArrangementReportCommand = new RelayCommand(obj => GenerateArrangementReport());
-            SelectedArrangement = Arrangements.First();
+            //SelectedArrangement = Arrangements.First();
+
+
         }
 
 
