@@ -32,18 +32,25 @@
                 <Grid Grid.Column ="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="0.95*"/>
-                        <RowDefinition Height="0.09*"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="0.6*"/>
+                        <RowDefinition Height="0.3*"/>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition Height="0.15*"/>
                         <RowDefinition Height="0.15*"/>
                     </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="1">
+                    <Label Content="Select the attractions:"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px" Grid.Row="1"/>
+                    <Grid Grid.Row="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" Margin="20">
+                        <Grid Grid.Column="0" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="*" />
@@ -52,7 +59,7 @@
                             <TextBlock
                                 Grid.Row="0"
                                 FontSize="24"
-                                Text="In Progress" />
+                                Text="All" />
 
                             <DragAndDrop:AttractionListingView
                                 Grid.Row="1"
@@ -67,7 +74,7 @@
                                 AttractionItemRemovedCommand="{Binding AttractionItemRemovedCommand}" />    
                         </Grid>
 
-                        <Grid Grid.Column="1" Margin="20">
+                        <Grid Grid.Column="1" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="*" />
@@ -76,7 +83,7 @@
                             <TextBlock
                             Grid.Row="0"
                             FontSize="24"
-                            Text="Completed" />
+                            Text="Selected" />
 
                             <DragAndDrop:AttractionListingView
                             Grid.Row="1"
@@ -89,10 +96,51 @@
                             AttractionItemDropCommand="{Binding AttractionItemReceivedCommand}"
                             AttractionItemInsertedCommand="{Binding AttractionItemInsertedCommand}"
                             AttractionItemRemovedCommand="{Binding AttractionItemRemovedCommand}" />
+                            
+                            
                         </Grid>
+                        
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label Content="Pick a hotel:"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px" Grid.Column="0" Grid.Row="0"/>
+
+                        <MyControls:FilteredComboBox ItemsSource="{Binding AllHotels}"
+                                SelectedItem="{Binding SelectedHotel}"
+                                DisplayMemberPath="Name" 
+                                IsEditable="True" 
+                                IsTextSearchEnabled="False" 
+                                StaysOpenOnEdit="True" Grid.Column="1" Grid.Row="0">
+
+                            <MyControls:FilteredComboBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel VirtualizationMode="Recycling" />
+                                </ItemsPanelTemplate>
+                            </MyControls:FilteredComboBox.ItemsPanel>
+                        </MyControls:FilteredComboBox>
+
+                        <Label Content="Price*"
+                               Margin="0 10 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px" Grid.Column="0" Grid.Row="1"/>
+                        <TextBox Name="NumberTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding Price}" Style="{StaticResource DefaultTextBoxStyle}" Grid.Column="1" Grid.Row="1"/>
+
                     </Grid>
 
-                    <Grid Grid.Row="2">
+                    
+
+                    <Grid Grid.Row="4">
                         <Label Content="{Binding ErrorMessage}"
                        
                            Style="{StaticResource ErrorText}"
@@ -101,7 +149,7 @@
 
                         </Label>
                     </Grid>
-                    <Grid Grid.Row="3">
+                    <Grid Grid.Row="5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="0.925*"/>
@@ -153,31 +201,34 @@
                                FontSize="15px"/>
                             <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding TripPlan}" Style="{StaticResource DefaultTextBoxStyle}"/>
 
-                            <MyControls:FilteredComboBox ItemsSource="{Binding AllHotels}"
-                                SelectedItem="{Binding SelectedHotel}"
-                                DisplayMemberPath="Name" 
-                                IsEditable="True" 
-                                IsTextSearchEnabled="False" 
-                                StaysOpenOnEdit="True">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
 
-                                <MyControls:FilteredComboBox.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel VirtualizationMode="Recycling" />
-                                    </ItemsPanelTemplate>
-                                </MyControls:FilteredComboBox.ItemsPanel>
-                            </MyControls:FilteredComboBox>
-
-
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding DepartureDate, Mode=TwoWay}" />
-
-                            <DatePicker Grid.Row="0" SelectedDate="{Binding ReturnDate, Mode=TwoWay}" />
-                            <Label Content="Price*"
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Label Content="Departure date*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
-                               FontSize="15px"/>
-                            <TextBox Name="NumberTextBox" PreviewTextInput="NumberValidationTextBox" Text="{Binding Price}" Style="{StaticResource DefaultTextBoxStyle}"/>
-                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                               FontSize="15px" Grid.Row="0" Grid.Column="0"/>
+                                <Label Content="Return date*"
+                               Margin="0 10 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px" Grid.Row="0" Grid.Column="1"/>
+                                <DatePicker Grid.Row="1" Grid.Column="0" SelectedDate="{Binding DepartureDate, Mode=TwoWay}" />
+
+                                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ReturnDate, Mode=TwoWay}" />
+                            </Grid>
+                            
+                            
+                            
+                                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
                                 <Viewbox>
                                     <Grid>
                                         <Grid.ColumnDefinitions>

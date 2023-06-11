@@ -29,6 +29,9 @@ namespace HCIProject02.Navigation
         AttractionManagementView,
         NewAttractionView,
         UpdateAttractionView,
-        InfoAttractionView
+        InfoAttractionView,
+        AllHotelsView,
+        AllRestaurantsView,
+        AllAttractionsView
     }
 }

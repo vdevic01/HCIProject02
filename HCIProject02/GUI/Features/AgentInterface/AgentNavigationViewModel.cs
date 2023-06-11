@@ -36,7 +36,6 @@ namespace HCIProject02.GUI.Features.AgentInterface
         #region Commands
         public ICommand LogoutCommand { get; }
         public ICommand HotelManagementCommand { get; }
-
         public ICommand AttractionManagementCommand { get; }
         public ICommand ArrangementManagementCommand { get; }
         public ICommand RestaurantManagementCommand { get; }

@@ -25,6 +25,15 @@
     <DataTemplate DataType="{x:Type clientInterface:ArrangementViewModel}">
         <clientInterface:ArrangementView/>
     </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllAttractionsViewModel}">
+        <clientInterface:AllAttractionsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllHotelsViewModel}">
+            <clientInterface:AllHotelsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllRestaurantsViewModel}">
+        <clientInterface:AllRestaurantsView/>
+    </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:MyBookingsViewModel}">
         <clientInterface:MyBookingsView/>
     </DataTemplate>

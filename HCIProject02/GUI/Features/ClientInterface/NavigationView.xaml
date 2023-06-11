@@ -94,25 +94,29 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Button Grid.Row="0" Content="Destinations" Command="{Binding DestinationsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="0" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="1" Content="Hotels" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="1" Content="Hotels" Command="{Binding AllHotelsCommand}"  Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="1" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="2" Content="Restaurants" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <Button Grid.Row="2" Content="Restaurants" Command="{Binding AllRestaurantsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
             <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="3" Content="My Bookings" Command="{Binding MyBookingsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="3" Content="Attractions" Command="{Binding AllAttractionsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="4" Content="My Bookings" Command="{Binding MyBookingsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
             <StackPanel Grid.Row="3" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="4" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px"/>
+            <Button Grid.Row="5" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px"/>
             <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <StackPanel Orientation="Vertical" Grid.Row="5" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Vertical" Grid.Row="6" VerticalAlignment="Bottom">
                 <StackPanel Height="1" VerticalAlignment="Top" Background="{StaticResource BorderColor}"/>
                 <Button Style="{StaticResource NavigationButtonStyle}" VerticalAlignment="Bottom" Height="50px" Command="{Binding LogoutCommand}">
                     <Button.Template>
