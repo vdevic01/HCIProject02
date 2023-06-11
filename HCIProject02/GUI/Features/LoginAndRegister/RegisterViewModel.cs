@@ -147,7 +147,9 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
             Navigator.FireEvent(ViewType.LoginView);
         }
 
+
         public RegisterViewModel(IUserService userService, IDialogService dialogService)
+
         {
             NavigateToLoginViewCommand = new RelayCommand(obj => NavigateToLoginView());
             RegisterUserCommand = new RelayCommand(obj => RegisterUser());

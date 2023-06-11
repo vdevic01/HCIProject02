@@ -31,6 +31,7 @@ using HCIProject02.Core.Service.Travel.Implementation;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.Features.LoginAndRegister;
 using HCIProject02.GUI.Features.ClientInterface;
+using HCIProject02.HelpSystem;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -134,6 +135,24 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 ImageButton.Visibility = Visibility.Collapsed;
                 DropText.Visibility = Visibility.Collapsed;
 
+            }
+        }
+
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (str == "index")
+                    HelpProvider.ShowHelp("NewHotel01", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("NewHotel01", Window.GetWindow(this));
             }
         }
 

@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+	<Target Name="CopyHelpFiles" AfterTargets="Build">
+		<ItemGroup>
+			<HelpFiles Include="Help\**" />
+		</ItemGroup>
+		<Copy SourceFiles="@(HelpFiles)" DestinationFolder="$(TargetDir)\%(RecursiveDir)" SkipUnchangedFiles="true" />
+	</Target>
   <ItemGroup>
 	<Content Include="GUI\Fonts\*.ttf">
 	<CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -45,4 +51,12 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
   </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  </Target>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="XCOPY &quot;$(SolutionDir)Help&quot; &quot;$(TargetDir)\Help\&quot; /S /Y&#xD;&#xA;XCOPY &quot;$(SolutionDir)Help\Images&quot; &quot;$(TargetDir)\Help\Images&quot; /S /Y" />
+  </Target>
+
 </Project>

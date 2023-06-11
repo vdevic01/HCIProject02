@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'fjallaone-regular';
+    src: url('../gui/fonts/fjallaone-regular.ttf') format('truetype');
+}
+
+body {
+    background-color: #FFFFFF;
+    color: #4b290a;
+    font-family: fjallaone-regular;
+    padding: 20px;
+}
+
+
+h1 {
+    font-size: 24px;
+    margin-top: 0;
+}
+
+p {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    font-weight: bold;
+}
+

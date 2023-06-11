@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
-               mc:Ignorable="d" 
+                            xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="AttractionInfo" 
+             mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
@@ -15,6 +17,9 @@
             <converters:PriceConverter x:Key="PriceConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="15 0 15 15">
             <Grid MaxWidth="650px">
@@ -69,6 +74,13 @@
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Arrangements which involving this location.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
 
@@ -80,6 +92,13 @@
                                 Padding="10">
                             <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Attraction.Address}" TextWrapping="Wrap"/>
                         </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Address of this attraction.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
                     </StackPanel>
 
                 </Grid>
