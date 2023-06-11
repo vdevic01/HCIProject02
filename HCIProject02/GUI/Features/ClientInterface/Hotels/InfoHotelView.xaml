@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
-               mc:Ignorable="d" 
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="HotelInfo" 
+             mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
     <UserControl.Resources>
@@ -16,6 +18,9 @@
             <converters:RangeConverter x:Key="RangeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="15 0 15 15">
             <Grid MaxWidth="650px">

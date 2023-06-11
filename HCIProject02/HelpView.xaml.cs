@@ -29,7 +29,8 @@ namespace HCIProject02.HelpSystem
             InitializeComponent();
             string curDir = Directory.GetCurrentDirectory();
             string path = String.Format("{0}/Help/{1}.htm", curDir, key);
-           
+
+            Log.Information(path);
             if (!File.Exists(path))
             {
                 key = "error";

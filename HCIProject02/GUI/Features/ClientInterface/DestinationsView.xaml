@@ -32,7 +32,7 @@
         <Label Grid.Row="0" Content="Destinations" Style="{StaticResource HeaderText}"
                HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
         <StackPanel Grid.Row="1" Margin="10 0 10 0" Width="650px" Orientation="Horizontal">
-            <Border Width="200" HorizontalAlignment="Left" BorderBrush="{StaticResource BorderColor}" Padding="10" BorderThickness="1.5" CornerRadius="3" l:HelpProvider.HelpKey="SearchDestinations">
+            <Border Width="200" HorizontalAlignment="Left" BorderBrush="{StaticResource BorderColor}" Padding="10" BorderThickness="1.5" CornerRadius="3" l:HelpProvider.HelpKey="Destinations">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -95,7 +95,7 @@
             </Border>
         </StackPanel>
         <ScrollViewer Grid.Row="2" Width="650px" Margin="10" VerticalScrollBarVisibility="Auto">
-            <ItemsControl Width="650px" HorizontalAlignment="Center" ItemsSource="{Binding FilteredArrangements}">
+            <ItemsControl Width="650px" HorizontalAlignment="Center" ItemsSource="{Binding FilteredArrangements}"  l:HelpProvider.HelpKey="Destinations">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
@@ -113,18 +113,19 @@
                                     <ColumnDefinition Width="0.5*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <StackPanel Grid.Column="0" Orientation="Vertical">
+                                <StackPanel Grid.Column="0" Orientation="Vertical" l:HelpProvider.HelpKey="Destinations">
                                     <Label FontSize="18" Content="{Binding Arrangement.Name}" Style="{StaticResource HeaderText}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.DepartureTime, Converter={StaticResource DepartureConverter}}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.ReturnTime, Converter={StaticResource ReturnConverter}}"/>
                                     <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.Price, Converter={StaticResource PriceConverter}}"/>
-                                    <Button FontSize="18px" Command="{Binding BookCommand}" Content="Book" Margin="0 10 0 0" Style="{StaticResource DefaultButtonStyle}">
+                                    <Button FontSize="18px" Command="{Binding BookCommand}" Content="Book" Margin="0 10 0 0" Style="{StaticResource DefaultButtonStyle}"  l:HelpProvider.HelpKey="Destinations">
                                         <Button.Template>
                                             <ControlTemplate TargetType="Button">
                                                 <Border x:Name="border"                            
                                                         Background="{TemplateBinding Background}"
                                                         CornerRadius="3"
-                                                        Padding="0 3">
+                                                        Padding="0 3"
+                                                        l:HelpProvider.HelpKey="Destinations">
                                                     <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                                 </Border>
                                                 <ControlTemplate.Triggers>
@@ -147,7 +148,7 @@
                                 </StackPanel>
                                 <Path Height="150" Width="150" Grid.Column="1">
                                     <Path.Fill>
-                                        <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" />
+                                        <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" l:HelpProvider.HelpKey="Destinations"/>
                                     </Path.Fill>
                                     <Path.Data>
                                         <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />

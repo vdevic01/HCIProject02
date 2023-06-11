@@ -7,6 +7,8 @@
 
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
              xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="UpdateHotel01" 
              mc:Ignorable="d" 
           
              Background="{StaticResource DefaultBackground}"
@@ -19,6 +21,9 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid MaxWidth="800px">
             <Grid.ColumnDefinitions>
@@ -72,6 +77,7 @@
                             <Button Height="30px"
                         FontSize="20px"
                         Content="Update"
+                                    l:HelpProvider.HelpKey="MapUpdate"
                         Style="{StaticResource DefaultButtonStyle}"
                        Command="{Binding UpdateHotelCommand}">
                                 <Button.ToolTip>
@@ -105,7 +111,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Hotel.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                            <TextBox FontSize="15px" Text="{Binding Hotel.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="UpdateHotel01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -119,7 +125,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Hotel.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                            <TextBox FontSize="15px" Text="{Binding Hotel.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateHotel01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -133,7 +139,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Hotel.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Hotel.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateHotel01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -152,7 +158,7 @@
                                     <ColumnDefinition Width="9*"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
-                                <Slider Grid.Column="0" Value="{Binding Hotel.NumberOfStars}" Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                                <Slider Grid.Column="0" Value="{Binding Hotel.NumberOfStars}" Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" l:HelpProvider.HelpKey="UpdateHotel02"/>
                                 <Label Grid.Column="1" Content="{Binding Hotel.NumberOfStars, StringFormat={}{0:0.#}}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
                                 <Grid.ToolTip>
                                     <StackPanel Orientation="Horizontal">
@@ -170,12 +176,12 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped"  Grid.ColumnSpan="2" CornerRadius="10">
+                                        <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped"  Grid.ColumnSpan="2" CornerRadius="10" l:HelpProvider.HelpKey="UpdateHotel02">
                                             <Border.Background>
                                                 <ImageBrush x:Name="ImagePath" ImageSource="{Binding Hotel.ImagePath,  UpdateSourceTrigger=PropertyChanged}" />
                                             </Border.Background>
                                             <StackPanel VerticalAlignment="Bottom">
-                                                <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
+                                                <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click" l:HelpProvider.HelpKey="UpdateHotel02">
                                                     <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
                                                 </Button>
                                             </StackPanel>

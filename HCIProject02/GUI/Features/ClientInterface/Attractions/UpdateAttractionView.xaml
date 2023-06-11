@@ -7,7 +7,8 @@
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
              xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
-
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="UpdateAttraction01"
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
@@ -21,6 +22,9 @@
 
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
             <Grid MaxWidth="900px">
                 <Grid.ColumnDefinitions>
@@ -39,8 +43,8 @@
                         <Grid Grid.Row="0">
                             <Label FontSize="15" Style="{StaticResource DefaultText}">Choose Location:</Label>
                         </Grid>
-                    <Grid Grid.Row="1">
-                        <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid Grid.Row="1" l:HelpProvider.HelpKey="MapUpdate">
+                        <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" MouseDoubleClick="MapMouseClick" ZoomLevel="14" Center="{Binding PinLocation,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" l:HelpProvider.HelpKey="MapUpdate">
                             <m:Pushpin x:Name="PushPin" Location="{Binding PinLocation }" ></m:Pushpin>
                         </m:Map>
                         <Grid.ToolTip>
@@ -73,6 +77,7 @@
 
                                 <Button Height="30px"
                         FontSize="20px"
+                        l:HelpProvider.HelpKey="MapUpdate"
                         Content="Update"
                         Style="{StaticResource DefaultButtonStyle}"
                        Command="{Binding UpdateAttractionCommand}">
@@ -107,7 +112,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Attraction.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                            <TextBox FontSize="15px" Text="{Binding Attraction.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -121,7 +126,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Attraction.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                            <TextBox FontSize="15px" Text="{Binding Attraction.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -135,7 +140,9 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Attraction.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Attraction.Address, UpdateSourceTrigger=PropertyChanged}"
+                                         Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -145,19 +152,19 @@
                                 </TextBox.ToolTip>
                             </TextBox>
 
-                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0" l:HelpProvider.HelpKey="UpdateAttraction02">
                                     <Viewbox>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10">
+                                        <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10"  l:HelpProvider.HelpKey="UpdateAttraction02">
                                                 <Border.Background>
                                                     <ImageBrush x:Name="imageBrush" ImageSource="{Binding Attraction.ImagePath, UpdateSourceTrigger=Explicit}" />
                                                 </Border.Background>
-                                                <StackPanel VerticalAlignment="Bottom">
-                                                    <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
+                                            <StackPanel VerticalAlignment="Bottom" l:HelpProvider.HelpKey="UpdateAttraction02">
+                                                <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click" l:HelpProvider.HelpKey="UpdateAttraction02">
                                                         <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
                                                     </Button>
                                                 </StackPanel>

@@ -35,8 +35,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
-        private readonly IAttractionService attractionService;
-        private readonly IHotelService hotelService;
+
         #endregion
 
         #region Commands
@@ -64,33 +63,15 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private void NavigateToMyBookingsView()
             //TODO VRATITI KAKO JE BILO
         {
-            /*            ReturnButtonVisibility = Visibility.Collapsed;
-                        MyBookingsViewModel viewModel = ServiceLocator.Get<MyBookingsViewModel>();
-                        viewModel.AuthenticatedUser = AuthenticatedUser;
-                        SwitchCurrentViewModel(viewModel);*/
+            ReturnButtonVisibility = Visibility.Collapsed;
+            MyBookingsViewModel viewModel = ServiceLocator.Get<MyBookingsViewModel>();
+            viewModel.AuthenticatedUser = AuthenticatedUser;
+            SwitchCurrentViewModel(viewModel);
 
 
             ReturnButtonVisibility = Visibility.Collapsed;
 
-            UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
-            Attraction? res = attractionService.GetAttractionByName("Hram Svetog Save");
-            viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
-            viewModel.Attraction = res;
-            SwitchCurrentViewModel(viewModel);
 
-            /*            NewRestaurantViewModel viewModel = ServiceLocator.Get<NewRestaurantViewModel>();
-                        SwitchCurrentViewModel(viewModel);*/
-
-            /*            InfoAttractionViewModel viewModel = ServiceLocator.Get<InfoAttractionViewModel>();
-                        Attraction? res = attractionService.GetAttractionByName("Hram Svetog Save");
-                        viewModel.Attraction = res;*/
-            /*
-                        UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
-                        Hotel? res = hotelService.GetHotelByName("Reks hotel");
-                        viewModel.Hotel = res;
-                        viewModel.PinLocation = new Location(latitude: (double)res.Latitude, longitude: (double)res.Longitude);
-            */
-            SwitchCurrentViewModel(viewModel);
 
         }
         private void NavigateToDestinationsView()
@@ -100,11 +81,10 @@ namespace HCIProject02.GUI.Features.ClientInterface
             SwitchCurrentViewModel(viewModel);
         }
         //TODO: KONSTRUKTOR TREBA DA JE PRAZAN
-        public NavigationViewModel(IAttractionService attractionService, IHotelService hotelService)
+        public NavigationViewModel()
         {
             _returnButtonVisibility = Visibility.Collapsed;
-            this.attractionService = attractionService;
-            this.hotelService = hotelService;
+         
             RegisterHandlers();
             NavigateToDestinationsView();
             DestinationsCommand = new RelayCommand(obj => NavigateToDestinationsView());

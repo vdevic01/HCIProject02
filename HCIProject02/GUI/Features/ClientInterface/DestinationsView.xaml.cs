@@ -1,4 +1,5 @@
 ﻿using HCIProject02.HelpSystem;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,12 +32,18 @@ namespace HCIProject02.GUI.Features.ClientInterface
             IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
             if (focusedControl is DependencyObject)
             {
+               
                 string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                HelpProvider.ShowHelp(str, Window.GetWindow(this));
+                Log.Information("strz je: " + str);
+
+                if (str == "index")
+                    HelpProvider.ShowHelp("Destinations", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
             }
             else
             {
-                HelpProvider.ShowHelp("SearchDestinations", Window.GetWindow(this));
+                HelpProvider.ShowHelp("Destinations", Window.GetWindow(this));
             }
         }
     }

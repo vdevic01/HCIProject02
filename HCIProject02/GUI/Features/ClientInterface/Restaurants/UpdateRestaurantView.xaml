@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
-
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="UpdateRestaurant01"
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
              xmlns:System.Configuration="clr-namespace:System.Configuration;assembly=System.Configuration"
              mc:Ignorable="d" 
@@ -19,6 +20,9 @@
            
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
 
             <Grid MaxWidth="800px">
@@ -71,6 +75,7 @@
 
                             <Button Height="30px"
                         FontSize="20px"
+                                    l:HelpProvider.HelpKey="MapUpdate"
                         Content="Update"
                         Style="{StaticResource DefaultButtonStyle}"
                        Command="{Binding UpdateRestaurantCommand}">
@@ -105,7 +110,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                            <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="UpdateRestaurant01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -119,7 +124,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                            <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -133,7 +138,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto">
+                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant02">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -150,12 +155,14 @@
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10">
+                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1"
+                                                    Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2"
+                                                    CornerRadius="10" l:HelpProvider.HelpKey="UpdateRestaurant02">
                                                 <Border.Background>
                                                     <ImageBrush x:Name="imageBrush" ImageSource="{Binding Restaurant.ImagePath, UpdateSourceTrigger=Explicit}" />
                                                 </Border.Background>
                                                 <StackPanel VerticalAlignment="Bottom">
-                                                    <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
+                                                <Button l:HelpProvider.HelpKey="UpdateRestaurant02" x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click">
                                                         <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
                                                     </Button>
                                                 </StackPanel>

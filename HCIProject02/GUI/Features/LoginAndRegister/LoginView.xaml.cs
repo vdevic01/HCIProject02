@@ -33,7 +33,10 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
             if (focusedControl is DependencyObject)
             {
                 string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
-                HelpProvider.ShowHelp(str, Window.GetWindow(this));
+                if (str == "index")
+                    HelpProvider.ShowHelp("LoginForm", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
             } else
             {
                 HelpProvider.ShowHelp("LoginForm", Window.GetWindow(this));
