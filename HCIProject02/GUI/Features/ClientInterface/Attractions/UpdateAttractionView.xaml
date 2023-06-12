@@ -152,20 +152,20 @@
                                 </TextBox.ToolTip>
                             </TextBox>
 
-                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0" l:HelpProvider.HelpKey="UpdateAttraction02">
+                            <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 15 0" l:HelpProvider.HelpKey="UpdateAttraction02">
                                     <Viewbox>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                        <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10"  l:HelpProvider.HelpKey="UpdateAttraction02">
+                                        <Border x:Name="ImageBorder" BorderBrush="{StaticResource BorderColor}" BorderThickness="2" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10"  l:HelpProvider.HelpKey="UpdateAttraction02">
                                                 <Border.Background>
                                                     <ImageBrush x:Name="imageBrush" ImageSource="{Binding Attraction.ImagePath, UpdateSourceTrigger=Explicit}" />
                                                 </Border.Background>
                                             <StackPanel VerticalAlignment="Bottom" l:HelpProvider.HelpKey="UpdateAttraction02">
-                                                <Button x:Name="ImageButton" Background="#E3B6A1" Width="32" Height="20" Click="Button_Click" l:HelpProvider.HelpKey="UpdateAttraction02">
-                                                        <Image Source="../../../../Resources/Images/Static/cloud.png" Height="15" Width="Auto"/>
+                                                <Button x:Name="ImageButton" Style="{StaticResource ImageButtonStyle}" Width="60" Height="30" Click="Button_Click" l:HelpProvider.HelpKey="UpdateAttraction02">
+                                                        <Image Source="../../../../Resources/Images/Static/cloud.png" Height="30" Width="Auto"/>
                                                     </Button>
                                                 </StackPanel>
                                             <Border.ToolTip>

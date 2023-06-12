@@ -103,10 +103,10 @@
                                 BorderThickness="1.5"
                                 CornerRadius="3"
                                 Padding="10">
-                            <ItemsControl ItemsSource="{Binding Arrangement.Attractions}">
+                            <ItemsControl ItemsSource="{Binding Attractions}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Margin="0 2" VerticalAlignment="Center" Command="{Binding AttractionCommand}" CommandParameter="{Binding}"  FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Name}"/>
+                                        <Button Margin="0 2" VerticalAlignment="Center" Command="{Binding BookCommand}"  FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Attraction.Name}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

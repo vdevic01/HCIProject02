@@ -110,7 +110,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             {
                 // Dobijte putanju do izabrane slike
                 string imagePath = openFileDialog.FileName;
-
+                newRestaurantViewModel.FilePath = imagePath;
                 // Postavite izvor slike na odabranu putanju
                 //((Image)((Button)sender).Content).Source = new BitmapImage(new Uri(imagePath));
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));

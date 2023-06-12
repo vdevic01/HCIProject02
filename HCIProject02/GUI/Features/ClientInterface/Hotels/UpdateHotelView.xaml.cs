@@ -30,17 +30,12 @@ namespace HCIProject02.GUI.Features.ClientInterface
     /// </summary>
     public partial class UpdateHotelView : UserControl
     {
-        private UpdateHotelViewModel viewModel { get; set; }
+       
         private string mapKey { get; set; }
 
         public UpdateHotelView()
         {
             InitializeComponent();
-
-            UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
-            this.viewModel = viewModel;
-           
-
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
          
@@ -88,12 +83,13 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         private void OnImageDropped(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && DataContext is UpdateHotelViewModel)
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 string imagePath = files[0];
-
+                var dataContext = DataContext as UpdateHotelViewModel;
+                dataContext.Hotel.ImagePath = imagePath;
                 ImagePath.ImageSource = new BitmapImage(new Uri(imagePath));
 
 
@@ -108,11 +104,12 @@ namespace HCIProject02.GUI.Features.ClientInterface
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true && DataContext is UpdateHotelViewModel)
             {
            
                 string imagePath = openFileDialog.FileName;
-
+                var dataContext = DataContext as UpdateHotelViewModel;
+                dataContext.Hotel.ImagePath = imagePath;
                 ImagePath.ImageSource = new BitmapImage(new Uri(imagePath));
 
 

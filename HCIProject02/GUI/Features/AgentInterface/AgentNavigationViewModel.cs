@@ -11,6 +11,7 @@ using HCIProject02.GUI.Features.ClientInterface.Attractions;
 using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
+using Microsoft.Maps.MapControl.WPF;
 using System.Windows;
 using System.Windows.Input;
 
@@ -133,7 +134,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 NavigatorEventDTO hotelInfo = (NavigatorEventDTO)obj;
                 ReturnButtonVisibility = Visibility.Visible;
                 UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
-                viewModel.Hotel = (Hotel?)hotelInfo.Payload;
+                var hotel = (Hotel?)hotelInfo.Payload;
+                viewModel.Hotel = hotel;
+                viewModel.PinLocation = new Location(latitude: (double)hotel.Latitude, longitude: (double)hotel.Longitude);
                 SwitchCurrentViewModel(viewModel);
                 ReturnCommand = new RelayCommand(obj => NavigateToHotelManagementView());
             });
@@ -177,7 +180,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 NavigatorEventDTO restaurantInfo = (NavigatorEventDTO)obj;
                 ReturnButtonVisibility = Visibility.Visible;
                 UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
-                viewModel.Restaurant = (Restaurant?)restaurantInfo.Payload;
+                Restaurant restaurant = (Restaurant?)restaurantInfo.Payload;
+                viewModel.Restaurant = restaurant;
+                viewModel.PinLocation = new Location(latitude: (double)restaurant.Latitude, longitude: (double)restaurant.Longitude);
                 SwitchCurrentViewModel(viewModel);
                 ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
             });
@@ -204,7 +209,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 NavigatorEventDTO attractionInfo = (NavigatorEventDTO)obj;
                 ReturnButtonVisibility = Visibility.Visible;
                 UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
-                viewModel.Attraction = (Attraction?)attractionInfo.Payload;
+                Attraction attraction= (Attraction?)attractionInfo.Payload;
+                viewModel.Attraction = attraction;
+                viewModel.PinLocation = new Location(latitude: (double)attraction.Latitude, longitude: (double)attraction.Longitude);
                 SwitchCurrentViewModel(viewModel);
                 ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
             });

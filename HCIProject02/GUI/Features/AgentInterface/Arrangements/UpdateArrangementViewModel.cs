@@ -3,13 +3,17 @@ using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.Dialog;
 using HCIProject02.GUI.Dialog.Implementations;
+using HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop;
 using HCIProject02.GUI.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 {
@@ -25,7 +29,48 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
             {
                 _selectedArrangement = value;
                 OnPropertyChanged(nameof(SelectedArrangement));
+                Image = new ImageBrush(new BitmapImage(new Uri(SelectedArrangement.ImagePath)));
+                AttractionListingViewModel chosenAttractionsViewModel = new AttractionListingViewModel();
+                AttractionListingViewModel allAttractionsViewModel = new AttractionListingViewModel();
+                List<Attraction> attractions = _attractionService.GetAll();
+                foreach (var attraction in attractions)
+                {
+                    if (SelectedArrangement.Attractions.Contains(attraction))
+                    {
+                        chosenAttractionsViewModel.AddAttractionItem(new AttractionItemViewModel(attraction));
+                    }
+                    else
+                    {
+                        allAttractionsViewModel.AddAttractionItem(new AttractionItemViewModel(attraction));
+                    }
 
+                }
+                this.AllAttractions = allAttractionsViewModel;
+                this.ChosenAttractions = chosenAttractionsViewModel;
+            }
+        }
+        public AttractionListingViewModel AllAttractions { get; set; }
+        public AttractionListingViewModel ChosenAttractions { get; set; }
+
+        private ImageBrush _image;
+        public ImageBrush Image
+        {
+            get => _image;
+            set
+            {
+                _image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
+
+        private List<Hotel> _allHotels;
+        public List<Hotel> AllHotels
+        {
+            get => _allHotels;
+            set
+            {
+                _allHotels= value;
+                OnPropertyChanged(nameof(AllHotels));
             }
         }
 
@@ -47,9 +92,12 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
         #endregion
 
         #region Services
-        private IArrangementService arrangementService;
+        private IArrangementService _arrangementService;
+        private IHotelService _hotelService;
+        private IAttractionService _attractionService;
         private readonly IDialogService _dialogService;
         #endregion
+
 
 
         private void UpdateArrangement()
@@ -80,6 +128,11 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 ErrorMessage = "Field (Hotel) is required";
                 return;
             }
+            if (SelectedArrangement.DepartureTime > SelectedArrangement.ReturnTime)
+            {
+                ErrorMessage = "Departure time can not be after return time";
+                return;
+            }
             if (string.IsNullOrEmpty(SelectedArrangement.Price.ToString()) || SelectedArrangement.Price <= 0)
             {
                 ErrorMessage = "Field (Price) is required";
@@ -98,8 +151,13 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 }
                 if ((bool)result)
                 {
-
-                    Arrangement? arrangement = arrangementService.Update(SelectedArrangement);
+                    List<Attraction> attractions = new List<Attraction>();
+                    foreach (var attraction in ChosenAttractions.AttractionItemViewModels)
+                    {
+                        attractions.Add(attraction.AttractionItem);
+                    }
+                    SelectedArrangement.Attractions = attractions;
+                    Arrangement? arrangement = _arrangementService.Update(SelectedArrangement);
                     if (arrangement != null)
                     {
                         OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Arrangement updated.");
@@ -112,13 +170,18 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 
         }
 
-        public UpdateArrangementViewModel(IArrangementService arrangementService, IDialogService dialogService)
+
+
+        public UpdateArrangementViewModel(IHotelService hotelService, IArrangementService arrangementService, IDialogService dialogService, IAttractionService attractionService)
         {
-            this.arrangementService = arrangementService;
+            _arrangementService = arrangementService;
+            _hotelService = hotelService;
             _dialogService = dialogService;
+            _attractionService = attractionService;
             UpdateArrangementCommand = new RelayCommand(obj => UpdateArrangement());
+            AllHotels = hotelService.GetAll();
 
-
+            
         }
     }
 }
