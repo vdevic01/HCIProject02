@@ -237,7 +237,7 @@
 
                             </Grid>
 
-                            <CheckBox Content="Availible*" IsChecked="{Binding IsAvailible}" Style="{StaticResource DefaulCheckbox}"   FontSize="15" VerticalAlignment="Bottom" Margin="5,15,0,0" HorizontalAlignment="Left"/>
+                            <CheckBox Content="Available*" IsChecked="{Binding IsAvailable}" Style="{StaticResource DefaulCheckbox}"   FontSize="15" VerticalAlignment="Bottom" Margin="5,15,0,0" HorizontalAlignment="Left"/>
 
 
                             <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 20 15 0" HorizontalAlignment="Center">

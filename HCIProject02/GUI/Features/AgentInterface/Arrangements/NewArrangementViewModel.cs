@@ -1,6 +1,8 @@
 ﻿using HCIProject02.Commands;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.Dialog;
+using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop;
 using HCIProject02.GUI.ViewModel;
 using System;
@@ -64,14 +66,14 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
             }
         }
 
-        private bool _isAvailible;
-        public bool IsAvailible
+        private bool _isAvailable;
+        public bool IsAvailable
         {
-            get => _isAvailible;
+            get => _isAvailable;
             set
             {
-                _isAvailible = value;
-                OnPropertyChanged(nameof(IsAvailible));
+                _isAvailable = value;
+                OnPropertyChanged(nameof(IsAvailable));
             }
         }
 
@@ -159,11 +161,12 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
         private IArrangementService _arrangementService;
         private IHotelService _hotelService;
         private IAttractionService _attractionService;
+        private IDialogService _dialogService;
         #endregion
 
         private void AddNewArrangement()
         {
-            Console.WriteLine(IsAvailible);
+            Console.WriteLine(IsAvailable);
             if (string.IsNullOrEmpty(Name))
             {
                 ErrorMessage = "Field (Name) is required";
@@ -213,17 +216,19 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 Price = double.Parse(Price),
                 Hotel = SelectedHotel,
                 Attractions = attractions,
-                IsAvailable = IsAvailible
+                IsAvailable = IsAvailable
             };
             _arrangementService.Create(arrangement);
-            MessageBox.Show("Arrangement created");
+            OkDialogViewModel okDialog = new OkDialogViewModel("Message", "Arrangement created.");
+            _dialogService.ShowDialog(okDialog, result => { }, true);
 
         }
 
 
 
-        public NewArrangementViewModel(IArrangementService arrangementService, IHotelService hotelService, IAttractionService attractionService)
+        public NewArrangementViewModel(IDialogService dialogService, IArrangementService arrangementService, IHotelService hotelService, IAttractionService attractionService)
         {
+            _dialogService = dialogService;
             _arrangementService = arrangementService;
             _hotelService = hotelService;
             _attractionService = attractionService;

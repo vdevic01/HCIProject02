@@ -148,18 +148,18 @@
                                 </TextBox>
 
 
-                                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 15 0">
                                     <Viewbox>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <Border x:Name="ImageBorder" BorderBrush="Black" BorderThickness="1"
+                                            <Border x:Name="ImageBorder" BorderBrush="{StaticResource BorderColor}" BorderThickness="2"
                                                     Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" 
-                                                    Background="#E3B6A1" Grid.ColumnSpan="2" CornerRadius="10" l:HelpProvider.HelpKey="NewPhoto" >
+                                                    Background="{StaticResource DefaultBackground}" Grid.ColumnSpan="2" CornerRadius="10" l:HelpProvider.HelpKey="NewPhoto" >
                                                 <StackPanel VerticalAlignment="Center">
-                                                    <Button l:HelpProvider.HelpKey="NewPhoto"  x:Name="ImageButton" Background="#E3B6A1" Width="62" Height="30" Click="Button_Click">
+                                                    <Button l:HelpProvider.HelpKey="NewPhoto"  x:Name="ImageButton" Style="{StaticResource ImageButtonStyle }" Width="62" Height="30" Click="Button_Click">
                                                         <Image Source="../../../../Resources/Images/Static/cloud.png" Height="30" Width="Auto"/>
                                                     </Button>
                                                     <Label x:Name="DropText" HorizontalContentAlignment="Center">Choose image or drag here</Label>
