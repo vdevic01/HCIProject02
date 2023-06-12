@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Ninject;
+using HCIProject02.HelpSystem;
 using Microsoft.Win32;
 using System;
 using System.Collections;
@@ -73,7 +74,25 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 
             }
         }
-        
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (str == "index")
+                    HelpProvider.ShowHelp("NewArrangement01", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("NewArrangement01", Window.GetWindow(this));
+            }
+        }
+
+
 
     }
 

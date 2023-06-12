@@ -15,5 +15,7 @@ namespace HCIProject02.Core.Model
         {
             Arrangements = other.Arrangements;
         }
+
+
     }
 }

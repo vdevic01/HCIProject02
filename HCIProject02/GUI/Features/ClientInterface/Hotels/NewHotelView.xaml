@@ -152,10 +152,11 @@
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="9*"/>
-                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2*"/>
                                     </Grid.ColumnDefinitions>
-                                    <Slider l:HelpProvider.HelpKey="NewHotel02" Grid.Column="0" Value="{Binding Rating}" Minimum="0" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                                    <Label Grid.Column="1" Content="{Binding Rating, StringFormat={}{0:0.#}}" HorizontalAlignment="Left" Margin="10,0,0,0"/>
+                                    <TextBox Grid.Column="1" Text="{Binding ElementName=slValue, Path=Value, UpdateSourceTrigger=PropertyChanged}" DockPanel.Dock="Right" TextAlignment="Right" Width="40" />
+                                    <Slider l:HelpProvider.HelpKey="NewHotel02" Value="{Binding Rating}" Maximum="5" TickPlacement="BottomRight" TickFrequency="1" IsSnapToTickEnabled="True" Name="slValue" />
+
                                     <Grid.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label>

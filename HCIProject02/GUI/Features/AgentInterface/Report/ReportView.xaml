@@ -48,12 +48,37 @@
 
                         MyControls:DatePickerDateFormat.DateFormat="MMM-yyyy"
                         Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" IsTodayHighlighted="True">
+                            <DatePicker.ToolTip>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Label>
+                                        Select date.
+                                    </Label>
+                                </StackPanel>
+
+                            </DatePicker.ToolTip>
                         </DatePicker>
                     </Grid>
-                    <Button   l:HelpProvider.HelpKey="Reports01" Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
+                    <Button   l:HelpProvider.HelpKey="Reports01" Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    View the report for selected month.
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
 
 
-                    <Button l:HelpProvider.HelpKey="Reports02" Margin="0 5 30 0"  Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom"  Width="170px"/>
+                    <Button l:HelpProvider.HelpKey="Reports02" Margin="0 5 30 0"  Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom"  Width="170px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    View the report for selected arrangemen.
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
 
 
                     <MyControls:FilteredComboBox  l:HelpProvider.HelpKey="Reports02" ItemsSource="{Binding AllArrangements}"
@@ -62,7 +87,15 @@
                                 IsTextSearchEnabled="False" 
                                 StaysOpenOnEdit="True"
                                                  Grid.Column="2" Grid.Row="0" Width="150px" Margin="30 5 10 0" Height="Auto">
-
+                        <MyControls:FilteredComboBox.ToolTip>
+                          
+                                <StackPanel Orientation="Horizontal">
+                                    <Label  >
+                                       Select arrangement
+                                    </Label>
+                                </StackPanel>
+                       
+                        </MyControls:FilteredComboBox.ToolTip>
                         <MyControls:FilteredComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel VirtualizationMode="Recycling" />

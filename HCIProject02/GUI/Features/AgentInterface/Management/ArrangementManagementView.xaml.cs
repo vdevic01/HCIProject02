@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCIProject02.HelpSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,23 @@ namespace HCIProject02.GUI.Features.AgentInterface.Management
         public ArrangementManagementView()
         {
             InitializeComponent();
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                if (str == "index")
+                    HelpProvider.ShowHelp("Management", Window.GetWindow(this));
+                else
+                    HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("Management", Window.GetWindow(this));
+            }
         }
     }
 }

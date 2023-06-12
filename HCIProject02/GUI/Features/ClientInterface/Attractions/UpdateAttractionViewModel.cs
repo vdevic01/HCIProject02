@@ -30,10 +30,23 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             set
             {
                 _attraction = value;
+                UpdatedAttraction = new Attraction(_attraction);
                 OnPropertyChanged(nameof(Attraction));
 
             }
         }
+
+        public Attraction _updatedAttraction;
+        public Attraction UpdatedAttraction
+        {
+            get => _updatedAttraction;
+            set
+            {
+                _updatedAttraction = value;
+                OnPropertyChanged(nameof(UpdateAttraction));
+            }
+        }
+
         private Location _pinLocation;
         public Location PinLocation
         {
@@ -72,22 +85,22 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
         private void UpdateAttraction()
         {
-            if (string.IsNullOrEmpty(Attraction.Name))
+            if (string.IsNullOrEmpty(UpdatedAttraction.Name))
             {
                 ErrorMessage = "Field (Name) is required";
                 return;
             }
-            if (string.IsNullOrEmpty(Attraction.Description))
+            if (string.IsNullOrEmpty(UpdatedAttraction.Description))
             {
                 ErrorMessage = "Field (Description) is required";
                 return;
             }
-            if (string.IsNullOrEmpty(Attraction.Address))
+            if (string.IsNullOrEmpty(UpdatedAttraction.Address))
             {
                 ErrorMessage = "Field (Address) is required";
                 return;
             }
-            if (string.IsNullOrEmpty(Attraction.ImagePath))
+            if (string.IsNullOrEmpty(UpdatedAttraction.ImagePath))
             {
                 ErrorMessage = "Image of attraction is required";
                 return;
@@ -104,6 +117,12 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
                 }
                 if ((bool)result)
                 {
+                    Attraction.Name = UpdatedAttraction.Name; 
+                    Attraction.Longitude = PinLocation.Longitude;
+                    Attraction.Latitude = PinLocation.Latitude;
+                    Attraction.ImagePath = UpdatedAttraction.ImagePath;
+                    Attraction.Address = UpdatedAttraction.Address;
+                    Attraction.Description = UpdatedAttraction.Description;
 
                     Attraction? attraction = attractionService.Update(Attraction);
                     if (attraction != null)

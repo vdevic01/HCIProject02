@@ -85,7 +85,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
                 var dataContext = DataContext as UpdateAttractionViewModel;
-                dataContext.Attraction.ImagePath = imagePath;
+                dataContext.UpdatedAttraction.ImagePath = imagePath;
 
             }
         }
@@ -102,7 +102,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
                 var dataContext = DataContext as UpdateAttractionViewModel;
-                dataContext.Attraction.ImagePath = imagePath;
+                dataContext.UpdatedAttraction.ImagePath = imagePath;
                 
 
             }

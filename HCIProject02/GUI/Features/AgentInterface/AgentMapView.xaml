@@ -43,9 +43,33 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
-                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px"/>
-                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Attractions" IsChecked="{Binding ShowAttractions}"  Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
-                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Restaurants" IsChecked="{Binding ShowRestaurants}"  Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px">
+                        <CheckBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Select hotels.
+                                </Label>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
+                    </CheckBox>
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Attractions" IsChecked="{Binding ShowAttractions}"  Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px">
+                        <CheckBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Select attractions.
+                                </Label>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
+                    </CheckBox>
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Restaurants" IsChecked="{Binding ShowRestaurants}"  Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px">
+                        <CheckBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Select restaurants.
+                                </Label>
+                            </StackPanel>
+                        </CheckBox.ToolTip>
+                    </CheckBox>
 
                 </Grid>
                 <Grid Grid.Row="1" l:HelpProvider.HelpKey="MainMap" >

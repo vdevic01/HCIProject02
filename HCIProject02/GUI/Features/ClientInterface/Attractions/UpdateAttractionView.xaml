@@ -112,7 +112,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Attraction.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"  l:HelpProvider.HelpKey="UpdateAttraction01">
+                            <TextBox FontSize="15px" Text="{Binding UpdatedAttraction.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -126,7 +126,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Attraction.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  l:HelpProvider.HelpKey="UpdateAttraction01">
+                            <TextBox FontSize="15px" Text="{Binding UpdatedAttraction.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -140,7 +140,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                                <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Attraction.Address, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding UpdatedAttraction.Address, UpdateSourceTrigger=PropertyChanged}"
                                          Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True"
                                          VerticalScrollBarVisibility="Auto"  l:HelpProvider.HelpKey="UpdateAttraction01">
                                 <TextBox.ToolTip>
@@ -161,7 +161,7 @@
                                             </Grid.ColumnDefinitions>
                                         <Border x:Name="ImageBorder" BorderBrush="{StaticResource BorderColor}" BorderThickness="2" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2" CornerRadius="10"  l:HelpProvider.HelpKey="UpdateAttraction02">
                                                 <Border.Background>
-                                                    <ImageBrush x:Name="imageBrush" ImageSource="{Binding Attraction.ImagePath, UpdateSourceTrigger=Explicit}" />
+                                                <ImageBrush x:Name="imageBrush" ImageSource="{Binding UpdatedAttraction.ImagePath, UpdateSourceTrigger=Explicit}" />
                                                 </Border.Background>
                                             <StackPanel VerticalAlignment="Bottom" l:HelpProvider.HelpKey="UpdateAttraction02">
                                                 <Button x:Name="ImageButton" Style="{StaticResource ImageButtonStyle}" Width="60" Height="30" Click="Button_Click" l:HelpProvider.HelpKey="UpdateAttraction02">

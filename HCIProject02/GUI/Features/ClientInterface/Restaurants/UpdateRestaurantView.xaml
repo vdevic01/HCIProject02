@@ -110,7 +110,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Restaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="UpdateRestaurant01">
+                            <TextBox FontSize="15px" Text="{Binding UpdatedRestaurant.Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="UpdateRestaurant01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -124,7 +124,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Restaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant01">
+                            <TextBox FontSize="15px" Text="{Binding UpdatedRestaurant.Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant01">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -138,7 +138,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding Restaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant02">
+                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding UpdatedRestaurant.Address, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" l:HelpProvider.HelpKey="UpdateRestaurant02">
                                 <TextBox.ToolTip>
                                     <StackPanel Orientation="Horizontal">
                                         <Label>
@@ -159,7 +159,7 @@
                                                     Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Grid.ColumnSpan="2"
                                                     CornerRadius="10" l:HelpProvider.HelpKey="UpdateRestaurant02">
                                                 <Border.Background>
-                                                    <ImageBrush x:Name="imageBrush" ImageSource="{Binding Restaurant.ImagePath, UpdateSourceTrigger=Explicit}" />
+                                                <ImageBrush x:Name="imageBrush" ImageSource="{Binding UpdatedRestaurant.ImagePath, UpdateSourceTrigger=Explicit}" />
                                                 </Border.Background>
                                                 <StackPanel VerticalAlignment="Bottom">
                                                 <Button l:HelpProvider.HelpKey="UpdateRestaurant02" Style="{StaticResource ImageButtonStyle}" x:Name="ImageButton" Width="60" Height="30" Click="Button_Click">

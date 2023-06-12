@@ -6,6 +6,8 @@
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="Destinations"
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
@@ -17,6 +19,9 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -37,15 +42,32 @@
                     <TextBox Grid.Column="1"
                              FontFamily="{StaticResource DefaultFont}"
                              FontSize="14"
+                              l:HelpProvider.HelpKey="SearchDestinations"
                              BorderThickness="0"
                              Padding="10 0 10 0"
                              Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                             Foreground="{StaticResource TextDark}"/>
+                             Foreground="{StaticResource TextDark}">
+                        <TextBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Search restaurants
+                                </Label>
+                            </StackPanel>
+                        </TextBox.ToolTip>
+                    </TextBox>
                     <Button Grid.Column="2" Padding="5"
                             Background="Transparent"
                             BorderThickness="0"
+                             l:HelpProvider.HelpKey="SearchDestinations"
                             Visibility="{Binding SearchText, Converter={StaticResource StringToVisibilityConverter}}"
                             Command="{Binding ClearSearchBoxCommand}">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Clear search
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
                         <Button.Style>
                             <Style TargetType="Button">
                                 <Setter Property="Template">
@@ -117,6 +139,13 @@
                                                 </ControlTemplate.Triggers>
                                             </ControlTemplate>
                                         </Button.Template>
+                                        <Button.ToolTip>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Label  >
+                                                    View details about this restaurant
+                                                </Label>
+                                            </StackPanel>
+                                        </Button.ToolTip>
                                     </Button>
                                 </StackPanel>
                                 <Path Height="150" Width="150" Grid.Column="1">
