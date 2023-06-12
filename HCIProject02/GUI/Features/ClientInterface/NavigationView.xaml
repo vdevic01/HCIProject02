@@ -114,6 +114,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
@@ -135,7 +136,7 @@
             <Button Grid.Row="5" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px"/>
             <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <StackPanel Orientation="Vertical" Grid.Row="6" VerticalAlignment="Bottom">
+            <StackPanel Orientation="Vertical" Grid.Row="6" VerticalAlignment="Top">
                 <StackPanel Height="1" VerticalAlignment="Top" Background="{StaticResource BorderColor}"/>
                 <Button Style="{StaticResource NavigationButtonStyle}" VerticalAlignment="Bottom" Height="50px" Command="{Binding LogoutCommand}">
                     <Button.Template>
@@ -168,8 +169,9 @@
                         </StackPanel>
                     </Button.ToolTip>
                 </Button>
+                <StackPanel Grid.Row="7" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
             </StackPanel>
-
+            
         </Grid>
         <Grid Grid.Row="1" Grid.RowSpan="2">
             <ContentControl Content="{Binding CurrentViewModel}"/>

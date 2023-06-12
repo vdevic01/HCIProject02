@@ -128,7 +128,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
             {
                 // Dobijte putanju do izabrane slike
                 string imagePath = openFileDialog.FileName;
-
+                newHotelViewModel.FilePath = imagePath;
                 // Postavite izvor slike na odabranu putanju
                 //((Image)((Button)sender).Content).Source = new BitmapImage(new Uri(imagePath));
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));

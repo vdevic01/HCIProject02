@@ -38,7 +38,7 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="70px"/>
+                    <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px"/>
                     <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Attractions" IsChecked="{Binding ShowAttractions}"  Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
                     <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Restaurants" IsChecked="{Binding ShowRestaurants}"  Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
                 </Grid>

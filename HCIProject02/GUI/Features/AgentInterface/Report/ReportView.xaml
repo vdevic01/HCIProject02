@@ -39,7 +39,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Grid.Row="0" Grid.Column="0">
+                    <Grid Grid.Row="0" Grid.Column="0" Margin="0 5 0 0">
                         <DatePicker MyControls:DatePickerCalendar.IsMonthYear="True" Style="{StaticResource DefaultDatePicker}" 
                         MyControls:DatePickerDateFormat.DateFormat="MMM-yyyy"
                         Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" IsTodayHighlighted="True">
@@ -47,14 +47,14 @@
                     </Grid>
                     <Button  Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
 
-                    <Button Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
+                    <Button Margin="0 5 30 0"  Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom"  Width="170px"/>
 
                     <MyControls:FilteredComboBox ItemsSource="{Binding AllArrangements}"
                                                  SelectedItem="{Binding SelectedArrangement}"
                                 IsEditable="True" 
                                 IsTextSearchEnabled="False" 
                                 StaysOpenOnEdit="True"
-                                                 Grid.Column="2" Grid.Row="0" Width="100px">
+                                                 Grid.Column="2" Grid.Row="0" Width="150px" Margin="30 5 10 0" Height="Auto">
 
                         <MyControls:FilteredComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
@@ -66,7 +66,7 @@
                 </Grid>
 
                 
-                <Grid Grid.Row="3" >
+                <Grid Grid.Row="3" Margin="0 30 0 0">
                     
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
@@ -90,7 +90,7 @@
 
                     </Grid>
 
-                    <lvc:CartesianChart Series="{Binding ChartSeries}" Grid.Column="1"  Width="500px" Visibility="{Binding ShowChart, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <lvc:CartesianChart Series="{Binding ChartSeries}" Margin="20 15 15 0" Grid.Column="1"  Width="500px" Visibility="{Binding ShowChart, Converter={StaticResource BoolToVisibilityConverter}}">
                         <lvc:CartesianChart.AxisX>
                             <lvc:Axis Labels="{Binding XAxisValues}" />
                         </lvc:CartesianChart.AxisX>
