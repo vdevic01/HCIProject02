@@ -4,6 +4,7 @@ using HCIProject02.Core.Ninject;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.Core.Service.Travel.Implementation;
 using HCIProject02.GUI.DTO;
+using HCIProject02.GUI.Features.AgentInterface;
 using HCIProject02.GUI.Features.ClientInterface.Attractions;
 using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using HCIProject02.GUI.ViewModel;
@@ -82,8 +83,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private void NavigateToMapView()
         {
             ReturnButtonVisibility = Visibility.Collapsed;
-            MapViewModel viewModel = ServiceLocator.Get<MapViewModel>();
-            viewModel.AuthenticatedUser = AuthenticatedUser;
+            AgentMapViewModel viewModel = ServiceLocator.Get<AgentMapViewModel>();
             SwitchCurrentViewModel(viewModel);
         }
         private void NavigateToDestinationsView()

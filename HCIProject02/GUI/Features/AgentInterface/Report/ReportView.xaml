@@ -40,7 +40,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DatePicker MyControls:DatePickerCalendar.IsMonthYear="True" 
+                        <DatePicker MyControls:DatePickerCalendar.IsMonthYear="True" Style="{StaticResource DefaultDatePicker}" 
                         MyControls:DatePickerDateFormat.DateFormat="MMM-yyyy"
                         Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" IsTodayHighlighted="True">
                         </DatePicker>

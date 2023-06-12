@@ -17,6 +17,8 @@ using System.Windows.Input;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
+
+
     class ArrangementViewModel : ViewModelBase
     {
         #region Properties
@@ -28,6 +30,17 @@ namespace HCIProject02.GUI.Features.ClientInterface
             {
                 _arrangement = value;
                 OnPropertyChanged(nameof(Arrangement));
+                this.Attractions = new List<AttractionCardDTO>();
+                foreach (var attr in Arrangement.Attractions)
+                {
+                    ICommand command = new RelayCommand(obj =>
+                    {
+                        NavigatorEventDTO dto = new NavigatorEventDTO(attr, ViewType.ArrangementView);
+                        Navigator.FireEvent(ViewType.InfoAttractionView, dto);
+                    });
+                    AttractionCardDTO card = new AttractionCardDTO(attr, command);
+                    Attractions.Add(card);
+                }
             }
         }
 
@@ -50,6 +63,18 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 }
             }
         }
+
+        private List<AttractionCardDTO> _attractions;
+        public List<AttractionCardDTO> Attractions
+        {
+            get => _attractions;
+            set
+            {
+                _attractions = value;
+                OnPropertyChanged(nameof(Attractions));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -61,6 +86,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
         #region Services
         private readonly IDialogService _dialogService;
         private readonly IBookingService _bookingService;
+        private readonly IAttractionService _attractionService;
         #endregion
 
         private void NavigateToHotelView()
@@ -75,13 +101,14 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Navigator.FireEvent(ViewType.InfoAttractionView, dto);
         }
 
-        public ArrangementViewModel(IDialogService dialogService, IBookingService bookingService)
+        public ArrangementViewModel(IDialogService dialogService, IBookingService bookingService, IAttractionService attractionService)
         {
             _bookingService = bookingService;
             _dialogService = dialogService;
+            _attractionService = attractionService;
             HotelCommand = new RelayCommand(obj => NavigateToHotelView());
             AttractionCommand = new RelayCommand(obj => NavigateToAttractionView(obj as Attraction));
-
+            
             BookCommand = new RelayCommand(obj =>
             {
                 var yesNoDialog = new YesNoDialogViewModel("Arrangement booking confirmation", "Are you sure you want to book this arrangement?");

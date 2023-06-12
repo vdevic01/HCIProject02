@@ -15,7 +15,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
     /// </summary>
     public partial class UpdateArrangementView : UserControl
     {
-        private UpdateArrangementViewModel UpdateArrangementViewModel { get; set; }
+        
         public UpdateArrangementView()
         {
             InitializeComponent();
@@ -28,12 +28,14 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
         }
         private void OnImageDropped(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && DataContext is UpdateArrangementViewModel)
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 string imagePath = files[0];
-                this.UpdateArrangementViewModel.SelectedArrangement.ImagePath = imagePath;
+                var dataContext = DataContext as UpdateArrangementViewModel;
+                dataContext.SelectedArrangement.ImagePath = imagePath;
 
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
@@ -49,10 +51,11 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true && DataContext is UpdateArrangementViewModel)
             {
                 string imagePath = openFileDialog.FileName;
-                this.UpdateArrangementViewModel.SelectedArrangement.ImagePath = imagePath;
+                var dataContext = DataContext as UpdateArrangementViewModel;
+                dataContext.SelectedArrangement.ImagePath = imagePath;
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
                 DropText.Visibility = Visibility.Collapsed;

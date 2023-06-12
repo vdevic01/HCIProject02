@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
@@ -111,6 +112,8 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 
 
         }
+
+
 
         public UpdateArrangementViewModel(IArrangementService arrangementService, IDialogService dialogService)
         {

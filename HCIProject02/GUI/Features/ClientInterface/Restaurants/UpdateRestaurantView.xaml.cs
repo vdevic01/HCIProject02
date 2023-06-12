@@ -29,13 +29,10 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
     public partial class UpdateRestaurantView : UserControl
     {
 
-        private UpdateRestaurantViewModel viewModel { get; set; }
         private string mapKey { get; set; }
         public UpdateRestaurantView()
         {
             InitializeComponent();
-            UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
-            this.viewModel = viewModel;
 
             mapKey = ConfigurationManager.AppSettings["MapKey"];
             myMap.CredentialsProvider = new Microsoft.Maps.MapControl.WPF.ApplicationIdCredentialsProvider(mapKey);
@@ -82,17 +79,15 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
         private void OnImageDropped(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && DataContext is UpdateRestaurantViewModel)
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
                 string imagePath = files[0];
-
+                var dataContext = DataContext as UpdateRestaurantViewModel;
+                dataContext.Restaurant.ImagePath = imagePath;
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
-                if (DataContext is UpdateRestaurantViewModel viewModel)
-                {
-                    viewModel.Restaurant.ImagePath = imagePath;
-                }
+               
 
 
             }
@@ -103,20 +98,14 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
 
-            if (openFileDialog.ShowDialog() == true)
+            if (openFileDialog.ShowDialog() == true && DataContext is UpdateRestaurantViewModel)
             {
 
                 string imagePath = openFileDialog.FileName;
 
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
-                if (DataContext is UpdateRestaurantViewModel viewModel)
-                {
-                    viewModel.Restaurant.ImagePath = imagePath;
-
-                    
-                  
-                    
-                }
+                var dataContext = DataContext as UpdateRestaurantViewModel;
+                dataContext.Restaurant.ImagePath = imagePath;
 
             }
         }
