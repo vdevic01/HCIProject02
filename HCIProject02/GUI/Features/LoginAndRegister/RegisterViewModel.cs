@@ -9,7 +9,9 @@ using HCIProject02.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -116,9 +118,23 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
                 ErrorMessage = "Field (Email) is required";
                 return;
             }
+            try
+            {
+                var _ = new MailAddress(Email).Address;
+            }
+            catch (FormatException)
+            {
+                ErrorMessage = "Email address is invalid";
+                return;
+            }
             if (string.IsNullOrEmpty(Password))
             {
                 ErrorMessage = "Field (Password) is required";
+                return;
+            }
+            if(!Regex.IsMatch(Password, "^(?=.*\\d).{6,}$"))
+            {
+                ErrorMessage = "Password must be at least 6 characters long\nand contains at least 1 digit";
                 return;
             }
             if (string.IsNullOrEmpty(PasswordConfirm))
