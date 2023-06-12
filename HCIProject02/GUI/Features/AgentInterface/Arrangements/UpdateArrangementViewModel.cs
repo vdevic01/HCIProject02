@@ -5,6 +5,7 @@ using HCIProject02.GUI.Dialog;
 using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop;
 using HCIProject02.GUI.ViewModel;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;

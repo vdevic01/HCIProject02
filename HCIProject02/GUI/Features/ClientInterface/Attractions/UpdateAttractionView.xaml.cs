@@ -77,7 +77,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
 
         private void OnImageDropped(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent(DataFormats.FileDrop) && DataContext is UpdateRestaurantViewModel)
+            if (e.Data.GetDataPresent(DataFormats.FileDrop) && DataContext is UpdateAttractionViewModel)
             {
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
 
@@ -95,7 +95,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "Image Files (*.png;*.jpg;*.jpeg)|*.png;*.jpg;*.jpeg";
 
-            if (openFileDialog.ShowDialog() == true && DataContext is UpdateRestaurantViewModel)
+            if (openFileDialog.ShowDialog() == true && DataContext is UpdateAttractionViewModel)
             {
 
                 string imagePath = openFileDialog.FileName;

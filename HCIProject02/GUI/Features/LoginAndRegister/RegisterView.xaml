@@ -55,7 +55,7 @@
                                     <TextBox.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label  >
-                                            Enter your first name.
+                                            Enter your first name
                                             </Label>
                                         </StackPanel>
                                     </TextBox.ToolTip>
@@ -71,7 +71,7 @@
                                     <TextBox.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label  >
-                                                Enter your last name.
+                                                Enter your last name
                                             </Label>
                                         </StackPanel>
                                     </TextBox.ToolTip>
@@ -87,7 +87,7 @@
                             <TextBox.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <Label  >
-                                        Enter your email.
+                                        Enter your email
                                     </Label>
                                 </StackPanel>
                             </TextBox.ToolTip>
@@ -107,7 +107,7 @@
                                     <TextBox.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label  >
-                                                Enter your password.
+                                                Minimum 6 characters and at least one number
                                             </Label>
                                         </StackPanel>
                                     </TextBox.ToolTip>
@@ -123,7 +123,7 @@
                                     <TextBox.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label  >
-                                                Re-enter your password.
+                                                Re-enter your password
                                             </Label>
                                         </StackPanel>
                                     </TextBox.ToolTip>

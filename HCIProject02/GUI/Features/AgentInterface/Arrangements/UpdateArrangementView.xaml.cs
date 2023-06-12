@@ -1,4 +1,5 @@
-﻿using HCIProject02.Core.Ninject;
+﻿
+using HCIProject02.Core.Ninject;
 using System;
 using System.Text.RegularExpressions;
 using System.Windows;

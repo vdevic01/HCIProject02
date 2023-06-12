@@ -89,7 +89,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
                 string imagePath = files[0];
                 var dataContext = DataContext as UpdateHotelViewModel;
-                dataContext.Hotel.ImagePath = imagePath;
+                dataContext.UpdatedHotel.ImagePath = imagePath;
                 ImagePath.ImageSource = new BitmapImage(new Uri(imagePath));
 
 
@@ -109,7 +109,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
            
                 string imagePath = openFileDialog.FileName;
                 var dataContext = DataContext as UpdateHotelViewModel;
-                dataContext.Hotel.ImagePath = imagePath;
+                dataContext.UpdatedHotel.ImagePath = imagePath;
                 ImagePath.ImageSource = new BitmapImage(new Uri(imagePath));
 
 

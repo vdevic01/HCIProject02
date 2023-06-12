@@ -1,4 +1,5 @@
 ﻿using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.Features.ClientInterface.Attractions;
 using HCIProject02.HelpSystem;
 using Microsoft.Maps.MapControl.WPF;
 using Microsoft.Win32;
@@ -118,9 +119,11 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             {
                 // Dobijte putanju do izabrane slike
                 string imagePath = openFileDialog.FileName;
-                newRestaurantViewModel.FilePath = imagePath;
-                // Postavite izvor slike na odabranu putanju
-                //((Image)((Button)sender).Content).Source = new BitmapImage(new Uri(imagePath));
+
+                var dataContext = DataContext as NewRestaurantViewModel;
+                dataContext.FilePath = imagePath;
+
+
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
                 DropText.Visibility = Visibility.Collapsed;
