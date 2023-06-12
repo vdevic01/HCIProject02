@@ -4,6 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
+
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
                xmlns:l="clr-namespace:HCIProject02.HelpSystem"
              l:HelpProvider.HelpKey="ArrangementInfo"
@@ -15,6 +17,9 @@
             <converters:DepartureConverter x:Key="DepartureConverter"/>
             <converters:ReturnConverter x:Key="ReturnConverter"/>
             <converters:PriceConverter x:Key="PriceConverter"/>
+            <converters:LatitudeLongitudeToLocationConverter x:Key="LatitudeLongitudeConverter"/>
+            <converters:PointOfInterestPinColorConverter x:Key="PointOfInterestPinColorConverter"/>
+
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.CommandBindings>
@@ -28,6 +33,8 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="{Binding Arrangement.Name}" Style="{StaticResource HeaderText}" 
                        HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
@@ -128,6 +135,45 @@
                             <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Arrangement.TripPlan}" TextWrapping="Wrap"/>
                         </Border>
                     </StackPanel>
+                    
+                </Grid>
+                <Grid Grid.Row="3" Margin="20 20 20 0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label FontSize="14" Content="Map of your trip" Style="{StaticResource DefaultText}" Grid.Row="0"/>
+                    <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap" Height="300px" Grid.Row="1">
+                        <m:MapLayer>
+                            <m:MapItemsControl>
+                                <m:MapItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <m:Pushpin MouseDown="Pushpin_MouseDown">
+                                            <m:Pushpin.Tag>
+                                                <Binding />
+                                            </m:Pushpin.Tag>
+
+                                            <m:Pushpin.Location>
+                                                <MultiBinding Converter="{StaticResource LatitudeLongitudeConverter}">
+                                                    <Binding Path="Latitude" />
+                                                    <Binding Path="Longitude" />
+                                                </MultiBinding>
+                                            </m:Pushpin.Location>
+                                            <m:Pushpin.ToolTip>
+                                                <ToolTip Content="{Binding Name}" />
+                                            </m:Pushpin.ToolTip>
+                                        </m:Pushpin>
+                                    </DataTemplate>
+                                </m:MapItemsControl.ItemTemplate>
+                                <m:MapItemsControl.ItemsSource>
+                                    <Binding Path="PointsOfInterest" />
+                                </m:MapItemsControl.ItemsSource>
+                            </m:MapItemsControl>
+                            <m:MapPolyline Stroke="RoyalBlue" StrokeThickness="3" Locations="{Binding AttractionLocations}">
+                            </m:MapPolyline>
+                        </m:MapLayer>
+                    </m:Map>
+
                 </Grid>
             </Grid>
         </ScrollViewer>
