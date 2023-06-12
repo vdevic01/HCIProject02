@@ -1,0 +1,136 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.ClientInterface.ArrangementView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+               xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="ArrangementInfo"
+             mc:Ignorable="d"
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:DepartureConverter x:Key="DepartureConverter"/>
+            <converters:ReturnConverter x:Key="ReturnConverter"/>
+            <converters:PriceConverter x:Key="PriceConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid>
+        <ScrollViewer  VerticalScrollBarVisibility="Auto" Padding="15 0 15 15">
+            <Grid MaxWidth="650px">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="{Binding Arrangement.Name}" Style="{StaticResource HeaderText}" 
+                       HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Path VerticalAlignment="Top" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Height="130" Width="130" Margin="0 0 0 50">
+                        <Path.Fill>
+                            <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" />
+                        </Path.Fill>
+                        <Path.Data>
+                            <EllipseGeometry Center="65,65" RadiusX="65" RadiusY="65" />
+                        </Path.Data>
+                    </Path>
+
+                    <Button Visibility="{Binding BookButtonVisibility}" Content="Book" Style="{StaticResource DefaultButtonStyle}" Command="{Binding BookCommand}" Grid.Column="0" Grid.Row="1" Height="30px" FontSize="18" VerticalAlignment="Bottom">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Click the button to book this arrangement.
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+
+                    <TextBlock FontSize="14" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Padding="15 0" TextWrapping="Wrap" Style="{StaticResource DefaultTextBlock}" Text="{Binding Arrangement.Description}"/>
+                    <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Height="1.5" Margin="0 15 0 10" Background="{StaticResource GraphicalElementsColor}"/>
+
+                </Grid>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="0">
+                        <Label FontSize="14" Content="Info" Style="{StaticResource DefaultText}"/>
+                        <Border BorderBrush="{StaticResource BorderColor}"
+                                BorderThickness="1.5"
+                                CornerRadius="3"
+                                Padding="5">
+                            <StackPanel Orientation="Vertical">
+                                <Label FontSize="14" Style="{StaticResource DefaultText}" Content="{Binding Arrangement.DepartureTime, Converter={StaticResource DepartureConverter}}"/>
+                                <Label FontSize="14" Style="{StaticResource DefaultText}" Content="{Binding Arrangement.ReturnTime, Converter={StaticResource ReturnConverter}}"/>
+                                <Label FontSize="14" Style="{StaticResource DefaultText}" Content="{Binding Arrangement.Price, Converter={StaticResource PriceConverter}}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label FontSize="14" Style="{StaticResource DefaultText}" Content="Hotel: "/>
+                                    <Button VerticalAlignment="Center" FontSize="14" Command="{Binding HotelCommand}" Style="{StaticResource LinkText}" Content="{Binding Arrangement.Hotel.Name}"/>
+                                    <StackPanel.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label>
+                                                The hotel where you are staying.
+                                            </Label>
+                                        </StackPanel>
+                                    </StackPanel.ToolTip>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                        <Label FontSize="14" Content="Attractions" Style="{StaticResource DefaultText}"/>
+                        <Border BorderBrush="{StaticResource BorderColor}"
+                                BorderThickness="1.5"
+                                CornerRadius="3"
+                                Padding="10">
+                            <ItemsControl ItemsSource="{Binding Attractions}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Button Margin="0 2" VerticalAlignment="Center" Command="{Binding BookCommand}"  FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Attraction.Name}"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Border>
+                        <StackPanel.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Attractions that this arrangement includes.
+                                </Label>
+                            </StackPanel>
+                        </StackPanel.ToolTip>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="20 0 0 0" Grid.Column="1" Grid.Row="0" Grid.RowSpan="2">
+                        <Label FontSize="14" Content="Trip plan" Style="{StaticResource DefaultText}"/>
+                        <Border BorderBrush="{StaticResource BorderColor}"
+                                BorderThickness="1.5"
+                                CornerRadius="3"
+                                Padding="10">
+                            <TextBlock FontSize="14" Style="{StaticResource DefaultTextBlock}" Text="{Binding Arrangement.TripPlan}" TextWrapping="Wrap"/>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+        
+    </Grid>
+</UserControl>

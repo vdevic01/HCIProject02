@@ -3,6 +3,8 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+App.config
+
 # User-specific files
 *.rsuser
 *.suo
@@ -31,6 +33,12 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+HCIProject02/Migrations/*
+!Migrations/.gitkeep
+*.db-shm
+*.db-wal
+*.db
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/

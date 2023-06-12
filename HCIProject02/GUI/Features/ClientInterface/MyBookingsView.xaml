@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.ClientInterface.MyBookingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             mc:Ignorable="d" 
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="DataGridCell" BasedOn="{StaticResource MaterialDesignDataGridCell}">
+                <Setter Property="TextBlock.TextAlignment" Value="Center"/>
+            </Style>
+            <Style TargetType="DataGridColumnHeader" BasedOn="{StaticResource MaterialDesignDataGridColumnHeader}">
+                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            </Style>
+            <converters:DateConverter x:Key="DateConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Border Padding="15 0 15 15">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Content="My Bookings" Style="{StaticResource HeaderText}" 
+                       HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
+                <DataGrid Grid.Row="1"
+                          Background="{StaticResource DefaultBackground}"
+                          AutoGenerateColumns="False"
+                          SelectionMode="Single"
+                          ItemsSource="{Binding Bookings}"
+                          IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Arrangement" Binding="{Binding Booking.Arrangement.Name}" Width="*"/>
+                        <DataGridTextColumn Header="Departure Time" Binding="{Binding Booking.Arrangement.DepartureTime, Converter={StaticResource DateConverter}}" Width="*"/>
+                        <DataGridTextColumn Header="Return Time" Binding="{Binding Booking.Arrangement.ReturnTime, Converter={StaticResource DateConverter}}" Width="*"/>
+                        <DataGridTextColumn Header="Price (EUR)" Binding="{Binding Booking.Price}" Width="*"/>
+                        <DataGridTemplateColumn Header="Details" Width="*" >
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Details" FontSize="14" Command="{Binding SeeDetailsCommand}" Style="{StaticResource DefaultButtonStyle}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

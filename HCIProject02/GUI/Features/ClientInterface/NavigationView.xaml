@@ -1,0 +1,180 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.ClientInterface.NavigationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="Navigation"
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <Storyboard x:Key="NavigationStoryboard">
+            <ThicknessAnimation Storyboard.TargetName="NavigationPanel"
+                                Storyboard.TargetProperty="Margin"
+                                Duration="0:0:0.125" FillBehavior="HoldEnd">
+            </ThicknessAnimation>
+        </Storyboard>
+        <Style x:Key="NavigationButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+            <Setter Property="FontSize" Value="15px"/>
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Setter Property="Background" Value="{StaticResource GraphicalElementsColor}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Left" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#A68871"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6E5945"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="78*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Height="50px" Background="{StaticResource GraphicalElementsColor}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Visibility="{Binding ReturnButtonVisibility}" Style="{StaticResource NavigationButtonStyle}" HorizontalAlignment="Left" Command="{Binding ReturnCommand}">
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <materialDesign:PackIcon Margin="15"  VerticalAlignment="Center" Kind="ArrowLeft"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#A68871"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6E5945"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>
+                            Go back
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <Button Content="☰ Navigation"
+                    Grid.Row="0"
+                    HorizontalAlignment="Right"                      
+                    Style="{StaticResource NavigationButtonStyle}"
+                    Width="150px"
+                    Click="NavigationButton_Click"  l:HelpProvider.HelpKey="Navigation">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label>
+                            Main menu
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
+            <StackPanel Grid.Row="1" Height="1" Background="{StaticResource BorderColor}"/>
+        </Grid>
+        <Grid Background="{StaticResource GraphicalElementsColor}"
+              Panel.ZIndex="99999"
+              Grid.Row="1"
+              Margin="0 0 -150 0"
+              Width="150px"
+              x:Name="NavigationPanel"
+              HorizontalAlignment="Right" Grid.RowSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Button Grid.Row="0" Content="Destinations" Command="{Binding DestinationsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <StackPanel Grid.Row="0" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="1" Content="Hotels" Command="{Binding AllHotelsCommand}"  Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <StackPanel Grid.Row="1" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="2" Content="Restaurants" Command="{Binding AllRestaurantsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="3" Content="Attractions" Command="{Binding AllAttractionsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="4" Content="My Bookings" Command="{Binding MyBookingsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <StackPanel Grid.Row="3" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <Button Grid.Row="5" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px"/>
+            <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+
+            <StackPanel Orientation="Vertical" Grid.Row="6" VerticalAlignment="Top">
+                <StackPanel Height="1" VerticalAlignment="Top" Background="{StaticResource BorderColor}"/>
+                <Button Style="{StaticResource NavigationButtonStyle}" VerticalAlignment="Bottom" Height="50px" Command="{Binding LogoutCommand}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="border" Background="{TemplateBinding Background}">
+                                <Grid Margin="10 0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" VerticalAlignment="Center">Log Out</TextBlock>
+                                    <materialDesign:PackIcon  VerticalAlignment="Center" Grid.Column="1" Kind="Logout"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#A68871"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#6E5945"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <Button.ToolTip>
+                        <StackPanel Orientation="Horizontal">
+                            <Label  >
+                                Sign out
+                            </Label>
+                        </StackPanel>
+                    </Button.ToolTip>
+                </Button>
+                <StackPanel Grid.Row="7" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
+            </StackPanel>
+            
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </Grid>
+</UserControl>

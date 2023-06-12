@@ -1,0 +1,164 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.LoginAndRegister.RegisterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister"
+             mc:Ignorable="d" 
+              xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="SignUp"
+             Background="{StaticResource DefaultBackground}"
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.625*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="../../../Resources/Images/Static/register_cover.jpg"
+               Grid.Column="1"
+               Stretch="UniformToFill"/>
+        <Border Padding="20px" Grid.Column="0" MaxWidth="500px">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label Content="Sign Up"
+                       Grid.Row="0"
+                               HorizontalAlignment="Center"
+                               Style="{StaticResource HeaderText}"
+                               FontSize="40px"/>
+                <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Orientation="Vertical">
+                        <Grid Margin="0 20 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 0 10 0">
+                                <Label Content="First Name*"
+                                   Margin="0 0 0 -5"
+                                   HorizontalAlignment="Left"
+                                   Style="{StaticResource DefaultText}"
+                                   FontSize="15px"/>
+                                <TextBox FontSize="15px" Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="SignUp"
+                                         >
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                            Enter your first name.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10 0 0 0">
+                                <Label Content="Last Name*"
+                               Margin="0 0 0 -5"                                   
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px"/>
+                                <TextBox FontSize="15px" Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="SignUp">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter your last name.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                            </StackPanel>
+                        </Grid>
+                        <Label Content="Email*"
+                               Margin="0 10 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px"/>
+                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="SignUp">
+                            <TextBox.ToolTip>
+                                <StackPanel Orientation="Horizontal">
+                                    <Label  >
+                                        Enter your email.
+                                    </Label>
+                                </StackPanel>
+                            </TextBox.ToolTip>
+                        </TextBox>
+                        <Grid Margin="0 10 0 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Orientation="Vertical" Grid.Column="0" Margin="0 0 10 0">
+                                <Label Content="Password*"
+                               Margin="0 0 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px"/>
+                                <TextBox Text="{Binding Password}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}" l:HelpProvider.HelpKey="SignUp">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter your password.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10 0 0 0">
+                                <Label Content="Confirm Password*"
+                               Margin="0 0 0 -5"
+                               HorizontalAlignment="Left"
+                               Style="{StaticResource DefaultText}"
+                               FontSize="15px"/>
+                                <TextBox Text="{Binding PasswordConfirm}" FontSize="15px" Style="{StaticResource DefaultPasswordBoxStyle}" l:HelpProvider.HelpKey="SignUp">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Re-enter your password.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 15 0 0">
+                    <Label Content="{Binding ErrorMessage}"
+                           FontSize="15px"
+                           Style="{StaticResource ErrorText}"
+                           Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
+                    <Button Height="40px"
+                        FontSize="20px"
+                        Content="Sign Up"
+                            l:HelpProvider.HelpKey="SignUp"
+                        Command="{Binding RegisterUserCommand}"
+                        Style="{StaticResource DefaultButtonStyle}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Label Content="Already have an account?"
+                               FontSize="15"
+                               Style="{StaticResource DefaultText}"/>
+                        <Button Content="Log in"
+                               Command="{Binding NavigateToLoginViewCommand}"
+                               FontSize="15"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource LinkText}"
+                                l:HelpProvider.HelpKey="SignUp">
+                            
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

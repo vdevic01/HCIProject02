@@ -1,0 +1,166 @@
+﻿<UserControl x:Class="HCIProject02.GUI.Features.ClientInterface.DestinationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
+             Background="{StaticResource DefaultBackground}"
+              xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="SearchDestinations"
+             mc:Ignorable="d" 
+             d:DesignHeight="430" d:DesignWidth="750">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:DepartureConverter x:Key="DepartureConverter"/>
+            <converters:ReturnConverter x:Key="ReturnConverter"/>
+            <converters:PriceConverter x:Key="PriceConverter"/>
+            <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
+        </ResourceDictionary>
+        
+    </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Content="Destinations" Style="{StaticResource HeaderText}"
+               HorizontalAlignment="Center" FontSize="35px" Margin="0 10"/>
+        <StackPanel Grid.Row="1" Margin="10 0 10 0" Width="650px" Orientation="Horizontal">
+            <Border Width="200" HorizontalAlignment="Left" BorderBrush="{StaticResource BorderColor}" Padding="10" BorderThickness="1.5" CornerRadius="3" l:HelpProvider.HelpKey="Destinations">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <materialDesign:PackIcon Grid.Column="0" Width="20" Height="20" Kind="Magnify" VerticalAlignment="Center"/>
+
+                    <TextBox Grid.Column="1"
+                             FontFamily="{StaticResource DefaultFont}"
+                             FontSize="14"
+                             BorderThickness="0"
+                             Padding="10 0 10 0"
+                             Text="{Binding Path=SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                             Foreground="{StaticResource TextDark}"
+                             l:HelpProvider.HelpKey="SearchDestinations">
+                        <TextBox.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                   Search destinations
+                                </Label>
+                            </StackPanel>
+                        </TextBox.ToolTip>
+                    </TextBox>
+                    <Button Grid.Column="2" Padding="5"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Visibility="{Binding SearchText, Converter={StaticResource StringToVisibilityConverter}}"
+                            Command="{Binding ClearSearchBoxCommand}"
+                            l:HelpProvider.HelpKey="SearchDestinations">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="border"                            
+                                                            Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label>
+                                    Clear search
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                        <materialDesign:PackIcon Width="20" Height="20" Kind="WindowClose" VerticalAlignment="Center"/>
+                    </Button>
+                </Grid>
+            </Border>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2" Width="650px" Margin="10" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Width="650px" HorizontalAlignment="Center" ItemsSource="{Binding FilteredArrangements}"  l:HelpProvider.HelpKey="Destinations">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="2" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="{StaticResource BorderColor}"
+                                BorderThickness="1.5"
+                                CornerRadius="3"
+                                Padding="10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackPanel Grid.Column="0" Orientation="Vertical" l:HelpProvider.HelpKey="Destinations">
+                                    <Label FontSize="18" Content="{Binding Arrangement.Name}" Style="{StaticResource HeaderText}"/>
+                                    <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.DepartureTime, Converter={StaticResource DepartureConverter}}"/>
+                                    <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.ReturnTime, Converter={StaticResource ReturnConverter}}"/>
+                                    <Label Style="{StaticResource DefaultText}" Content="{Binding Arrangement.Price, Converter={StaticResource PriceConverter}}"/>
+
+                                    <Button FontSize="18px" Command="{Binding BookCommand}" Content="Details" Margin="0 10 0 0" Style="{StaticResource DefaultButtonStyle}" l:HelpProvider.HelpKey="Destinations">
+
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="border"                            
+                                                        Background="{TemplateBinding Background}"
+                                                        CornerRadius="3"
+                                                        Padding="0 3"
+                                                        l:HelpProvider.HelpKey="Destinations">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{StaticResource DefaultButtonColorHover}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsPressed" Value="True">
+                                                        <Setter TargetName="border" Property="Background" Value="{StaticResource DefaultButtonColorClick}"/>
+                                                    </Trigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter Property="Background" Value="{StaticResource DefaultButtonDisabledBackground}" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter Property="Foreground" Value="{StaticResource DefaultButtonDisabledForeground}" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                    </Button>
+                                </StackPanel>
+                                <Path Height="150" Width="150" Grid.Column="1">
+                                    <Path.Fill>
+                                        <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" l:HelpProvider.HelpKey="Destinations"/>
+                                    </Path.Fill>
+                                    <Path.Data>
+                                        <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />
+                                    </Path.Data>
+                                </Path>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
