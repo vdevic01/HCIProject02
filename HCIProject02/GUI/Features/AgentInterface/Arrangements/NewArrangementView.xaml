@@ -152,7 +152,7 @@
                                HorizontalAlignment="Center"
                                Style="{StaticResource HeaderText}"
                                FontSize="30px"/>
-                    <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Padding="0 0 15 0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
                             <Label Content="Name*"
                                Margin="0 10 0 -5"
@@ -171,7 +171,7 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding TripPlan}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                            <TextBox AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Height="125" x:Name="addressTextBox" FontSize="15px" Text="{Binding TripPlan}" Style="{StaticResource DefaultTextBoxStyle}"/>
 
                             <Grid>
                                 <Grid.RowDefinitions>
