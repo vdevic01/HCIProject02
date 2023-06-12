@@ -6,7 +6,8 @@
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Report"
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-
+               xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="Reports01" 
              xmlns:MyControls="clr-namespace:HCIProject02.GUI.MyControls"
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
@@ -15,7 +16,9 @@
     <UserControl.Resources>
         <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
     </UserControl.Resources>
-
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid  >
         <Border Padding="15 0 15 15">
             <Grid>
@@ -40,16 +43,16 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0" Grid.Column="0">
-                        <DatePicker MyControls:DatePickerCalendar.IsMonthYear="True" 
+                        <DatePicker  l:HelpProvider.HelpKey="Reports01" MyControls:DatePickerCalendar.IsMonthYear="True" 
                         MyControls:DatePickerDateFormat.DateFormat="MMM-yyyy"
                         Text="MMM-yyyy" SelectedDate="{Binding SelectedDate, Mode=TwoWay}" IsTodayHighlighted="True">
                         </DatePicker>
                     </Grid>
-                    <Button  Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
+                    <Button   l:HelpProvider.HelpKey="Reports01" Content="Monthly Report" Command="{Binding MonthlyReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
 
-                    <Button Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
+                    <Button  l:HelpProvider.HelpKey="Reports02" Content="Arrangement Report" Command="{Binding ArrangementReportCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="170px"/>
 
-                    <MyControls:FilteredComboBox ItemsSource="{Binding AllArrangements}"
+                    <MyControls:FilteredComboBox  l:HelpProvider.HelpKey="Reports02" ItemsSource="{Binding AllArrangements}"
                                                  SelectedItem="{Binding SelectedArrangement}"
                                 IsEditable="True" 
                                 IsTextSearchEnabled="False" 
