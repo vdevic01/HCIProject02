@@ -39,7 +39,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
-                DropText.Visibility = Visibility.Collapsed;
+                /*DropText.Visibility = Visibility.Collapsed;*/
 
 
             }
@@ -58,7 +58,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 dataContext.SelectedArrangement.ImagePath = imagePath;
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
-                DropText.Visibility = Visibility.Collapsed;
+                /*DropText.Visibility = Visibility.Collapsed;*/
 
             }
         }
