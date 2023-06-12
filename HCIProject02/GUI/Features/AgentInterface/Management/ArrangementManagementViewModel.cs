@@ -99,12 +99,22 @@ namespace HCIProject02.GUI.Features.AgentInterface.Management
             }
 
         }
+        private void NavigateToUpdateArrangementView()
+        {
+            if (SelectedArrangement != null)
+            {
+                NavigatorEventDTO dto = new NavigatorEventDTO(SelectedArrangement, ViewType.ArrangementManagementView);
+                Navigator.FireEvent(ViewType.UpdateArrangementView, dto);
+            }
+
+        }
 
         public ArrangementManagementViewModel(IArrangementService arrangementService, IDialogService dialogService)
         {
             DetailsCommand = new RelayCommand(obj => NavigateToDetailsArrangementView());
             CreateCommand = new RelayCommand(obj => NavigateToCreateArrangementView());
             DeleteCommand = new RelayCommand(obj => DeleteDialog());
+            UpdateCommand = new RelayCommand(obj => NavigateToUpdateArrangementView());
             _arrangementService = arrangementService;
             _dialogService = dialogService;
             _arrangements = new ObservableCollection<Arrangement>();

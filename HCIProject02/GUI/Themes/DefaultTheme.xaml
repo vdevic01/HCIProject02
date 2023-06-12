@@ -58,6 +58,43 @@
         </Style.Triggers>
     </Style>
 
+    <Style TargetType="Button" x:Key="ImageButtonStyle">
+        <Setter Property="Background" Value="{StaticResource DefaultBackground}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border"                            
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="3">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DefaultBackground}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource DefaultBackground}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="{StaticResource DefaultBackground}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="{StaticResource DefaultBackground}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
     <Style TargetType="Label" x:Key="DefaultText">
         <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
@@ -94,6 +131,18 @@
                 <Setter Property="Cursor" Value="Hand" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="DatePicker" x:Key="DefaultDatePicker">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+    </Style>
+
+    <Style TargetType="CheckBox" x:Key="DefaulCheckbox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFont}"/>
+        <Setter Property="Foreground" Value="{StaticResource TextDark}"/>
     </Style>
 
     <Style TargetType="TextBox" x:Key="DefaultTextBoxStyle">

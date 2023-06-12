@@ -32,6 +32,7 @@ namespace HCIProject02.Navigation
         InfoAttractionView,
         AllHotelsView,
         AllRestaurantsView,
-        AllAttractionsView
+        AllAttractionsView,
+        UpdateArrangementView
     }
 }

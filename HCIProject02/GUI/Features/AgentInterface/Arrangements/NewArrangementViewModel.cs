@@ -64,6 +64,17 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
             }
         }
 
+        private bool _isAvailible;
+        public bool IsAvailible
+        {
+            get => _isAvailible;
+            set
+            {
+                _isAvailible = value;
+                OnPropertyChanged(nameof(IsAvailible));
+            }
+        }
+
         private string? _name;
         public string? Name
         {
@@ -152,7 +163,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
 
         private void AddNewArrangement()
         {
-
+            Console.WriteLine(IsAvailible);
             if (string.IsNullOrEmpty(Name))
             {
                 ErrorMessage = "Field (Name) is required";
@@ -178,6 +189,11 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 ErrorMessage = "Pick a hotel";
                 return;
             }
+            if(ReturnDate < DepartureDate)
+            {
+                ErrorMessage = "Return date can not be before the departure date";
+                return;
+            }
 
             List<Attraction> attractions = new List<Attraction>();
             foreach (var attraction in ChosenAttractions.AttractionItemViewModels)
@@ -196,7 +212,8 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 ReturnTime = ReturnDate,
                 Price = double.Parse(Price),
                 Hotel = SelectedHotel,
-                Attractions = attractions
+                Attractions = attractions,
+                IsAvailable = IsAvailible
             };
             _arrangementService.Create(arrangement);
             MessageBox.Show("Arrangement created");

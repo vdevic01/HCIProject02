@@ -1,6 +1,7 @@
 ﻿using HCIProject02.Commands;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
+using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.Features.AgentInterface.Arrangements;
 using HCIProject02.GUI.Features.AgentInterface.Management;
@@ -54,6 +55,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
             }
         }
         #endregion
+        #region Services
+        private readonly IArrangementService _arrangementService;
+        #endregion
 
         private void LogoutUser()
         {
@@ -101,7 +105,8 @@ namespace HCIProject02.GUI.Features.AgentInterface
             ReportViewModel viewModel = ServiceLocator.Get<ReportViewModel>();
             SwitchCurrentViewModel(viewModel);
         }
-        public AgentNavigationViewModel() {
+        public AgentNavigationViewModel(IArrangementService arrangementService) {
+            _arrangementService = arrangementService;
             RegisterHandlers();
             _returnButtonVisibility = Visibility.Collapsed;
             LogoutCommand = new RelayCommand(obj => LogoutUser());
@@ -213,6 +218,17 @@ namespace HCIProject02.GUI.Features.AgentInterface
                 ReturnCommand = attractionInfo.EventInvoker is ViewType.HotelManagementView
                     ? new RelayCommand(obj => NavigateToAttractionManagementView())
                     : new RelayCommand(obj => NavigateToMapView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateArrangementView, obj =>
+            {
+                NavigatorEventDTO arrangementInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateArrangementViewModel viewModel = ServiceLocator.Get<UpdateArrangementViewModel>();
+                Arrangement? arragementProxy = (Arrangement)arrangementInfo.Payload;
+                Arrangement? arrangement = _arrangementService.GetArrangementByName(arragementProxy.Name);
+                viewModel.SelectedArrangement = arrangement;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
             });
         }
     }
