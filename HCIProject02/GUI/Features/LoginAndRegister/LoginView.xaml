@@ -3,6 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="clr-namespace:System.Windows.Input;assembly=PresentationCore"
              xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister"
              mc:Ignorable="d"
@@ -46,7 +48,7 @@
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Text="{Binding Email}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="LoginForm">
+                        <TextBox FontSize="15px" Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DefaultTextBoxStyle}" l:HelpProvider.HelpKey="LoginForm">
                             <TextBox.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <Label  >
@@ -60,7 +62,7 @@
                        HorizontalAlignment="Left"
                        Style="{StaticResource DefaultText}"
                        FontSize="15px"/>
-                        <TextBox FontSize="15px" Text="{Binding Password}" Style="{StaticResource DefaultPasswordBoxStyle}" l:HelpProvider.HelpKey="LoginForm">
+                        <TextBox FontSize="15px" Text="{Binding Password, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Style="{StaticResource DefaultPasswordBoxStyle}" l:HelpProvider.HelpKey="LoginForm">
                             <TextBox.ToolTip>
                                 <StackPanel Orientation="Horizontal">
                                     <Label  >
@@ -77,6 +79,7 @@
                            Style="{StaticResource ErrorText}"
                            Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"/>
                     <Button Height="40px"
+                            IsDefault="True"
                             Command="{Binding LoginUserCommand}"
                             FontSize="20px"
                             Content="Login"
