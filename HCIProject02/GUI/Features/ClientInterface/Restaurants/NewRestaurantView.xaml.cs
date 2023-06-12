@@ -29,6 +29,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
     {
 
         private string mapKey { get; set; }
+        private Pushpin currentPin;
+
         private NewRestaurantViewModel newRestaurantViewModel { get; set; }
         public NewRestaurantView()
         {
@@ -49,10 +51,16 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             Point mousePosition = e.GetPosition(myMap);
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
-
-            Pushpin pin = new Pushpin();
-            pin.Location = clickedLocation;
-            myMap.Children.Add(pin);
+            if (currentPin != null)
+            {
+                currentPin.Location = clickedLocation;
+            }
+            else
+            {
+                currentPin = new Pushpin();
+                currentPin.Location = clickedLocation;
+                myMap.Children.Add(currentPin);
+            }
             newRestaurantViewModel.Latitude = clickedLocation.Latitude;
             newRestaurantViewModel.Longitude = clickedLocation.Longitude;
 
