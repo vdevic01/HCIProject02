@@ -71,13 +71,18 @@
                 </Grid>
             </Border>
         </StackPanel>
-        <ScrollViewer Grid.Row="2" Width="650px" Margin="10" VerticalScrollBarVisibility="Auto">
-            <ItemsControl Width="650px" HorizontalAlignment="Center" ItemsSource="{Binding FilteredAttractions}">
+        <ScrollViewer Grid.Row="2" Width="670px" Margin="10" VerticalScrollBarVisibility="Auto">
+            <ItemsControl Width="660px" HorizontalAlignment="Center" ItemsSource="{Binding FilteredAttractions}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="2" VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Margin" Value="5"></Setter>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Border BorderBrush="{StaticResource BorderColor}"
