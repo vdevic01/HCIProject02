@@ -85,7 +85,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
                 string imagePath = files[0];
                 var dataContext = DataContext as UpdateRestaurantViewModel;
-                dataContext.Restaurant.ImagePath = imagePath;
+                dataContext.UpdatedRestaurant.ImagePath = imagePath;
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
                
 
@@ -105,7 +105,7 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
 
                 imageBrush.ImageSource = new BitmapImage(new Uri(imagePath));
                 var dataContext = DataContext as UpdateRestaurantViewModel;
-                dataContext.Restaurant.ImagePath = imagePath;
+                dataContext.UpdatedRestaurant.ImagePath = imagePath;
 
             }
         }

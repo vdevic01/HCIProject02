@@ -32,6 +32,7 @@ using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.Features.LoginAndRegister;
 using HCIProject02.GUI.Features.ClientInterface;
 using HCIProject02.HelpSystem;
+using HCIProject02.GUI.Features.ClientInterface.Attractions;
 
 namespace HCIProject02.GUI.Features.ClientInterface
 {
@@ -140,9 +141,10 @@ namespace HCIProject02.GUI.Features.ClientInterface
             {
                 // Dobijte putanju do izabrane slike
                 string imagePath = openFileDialog.FileName;
-                newHotelViewModel.FilePath = imagePath;
-                // Postavite izvor slike na odabranu putanju
-                //((Image)((Button)sender).Content).Source = new BitmapImage(new Uri(imagePath));
+
+
+                var dataContext = DataContext as NewHotelViewModel;
+                dataContext.FilePath = imagePath;
                 ImageBorder.Background = new ImageBrush(new BitmapImage(new Uri(imagePath)));
                 ImageButton.Visibility = Visibility.Collapsed;
                 DropText.Visibility = Visibility.Collapsed;
