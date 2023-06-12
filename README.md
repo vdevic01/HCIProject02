@@ -53,5 +53,6 @@ implementira XAML. <br/>
 
 4. Za dobavljanje adrese na osnovu koordinata salje se HTTP zahtev preko Newtonsoft.Json.Linq, pa ce verovatno trebati da se uradi install tog paketa
 
-##Uputstvo za Chart:
+=============================================================================================================================================================
+Uputstvo za Chart:
 1. Instaliraj LiveCharts.Wpf
