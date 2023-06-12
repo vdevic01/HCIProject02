@@ -7,8 +7,10 @@ using HCIProject02.GUI.Dialog.Implementations;
 using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
+using Microsoft.Maps.MapControl.WPF;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +32,7 @@ namespace HCIProject02.GUI.Features.ClientInterface
             {
                 _arrangement = value;
                 OnPropertyChanged(nameof(Arrangement));
+                _pointsOfInterest.Add(Arrangement.Hotel);
                 this.Attractions = new List<AttractionCardDTO>();
                 foreach (var attr in Arrangement.Attractions)
                 {
@@ -40,6 +43,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
                     });
                     AttractionCardDTO card = new AttractionCardDTO(attr, command);
                     Attractions.Add(card);
+                    AttractionLocations.Add(new Location((double)attr.Latitude, (double)attr.Longitude));
+                    _pointsOfInterest.Add(attr);
                 }
             }
         }
@@ -75,6 +80,40 @@ namespace HCIProject02.GUI.Features.ClientInterface
             }
         }
 
+        private PointOfInterest _selectedPoint;
+        public PointOfInterest SelectedPoint
+        {
+            get => _selectedPoint;
+            set
+            {
+                _selectedPoint = value;
+                OnPropertyChanged(nameof(SelectedPoint));
+                ShowDetails();
+            }
+        }
+
+        private LocationCollection _attractionLocations;
+        public LocationCollection AttractionLocations
+        {
+            get => _attractionLocations;
+            set
+            {
+                _attractionLocations = value;
+                OnPropertyChanged(nameof(AttractionLocations));
+            }
+        }
+
+        private ObservableCollection<PointOfInterest> _pointsOfInterest;
+        public ObservableCollection<PointOfInterest> PointsOfInterest
+        {
+            get => _pointsOfInterest;
+            set
+            {
+                _pointsOfInterest = value;
+                OnPropertyChanged(nameof(PointsOfInterest));
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -88,6 +127,21 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private readonly IBookingService _bookingService;
         private readonly IAttractionService _attractionService;
         #endregion
+
+
+        private void ShowDetails()
+        {
+            if (SelectedPoint is Hotel)
+            {
+                NavigatorEventDTO dto = new NavigatorEventDTO(SelectedPoint, ViewType.MapView);
+                Navigator.FireEvent(ViewType.InfoHotelView, dto);
+            }
+            else if (SelectedPoint is Attraction)
+            {
+                NavigatorEventDTO dto = new NavigatorEventDTO(SelectedPoint, ViewType.MapView);
+                Navigator.FireEvent(ViewType.InfoAttractionView, dto);
+            }
+        }
 
         private void NavigateToHotelView()
         {
@@ -108,7 +162,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
             _attractionService = attractionService;
             HotelCommand = new RelayCommand(obj => NavigateToHotelView());
             AttractionCommand = new RelayCommand(obj => NavigateToAttractionView(obj as Attraction));
-            
+            _pointsOfInterest = new ObservableCollection<PointOfInterest>();
+            _attractionLocations = new LocationCollection();
             BookCommand = new RelayCommand(obj =>
             {
                 var yesNoDialog = new YesNoDialogViewModel("Arrangement booking confirmation", "Are you sure you want to book this arrangement?");

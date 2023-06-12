@@ -118,22 +118,70 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Content="Destinations" Command="{Binding DestinationsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="0" Content="Destinations" Command="{Binding DestinationsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            View destinations
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="0" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="1" Content="Hotels" Command="{Binding AllHotelsCommand}"  Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="1" Content="Hotels" Command="{Binding AllHotelsCommand}"  Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            View hotels
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="1" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="2" Content="Restaurants" Command="{Binding AllRestaurantsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <Button Grid.Row="2" Content="Restaurants" Command="{Binding AllRestaurantsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            View restaurants
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="3" Content="Attractions" Command="{Binding AllAttractionsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px"/>
+            <Button Grid.Row="3" Content="Attractions" Command="{Binding AllAttractionsCommand}" Style="{StaticResource NavigationButtonStyle}" Click="NavigationButton_Click" Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            View attractions
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="2" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="4" Content="My Bookings" Command="{Binding MyBookingsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px"/>
+            <Button Grid.Row="4" Content="My Bookings" Command="{Binding MyBookingsCommand}" Click="NavigationButton_Click" Style="{StaticResource NavigationButtonStyle}" Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            You'r bookings
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="3" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
-            <Button Grid.Row="5" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px"/>
+            <Button Grid.Row="5" Content="Map" Style="{StaticResource NavigationButtonStyle}" Command="{Binding MapCommand}"  Click="NavigationButton_Click"  Height="50px">
+                <Button.ToolTip>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  >
+                            Main map
+                        </Label>
+                    </StackPanel>
+                </Button.ToolTip>
+            </Button>
             <StackPanel Grid.Row="4" Height="1" VerticalAlignment="Bottom" Background="{StaticResource BorderColor}"/>
 
             <StackPanel Orientation="Vertical" Grid.Row="6" VerticalAlignment="Top">

@@ -34,10 +34,25 @@ namespace HCIProject02.GUI.Features.ClientInterface
             set
             {
                 _hotel = value;
+                
+                UpdatedHotel = new Hotel(_hotel);
                 OnPropertyChanged(nameof(Hotel));
 
             }
         }
+
+        private Hotel _updatedHotel;
+        public Hotel UpdatedHotel
+        {
+            get => _updatedHotel;
+            set
+            {
+                _updatedHotel = value;
+                OnPropertyChanged(nameof(UpdatedHotel));
+
+            }
+        }
+
         private Location _pinLocation;
         public Location PinLocation
         {
@@ -92,6 +107,14 @@ namespace HCIProject02.GUI.Features.ClientInterface
                 }
                 if ((bool)result)
                 {
+
+                    Hotel.Name = UpdatedHotel.Name;
+                    Hotel.Longitude = PinLocation.Longitude;
+                    Hotel.Latitude = PinLocation.Latitude;
+                    Hotel.ImagePath = UpdatedHotel.ImagePath;
+                    Hotel.Address = UpdatedHotel.Address;
+                    Hotel.Description = UpdatedHotel.Description;
+                    Hotel.NumberOfStars = UpdatedHotel.NumberOfStars;
 
                     Hotel? hotel = hotelService.Update(Hotel);
                     if (hotel != null)

@@ -30,6 +30,8 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
     {
 
         private string mapKey { get; set; }
+        private Pushpin currentPin;
+
         private NewAttractionViewModel newAttractionViewModel { get; set; }
 
         public NewAttractionView()
@@ -52,10 +54,16 @@ namespace HCIProject02.GUI.Features.ClientInterface.Attractions
             Point mousePosition = e.GetPosition(myMap);
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
-
-            Pushpin pin = new Pushpin();
-            pin.Location = clickedLocation;
-            myMap.Children.Add(pin);
+            if (currentPin != null)
+            {
+                currentPin.Location = clickedLocation;
+            }
+            else
+            {
+                currentPin = new Pushpin();
+                currentPin.Location = clickedLocation;
+                myMap.Children.Add(currentPin);
+            }
             newAttractionViewModel.Latitude = clickedLocation.Latitude;
             newAttractionViewModel.Longitude = clickedLocation.Longitude;
 

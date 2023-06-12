@@ -29,10 +29,25 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
             set
             {
                 _restaurant = value;
+                UpdatedRestaurant = new Restaurant(_restaurant);
                 OnPropertyChanged(nameof(Restaurant));
 
             }
         }
+
+        private Restaurant _updatedRestaurant;
+        public Restaurant UpdatedRestaurant
+        {
+            get => _updatedRestaurant;
+            set
+            {
+                _updatedRestaurant = value;
+                OnPropertyChanged(nameof(UpdatedRestaurant));
+
+            }
+        }
+
+
         private Location _pinLocation;
         public Location PinLocation
         {
@@ -76,6 +91,13 @@ namespace HCIProject02.GUI.Features.ClientInterface.Restaurants
                 }
                 if ((bool)result)
                 {
+
+                    Restaurant.Name = UpdatedRestaurant.Name;
+                    Restaurant.Longitude = PinLocation.Longitude;
+                    Restaurant.Latitude = PinLocation.Latitude;
+                    Restaurant.ImagePath = UpdatedRestaurant.ImagePath;
+                    Restaurant.Address = UpdatedRestaurant.Address;
+                    Restaurant.Description = UpdatedRestaurant.Description;
 
                     Restaurant? restaurant = restaurantService.Update(Restaurant);
                     if (restaurant != null)

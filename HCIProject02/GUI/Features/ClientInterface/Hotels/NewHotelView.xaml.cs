@@ -44,7 +44,9 @@ namespace HCIProject02.GUI.Features.ClientInterface
     {
 
         private string mapKey { get; set; }
-        private NewHotelViewModel newHotelViewModel { get; set; }   
+        private NewHotelViewModel newHotelViewModel { get; set; }
+        private Pushpin currentPin;
+
 
         public NewHotelView()
         {
@@ -67,12 +69,22 @@ namespace HCIProject02.GUI.Features.ClientInterface
             Point mousePosition = e.GetPosition(myMap);
             Location clickedLocation = myMap.ViewportPointToLocation(mousePosition);
 
+            if (currentPin != null)
+            {
+                currentPin.Location = clickedLocation;
+            } else
+            {
+                currentPin = new Pushpin();
+                currentPin.Location = clickedLocation;
+                myMap.Children.Add(currentPin);
+            }
+
  
-            Pushpin pin = new Pushpin();
-            pin.Location = clickedLocation;
-            myMap.Children.Add(pin);
+         
             newHotelViewModel.Latitude = clickedLocation.Latitude;
             newHotelViewModel.Longitude = clickedLocation.Longitude;
+
+
 
             string requestUrl = $"https://dev.virtualearth.net/REST/v1/Locations/{clickedLocation.Latitude},{clickedLocation.Longitude}?key={mapKey}";
 

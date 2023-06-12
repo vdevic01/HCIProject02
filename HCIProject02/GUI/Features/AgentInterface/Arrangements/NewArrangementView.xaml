@@ -10,6 +10,8 @@
              xmlns:MyControls="clr-namespace:HCIProject02.GUI.MyControls"
              xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
              d:DataContext="{d:DesignInstance Type=local:NewArrangementViewModel}"
+               xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="NewArrangement01" 
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
@@ -21,6 +23,9 @@
             <converters:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -48,19 +53,21 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0" >
+                        <Grid Grid.Column="0" l:HelpProvider.HelpKey="DragDrop">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
 
                             <TextBlock
+                                l:HelpProvider.HelpKey="DragDrop"
                                 Grid.Row="0"
                                 FontSize="16"
                                 Margin="0 10 15 0"
                                 Text="All"  Style="{StaticResource DefaultTextBlock}" HorizontalAlignment="Center"/>
 
                             <DragAndDrop:AttractionListingView
+                                l:HelpProvider.HelpKey="DragDrop"
                                 Grid.Row="1"
                                 Margin="0 10 15 0"
                                 BorderBrush="{StaticResource BorderColor}"
@@ -90,6 +97,7 @@
                             Text="Selected" Style="{StaticResource DefaultTextBlock}" HorizontalAlignment="Center"/>
 
                             <DragAndDrop:AttractionListingView
+                             l:HelpProvider.HelpKey="DragDrop"
                             Grid.Row="1"
                             Margin="5 10 15 0"
                             BorderBrush="{StaticResource BorderColor}"
@@ -132,10 +140,18 @@
 
                             <Button Height="30px"
                         FontSize="20px"
+                        l:HelpProvider.HelpKey="DragDrop"
                         Content="Create"
                         Style="{StaticResource DefaultButtonStyle}"
-                       Command="{Binding AddNewArrangementCommand}"
-                         />
+                       Command="{Binding AddNewArrangementCommand}">
+                                <Button.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label  >
+                                            Create this arrangement.
+                                        </Label>
+                                    </StackPanel>
+                                </Button.ToolTip>
+                            </Button>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -152,26 +168,52 @@
                                HorizontalAlignment="Center"
                                Style="{StaticResource HeaderText}"
                                FontSize="30px"/>
-                    <ScrollViewer Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
+                    <ScrollViewer Padding="0 0 15 0" Grid.Row="1" CanContentScroll="True" VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical">
                             <Label Content="Name*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                            <TextBox l:HelpProvider.HelpKey="NewArrangement01" FontSize="15px" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                                <TextBox.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label  >
+                                            Enter name of arrangemenet.
+                                        </Label>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <Label Content="Description*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}"/>
+                            <TextBox l:HelpProvider.HelpKey="NewArrangement01" FontSize="15px" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource DefaultTextBoxStyle}">
+                                <TextBox.ToolTip>
+                                    <StackPanel Orientation="Horizontal">
+                                        <Label  >
+                                            Enter description of arrangemenet.
+                                        </Label>
+                                    </StackPanel>
+                                </TextBox.ToolTip>
+                            </TextBox>
                             <Label Content="Trip plan*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px"/>
-                            <TextBox x:Name="addressTextBox" FontSize="15px" Text="{Binding TripPlan}" Style="{StaticResource DefaultTextBoxStyle}"/>
+
+                                <TextBox  l:HelpProvider.HelpKey="NewArrangement01" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Height="125" x:Name="addressTextBox" FontSize="15px" Text="{Binding TripPlan}" Style="{StaticResource DefaultTextBoxStyle}">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter trip plan of arrangemenet
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
+
 
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -193,11 +235,28 @@
                                 <Label Content="Return date*"
                                Margin="0 10 0 -5"
                                HorizontalAlignment="Left"
+                                        l:HelpProvider.HelpKey="NewArrangement02"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px" Grid.Row="0" Grid.Column="1"/>
-                                <DatePicker Grid.Row="1" Grid.Column="0" SelectedDate="{Binding DepartureDate, Mode=TwoWay}"  Style="{StaticResource DefaultDatePicker}" Padding="5" Margin="0 5 15 0"/>
+                                <DatePicker l:HelpProvider.HelpKey="NewArrangement02" Grid.Row="1" Grid.Column="0" SelectedDate="{Binding DepartureDate, Mode=TwoWay}"  Style="{StaticResource DefaultDatePicker}" Padding="5" Margin="0 5 15 0">
+                                    <DatePicker.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Choose departure date.
+                                            </Label>
+                                        </StackPanel>
+                                    </DatePicker.ToolTip>
+                                </DatePicker>
 
-                                <DatePicker Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ReturnDate, Mode=TwoWay}" Style="{StaticResource DefaultDatePicker}" Padding="5" Margin="0 5 15 0"/>
+                                <DatePicker l:HelpProvider.HelpKey="NewArrangement02" Grid.Row="1" Grid.Column="1" SelectedDate="{Binding ReturnDate, Mode=TwoWay}" Style="{StaticResource DefaultDatePicker}" Padding="5" Margin="0 5 15 0">
+                                    <DatePicker.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Choose return date.
+                                            </Label>
+                                        </StackPanel>
+                                    </DatePicker.ToolTip>
+                                </DatePicker>
                             </Grid>
 
                             <Grid >
@@ -214,14 +273,14 @@
                                Style="{StaticResource DefaultText}"
                                FontSize="15px" Grid.Column="0" Grid.Row="0" Margin="0 15 15 10"/>
 
-                                <MyControls:FilteredComboBox Margin="0 15 15 0"  ItemsSource="{Binding AllHotels}"
+                                <MyControls:FilteredComboBox l:HelpProvider.HelpKey="NewArrangement02" Margin="0 15 15 0"  ItemsSource="{Binding AllHotels}"
                                 SelectedItem="{Binding SelectedHotel}"
                                 DisplayMemberPath="Name" 
                                 IsEditable="True" 
                                 IsTextSearchEnabled="False" 
                                 StaysOpenOnEdit="True" Grid.Column="1" Grid.Row="0">
 
-                                    <MyControls:FilteredComboBox.ItemsPanel>
+                                    <MyControls:FilteredComboBox.ItemsPanel >
                                         <ItemsPanelTemplate>
                                             <VirtualizingStackPanel VirtualizationMode="Recycling" />
                                         </ItemsPanelTemplate>
@@ -233,11 +292,19 @@
                                HorizontalAlignment="Left"
                                Style="{StaticResource DefaultText}"
                                FontSize="15px" Grid.Column="0" Grid.Row="1"/>
-                                <TextBox Name="NumberTextBox" Margin="0 10 15 0" PreviewTextInput="NumberValidationTextBox" Text="{Binding Price}" Style="{StaticResource DefaultTextBoxStyle}" Grid.Column="1" Grid.Row="1"/>
+                                <TextBox l:HelpProvider.HelpKey="NewArrangement02" Name="NumberTextBox" Margin="0 10 15 0" PreviewTextInput="NumberValidationTextBox" Text="{Binding Price}" Style="{StaticResource DefaultTextBoxStyle}" Grid.Column="1" Grid.Row="1">
+                                    <TextBox.ToolTip>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Label  >
+                                                Enter price in Euros.
+                                            </Label>
+                                        </StackPanel>
+                                    </TextBox.ToolTip>
+                                </TextBox>
 
                             </Grid>
 
-                            <CheckBox Content="Available*" IsChecked="{Binding IsAvailable}" Style="{StaticResource DefaulCheckbox}"   FontSize="15" VerticalAlignment="Bottom" Margin="5,15,0,0" HorizontalAlignment="Left"/>
+                            <CheckBox l:HelpProvider.HelpKey="NewArrangement03" Content="Available*" IsChecked="{Binding IsAvailable}" Style="{StaticResource DefaulCheckbox}"   FontSize="15" VerticalAlignment="Bottom" Margin="5,15,0,0" HorizontalAlignment="Left"/>
 
 
                             <StackPanel Orientation="Vertical" Grid.Row="2" Margin="0 20 15 0" HorizontalAlignment="Center">
@@ -247,10 +314,18 @@
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
-                                        <Border x:Name="ImageBorder" BorderBrush="{StaticResource BorderColor}" BorderThickness="2" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Background="{StaticResource DefaultBackground}" Grid.ColumnSpan="2" CornerRadius="10">
+                                        <Border l:HelpProvider.HelpKey="NewArrangement03" x:Name="ImageBorder" BorderBrush="{StaticResource BorderColor}" BorderThickness="2" Width="200" Height="100" AllowDrop="True" Drop="OnImageDropped" Background="{StaticResource DefaultBackground}" Grid.ColumnSpan="2" CornerRadius="10">
                                             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                                                <Button x:Name="ImageButton" Style="{StaticResource ImageButtonStyle}" Width="60" Height="30" Click="Button_Click">
+                                                <Button l:HelpProvider.HelpKey="NewArrangement03" x:Name="ImageButton" Style="{StaticResource ImageButtonStyle}" Width="60" Height="30" Click="Button_Click">
                                                     <Image Source="../../../../Resources/Images/Static/cloud.png" Height="30" Width="Auto" />
+                                                    <Button.ToolTip>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Label  >
+                                                                Choose image of arrangement.
+                                                            </Label>
+                                                        </StackPanel>
+                                                    </Button.ToolTip>
+                                                    
                                                 </Button>
                                                 <Label x:Name="DropText" Foreground="{StaticResource TextDark}" HorizontalContentAlignment="Center">Choose image or drag here</Label>
                                             </StackPanel>

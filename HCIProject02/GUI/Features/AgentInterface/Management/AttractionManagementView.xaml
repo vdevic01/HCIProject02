@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Management"
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="Management" 
              mc:Ignorable="d" 
-                          xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
+             
+             xmlns:converters="clr-namespace:HCIProject02.GUI.Converters"
 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
@@ -23,6 +26,9 @@
             <converters:DateConverter x:Key="DateConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
     <Grid>
         <Border Padding="15 0 15 15">
             <Grid>
@@ -46,13 +52,46 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Button Content="Add" Command="{Binding CreateCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="70px"/>
-                    <Button Content="Remove" Command="{Binding DeleteCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="90px"/>
-                    <Button Content="Update" Command="{Binding UpdateCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px"/>
-                    <Button Content="Details" Command="{Binding DetailsCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="90px"/>
+                    <Button l:HelpProvider.HelpKey="Management"  Content="Add" Command="{Binding CreateCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="70px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Add new attraction
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button l:HelpProvider.HelpKey="Management"  Content="Remove" Command="{Binding DeleteCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="90px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Remove selected attraction
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button l:HelpProvider.HelpKey="Management"  Content="Update" Command="{Binding UpdateCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Update selected attraction
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
+                    <Button  l:HelpProvider.HelpKey="Management" Content="Details" Command="{Binding DetailsCommand}" Style="{StaticResource DefaultButtonStyle}" Grid.Column="3" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="90px">
+                        <Button.ToolTip>
+                            <StackPanel Orientation="Horizontal">
+                                <Label  >
+                                    Details about selected attraction
+                                </Label>
+                            </StackPanel>
+                        </Button.ToolTip>
+                    </Button>
 
                 </Grid>
                 <DataGrid Grid.Row="2"
+                          l:HelpProvider.HelpKey="Management" 
                           Background="{StaticResource DefaultBackground}"
                           AutoGenerateColumns="False"
                           SelectionMode="Single"

@@ -5,6 +5,7 @@
     <TargetFramework>net6.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Images\Static\serbia-icon.ico</ApplicationIcon>
   </PropertyGroup>
 	<Target Name="CopyHelpFiles" AfterTargets="Build">
 		<ItemGroup>
@@ -21,6 +22,7 @@
     <None Remove="GUI\Fonts\NotoSans-Light.ttf" />
     <None Remove="GUI\Fonts\password.ttf" />
     <None Remove="Resources\Images\Static\cloud.png" />
+    <None Remove="Resources\Images\Static\serbia-icon.ico" />
     <None Remove="Resources\register_cover.jpg" />
     <None Remove="Resources\test_img.png" />
   </ItemGroup>
