@@ -85,7 +85,7 @@
                                 <Label FontSize="14" Style="{StaticResource DefaultText}" Content="{Binding Arrangement.Price, Converter={StaticResource PriceConverter}}"/>
                                 <StackPanel Orientation="Horizontal">
                                     <Label FontSize="14" Style="{StaticResource DefaultText}" Content="Hotel: "/>
-                                    <Button VerticalAlignment="Center" FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Arrangement.Hotel.Name}"/>
+                                    <Button VerticalAlignment="Center" FontSize="14" Command="{Binding HotelCommand}" Style="{StaticResource LinkText}" Content="{Binding Arrangement.Hotel.Name}"/>
                                     <StackPanel.ToolTip>
                                         <StackPanel Orientation="Horizontal">
                                             <Label>
@@ -106,7 +106,7 @@
                             <ItemsControl ItemsSource="{Binding Arrangement.Attractions}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <Button Margin="0 2" VerticalAlignment="Center" FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Name}"/>
+                                        <Button Margin="0 2" VerticalAlignment="Center" Command="{Binding AttractionCommand}" CommandParameter="{Binding}"  FontSize="14" Style="{StaticResource LinkText}" Content="{Binding Name}"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

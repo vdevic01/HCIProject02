@@ -1,7 +1,8 @@
 ﻿using HCIProject02.Core.Model;
 using HCIProject02.Core.Repository;
 using HCIProject02.Core.Repository.Travel;
-
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HCIProject02.Core.Service.Travel.Implementation
 {
@@ -21,12 +22,21 @@ namespace HCIProject02.Core.Service.Travel.Implementation
 
         public Attraction? GetAttractionByName(string name)
         {
-           return this.attractionRepository.FindAttractionByName(name);
+            return this.attractionRepository.FindAttractionByName(name);
         }
 
         public Attraction? Update(Attraction attraction)
         {
             return this.attractionRepository.Update(attraction);
+        }
+        public List<Attraction> GetAll()
+        {
+            return attractionRepository.GetAll().ToList();
+        }
+
+        public Attraction Delete(Attraction attraction)
+        {
+            return attractionRepository.Delete(attraction.Id);
         }
     }
 }

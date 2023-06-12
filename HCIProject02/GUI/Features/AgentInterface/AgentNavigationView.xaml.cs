@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HCIProject02.HelpSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,9 @@ namespace HCIProject02.GUI.Features.AgentInterface
             InitializeComponent();
         }
         private bool isReversed = false;
-        private void NavigationButton_Click(object sender, RoutedEventArgs e)
+        private void AgentNavigationButton_Click(object sender, RoutedEventArgs e)
         {
-            var storyboard = (Storyboard)FindResource("NavigationStoryboard");
+            var storyboard = (Storyboard)FindResource("AgentNavigationStoryboard");
 
             var marginFrom = new Thickness(0, 0, -150, 0);
             var marginTo = new Thickness(0);
@@ -43,9 +44,23 @@ namespace HCIProject02.GUI.Features.AgentInterface
             animation.From = marginFrom;
             animation.To = marginTo;
 
-            storyboard.Begin(NavigationPanel);
+            storyboard.Begin(AgentNavigationPanel);
 
             isReversed = !isReversed;
+        }
+
+        private void CommandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            IInputElement focusedControl = FocusManager.GetFocusedElement(Application.Current.Windows[0]);
+            if (focusedControl is DependencyObject)
+            {
+                string str = HelpProvider.GetHelpKey((DependencyObject)focusedControl);
+                HelpProvider.ShowHelp(str, Window.GetWindow(this));
+            }
+            else
+            {
+                HelpProvider.ShowHelp("AgentNavigation", Window.GetWindow(this));
+            }
         }
     }
 }

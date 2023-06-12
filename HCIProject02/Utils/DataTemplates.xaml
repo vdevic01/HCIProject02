@@ -2,8 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:clientInterface="clr-namespace:HCIProject02.GUI.Features.ClientInterface"
                     xmlns:agentInterface="clr-namespace:HCIProject02.GUI.Features.AgentInterface"
+                    xmlns:management="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Management"
+                    xmlns:arrangement="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements"
+                    xmlns:attrdnd="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Arrangements.DragAndDrop"
                     xmlns:restaurants="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Restaurants"
                     xmlns:attractions="clr-namespace:HCIProject02.GUI.Features.ClientInterface.Attractions"
+                    xmlns:report="clr-namespace:HCIProject02.GUI.Features.AgentInterface.Report"
                     xmlns:dialogs="clr-namespace:HCIProject02.GUI.Dialog.Implementations"
                     xmlns:loginAndRegister="clr-namespace:HCIProject02.GUI.Features.LoginAndRegister">
     <DataTemplate DataType="{x:Type loginAndRegister:LoginViewModel}">
@@ -23,6 +27,15 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:ArrangementViewModel}">
         <clientInterface:ArrangementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllAttractionsViewModel}">
+        <clientInterface:AllAttractionsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllHotelsViewModel}">
+            <clientInterface:AllHotelsView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:AllRestaurantsViewModel}">
+        <clientInterface:AllRestaurantsView/>
     </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:MyBookingsViewModel}">
         <clientInterface:MyBookingsView/>
@@ -61,5 +74,35 @@
     </DataTemplate>
     <DataTemplate DataType="{x:Type clientInterface:NewHotelViewModel}">
         <clientInterface:NewHotelView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type clientInterface:MapViewModel}">
+        <clientInterface:MapView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type agentInterface:HotelManagementViewModel}">
+        <agentInterface:HotelManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type agentInterface:AgentMapViewModel}">
+        <agentInterface:AgentMapView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type management:ArrangementManagementViewModel}">
+        <management:ArrangementManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type arrangement:NewArrangementViewModel}">
+        <arrangement:NewArrangementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type arrangement:UpdateArrangementViewModel}">
+        <arrangement:UpdateArrangementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type attrdnd:AttractionListingViewModel}">
+        <attrdnd:AttractionListingView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type management:RestaurantManagementViewModel}">
+        <management:RestaurantManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type management:AttractionManagementViewModel}">
+        <management:AttractionManagementView/>
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type report:ReportViewModel}">
+        <report:ReportView/>
     </DataTemplate>
 </ResourceDictionary>

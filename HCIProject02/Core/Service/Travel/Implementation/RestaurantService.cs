@@ -21,6 +21,11 @@ namespace HCIProject02.Core.Service.Travel.Implementation
             return this.restaurantRepository.Create(restaurant);
         }
 
+        public List<Restaurant> GetAll()
+        {
+            return this.restaurantRepository.GetAll().ToList();
+        }
+
         public Restaurant? GetRestaurantByName(string name)
         {
             return this.restaurantRepository.FindRestaurantByName(name);
@@ -29,6 +34,11 @@ namespace HCIProject02.Core.Service.Travel.Implementation
         public Restaurant? Update(Restaurant restaurant)
         {
             return this.restaurantRepository.Update(restaurant);
+        }
+
+        public Restaurant Delete(Restaurant restaurant)
+        {
+            return this.restaurantRepository.Delete(restaurant.Id);
         }
     }
 }

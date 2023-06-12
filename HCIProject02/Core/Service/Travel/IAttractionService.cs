@@ -13,5 +13,7 @@ namespace HCIProject02.Core.Service.Travel
         public Attraction Create(Attraction attraction);
         public Attraction? Update(Attraction attraction);
         public Attraction? GetAttractionByName(string name);
+        public List<Attraction> GetAll();
+        public Attraction Delete(Attraction attraction);
     }
 }

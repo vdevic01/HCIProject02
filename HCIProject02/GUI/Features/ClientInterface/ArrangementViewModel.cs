@@ -4,7 +4,9 @@ using HCIProject02.Core.Model;
 using HCIProject02.Core.Service.Travel;
 using HCIProject02.GUI.Dialog;
 using HCIProject02.GUI.Dialog.Implementations;
+using HCIProject02.GUI.DTO;
 using HCIProject02.GUI.ViewModel;
+using HCIProject02.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +54,8 @@ namespace HCIProject02.GUI.Features.ClientInterface
 
         #region Commands
         public ICommand BookCommand { get; }
+        public ICommand AttractionCommand { get; }
+        public ICommand HotelCommand { get; }
         #endregion
 
         #region Services
@@ -59,10 +63,25 @@ namespace HCIProject02.GUI.Features.ClientInterface
         private readonly IBookingService _bookingService;
         #endregion
 
+        private void NavigateToHotelView()
+        {
+            NavigatorEventDTO dto = new NavigatorEventDTO(Arrangement.Hotel, ViewType.ArrangementView);
+            Navigator.FireEvent(ViewType.InfoHotelView, dto);
+        }
+
+        private void NavigateToAttractionView(Attraction attraction)
+        {
+            NavigatorEventDTO dto = new NavigatorEventDTO(attraction, ViewType.ArrangementView);
+            Navigator.FireEvent(ViewType.InfoAttractionView, dto);
+        }
+
         public ArrangementViewModel(IDialogService dialogService, IBookingService bookingService)
         {
             _bookingService = bookingService;
             _dialogService = dialogService;
+            HotelCommand = new RelayCommand(obj => NavigateToHotelView());
+            AttractionCommand = new RelayCommand(obj => NavigateToAttractionView(obj as Attraction));
+
             BookCommand = new RelayCommand(obj =>
             {
                 var yesNoDialog = new YesNoDialogViewModel("Arrangement booking confirmation", "Are you sure you want to book this arrangement?");

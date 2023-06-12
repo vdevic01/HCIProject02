@@ -1,5 +1,6 @@
 ﻿using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
+using HCIProject02.GUI.Features.AgentInterface;
 using HCIProject02.GUI.Features.ClientInterface;
 using HCIProject02.GUI.Features.AgentInterface;
 using HCIProject02.GUI.Features.LoginAndRegister;

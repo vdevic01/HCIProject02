@@ -1,21 +1,22 @@
 ﻿using HCIProject02.Commands;
 using HCIProject02.Core.Model;
 using HCIProject02.Core.Ninject;
+using HCIProject02.Core.Service.Travel;
+using HCIProject02.GUI.DTO;
+using HCIProject02.GUI.Features.AgentInterface.Arrangements;
+using HCIProject02.GUI.Features.AgentInterface.Management;
+using HCIProject02.GUI.Features.AgentInterface.Report;
 using HCIProject02.GUI.Features.ClientInterface;
+using HCIProject02.GUI.Features.ClientInterface.Attractions;
+using HCIProject02.GUI.Features.ClientInterface.Restaurants;
 using HCIProject02.GUI.ViewModel;
 using HCIProject02.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using System.Windows;
-using HCIProject02.GUI.DTO;
+using System.Windows.Input;
 
 namespace HCIProject02.GUI.Features.AgentInterface
 {
-    class AgentNavigationViewModel : NavigableViewModel
+    public class AgentNavigationViewModel : NavigableViewModel
     {
         #region Properties
         public User? AuthenticatedUser { get; set; }
@@ -35,7 +36,13 @@ namespace HCIProject02.GUI.Features.AgentInterface
 
         #region Commands
         public ICommand LogoutCommand { get; }
-        public ICommand DestinationsCommand { get; }
+        public ICommand HotelManagementCommand { get; }
+        public ICommand AttractionManagementCommand { get; }
+        public ICommand ArrangementManagementCommand { get; }
+        public ICommand RestaurantManagementCommand { get; }
+        public ICommand MapCommand { get; }
+
+        public ICommand ReportCommand { get; }
 
         private ICommand _returnCommand;
         public ICommand ReturnCommand
@@ -48,53 +55,180 @@ namespace HCIProject02.GUI.Features.AgentInterface
             }
         }
         #endregion
+        #region Services
+        private readonly IArrangementService _arrangementService;
+        #endregion
 
         private void LogoutUser()
         {
             AuthenticatedUser = null;
-            Navigator.RemoveHandler(ViewType.ArrangementView);
             Navigator.FireEvent(ViewType.LoginView);
         }
-        private void NavigateToDestinationsView()
+        private void NavigateToHotelManagementView()
         {
             ReturnButtonVisibility = Visibility.Collapsed;
-            DestinationsViewModel viewModel = ServiceLocator.Get<DestinationsViewModel>();
+            HotelManagementViewModel viewModel = ServiceLocator.Get<HotelManagementViewModel>();
             SwitchCurrentViewModel(viewModel);
         }
-        public AgentNavigationViewModel()
+
+        private void NavigateToAttractionManagementView()
         {
-            _returnButtonVisibility = Visibility.Collapsed;
-            RegisterHandlers();
-            NavigateToDestinationsView();
-            DestinationsCommand = new RelayCommand(obj => NavigateToDestinationsView());
-            LogoutCommand = new RelayCommand(obj => LogoutUser());
+            ReturnButtonVisibility = Visibility.Collapsed;
+            AttractionManagementViewModel viewModel = ServiceLocator.Get<AttractionManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
         }
+
+        private void NavigateToRestaurantManagementView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            RestaurantManagementViewModel viewModel = ServiceLocator.Get<RestaurantManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
+        private void NavigateToArrangementManagementView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            ArrangementManagementViewModel viewModel = ServiceLocator.Get<ArrangementManagementViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
+        private void NavigateToMapView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            AgentMapViewModel viewModel = ServiceLocator.Get<AgentMapViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+
+        private void NavigateToReportView()
+        {
+            ReturnButtonVisibility = Visibility.Collapsed;
+            ReportViewModel viewModel = ServiceLocator.Get<ReportViewModel>();
+            SwitchCurrentViewModel(viewModel);
+        }
+        public AgentNavigationViewModel(IArrangementService arrangementService) {
+            _arrangementService = arrangementService;
+            RegisterHandlers();
+            _returnButtonVisibility = Visibility.Collapsed;
+            LogoutCommand = new RelayCommand(obj => LogoutUser());
+            HotelManagementCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+            RestaurantManagementCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            ArrangementManagementCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            AttractionManagementCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+            MapCommand = new RelayCommand(obj => NavigateToMapView());
+            ReportCommand = new RelayCommand(obj => NavigateToReportView());
+            NavigateToMapView();
+        }
+
         private void RegisterHandlers()
         {
-            Navigator.RegisterHandler(ViewType.ArrangementView, (obj) =>
+            Navigator.RegisterHandler(ViewType.NewHotelView, () =>
             {
-                if (obj == null)
-                {
-                    return;
-                }
                 ReturnButtonVisibility = Visibility.Visible;
-                NavigatorEventDTO navigatorEventDTO = (NavigatorEventDTO)obj;
-                Arrangement arrangement = (Arrangement)navigatorEventDTO.Payload;
-                ViewType eventInvoker = navigatorEventDTO.EventInvoker;
-                ReturnCommand = new RelayCommand(param =>
-                {
-                    ReturnButtonVisibility = Visibility.Collapsed;
-                    switch (eventInvoker)
-                    {
-                        case ViewType.DestinationsView:
-                            NavigateToDestinationsView();
-                            break;
-                    }
-                });
-                ArrangementViewModel viewModel = ServiceLocator.Get<ArrangementViewModel>();
-                viewModel.Arrangement = arrangement;
-                viewModel.AuthenticatedUser = AuthenticatedUser;
+                NewHotelViewModel viewModel = ServiceLocator.Get<NewHotelViewModel>();
                 SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateHotelView, obj =>
+            {
+                NavigatorEventDTO hotelInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateHotelViewModel viewModel = ServiceLocator.Get<UpdateHotelViewModel>();
+                viewModel.Hotel = (Hotel?)hotelInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToHotelManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.InfoHotelView, obj =>
+            {
+                NavigatorEventDTO hoteInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                InfoHotelViewModel viewModel = ServiceLocator.Get<InfoHotelViewModel>();
+                viewModel.Hotel = (Hotel)hoteInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = hoteInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToHotelManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
+
+            });
+            Navigator.RegisterHandler(ViewType.ArrangementView, obj =>
+            {
+                NavigatorEventDTO arrangementInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                ArrangementViewModel viewModel = ServiceLocator.Get<ArrangementViewModel>();
+                viewModel.Arrangement = (Arrangement?)arrangementInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.NewArrangementView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewArrangementViewModel viewModel = ServiceLocator.Get<NewArrangementViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.NewRestaurantView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewRestaurantViewModel viewModel = ServiceLocator.Get<NewRestaurantViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateRestaurantView, obj =>
+            {
+                NavigatorEventDTO restaurantInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateRestaurantViewModel viewModel = ServiceLocator.Get<UpdateRestaurantViewModel>();
+                viewModel.Restaurant = (Restaurant?)restaurantInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToRestaurantManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.InfoRestaurantView, obj =>
+            {
+                NavigatorEventDTO restaurantInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                InfoRestaurantViewModel viewModel = ServiceLocator.Get<InfoRestaurantViewModel>();
+                viewModel.Restaurant = (Restaurant)restaurantInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = restaurantInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToRestaurantManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
+            });
+            Navigator.RegisterHandler(ViewType.NewAttractionView, () =>
+            {
+                ReturnButtonVisibility = Visibility.Visible;
+                NewAttractionViewModel viewModel = ServiceLocator.Get<NewAttractionViewModel>();
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateAttractionView, obj =>
+            {
+                NavigatorEventDTO attractionInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateAttractionViewModel viewModel = ServiceLocator.Get<UpdateAttractionViewModel>();
+                viewModel.Attraction = (Attraction?)attractionInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToAttractionManagementView());
+            });
+            Navigator.RegisterHandler(ViewType.InfoAttractionView, obj =>
+            {
+                NavigatorEventDTO attractionInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                InfoAttractionViewModel viewModel = ServiceLocator.Get<InfoAttractionViewModel>();
+                viewModel.Attraction = (Attraction)attractionInfo.Payload;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = attractionInfo.EventInvoker is ViewType.HotelManagementView
+                    ? new RelayCommand(obj => NavigateToAttractionManagementView())
+                    : new RelayCommand(obj => NavigateToMapView());
+            });
+            Navigator.RegisterHandler(ViewType.UpdateArrangementView, obj =>
+            {
+                NavigatorEventDTO arrangementInfo = (NavigatorEventDTO)obj;
+                ReturnButtonVisibility = Visibility.Visible;
+                UpdateArrangementViewModel viewModel = ServiceLocator.Get<UpdateArrangementViewModel>();
+                Arrangement? arragementProxy = (Arrangement)arrangementInfo.Payload;
+                Arrangement? arrangement = _arrangementService.GetArrangementByName(arragementProxy.Name);
+                viewModel.SelectedArrangement = arrangement;
+                SwitchCurrentViewModel(viewModel);
+                ReturnCommand = new RelayCommand(obj => NavigateToArrangementManagementView());
             });
         }
     }

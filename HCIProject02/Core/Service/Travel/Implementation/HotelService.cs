@@ -32,5 +32,14 @@ namespace HCIProject02.Core.Service.Travel.Implementation
         {
             return hotelRepository.FindHotelByName(name);
         }
+        public List<Hotel> GetAll()
+        {
+            return hotelRepository.GetAll().ToList();
+        }
+
+        public Hotel Delete(Hotel hotel)
+        {
+            return hotelRepository.Delete(hotel.Id);
+        }
     }
 }

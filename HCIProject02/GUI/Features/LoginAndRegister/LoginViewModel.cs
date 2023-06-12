@@ -83,6 +83,8 @@ namespace HCIProject02.GUI.Features.LoginAndRegister
             {
                 Navigator.FireEvent(ViewType.AgentHome, user);
             }
+
+       
         }
 
         private void NavigateToRegisterView()

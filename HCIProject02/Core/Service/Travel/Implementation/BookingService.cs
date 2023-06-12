@@ -28,6 +28,23 @@ namespace HCIProject02.Core.Service.Travel.Implementation
             
         }
 
+        public List<Booking> GetBookingByMonth(DateTime dateTime)
+        {
+            int month = dateTime.Month;
+            int year = dateTime.Year;
+
+            return _bookingRepository.GetAll()
+                .Where(booking => booking.Arrangement.DepartureTime.Month == month && booking.Arrangement.DepartureTime.Year == year)
+                .ToList();
+        }
+
+        public List<Booking> GetBookingsByArrangement(Arrangement arrangement)
+        {
+            return _bookingRepository.GetAll()
+                .Where(booking => booking.Arrangement.Id == arrangement.Id)
+                .ToList();
+        }
+
         public List<Booking> GetBookingsForUser(Client user)
         {
             return _bookingRepository.GetBookingsForPassenger(user);

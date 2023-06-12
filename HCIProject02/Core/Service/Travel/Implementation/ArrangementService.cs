@@ -17,11 +17,26 @@ namespace HCIProject02.Core.Service.Travel.Implementation
             this.arrangementRepository = arrangementRepository;
         }
 
+        public Arrangement Create(Arrangement arrangement)
+        {
+            return arrangementRepository.Create(arrangement);
+        }
+
+        public Arrangement Delete(Arrangement arrangement)
+        {
+            return arrangementRepository.Delete(arrangement.Id);
+        }
+
         public List<Arrangement> GetAll()
         {
             return arrangementRepository.GetAll().ToList();
         }
 
+
+        public Arrangement? Update(Arrangement arrangement)
+        {
+            return arrangementRepository.Update(arrangement);
+        }
         public Arrangement? GetArrangementByName(string name)
         {
             return this.arrangementRepository.FindArrangementByName(name);
