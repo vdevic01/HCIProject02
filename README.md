@@ -52,3 +52,7 @@ implementira XAML. <br/>
 3. Za primer rukovanja sa mapom i kako se postavlja kljuc iz konfiguracionog fajla u varijablu, pogledati klasu NewHotelView.xaml.cs. <br/>
 
 4. Za dobavljanje adrese na osnovu koordinata salje se HTTP zahtev preko Newtonsoft.Json.Linq, pa ce verovatno trebati da se uradi install tog paketa
+
+=============================================================================================================================================================
+Uputstvo za Chart:
+1. Instaliraj LiveCharts.Wpf

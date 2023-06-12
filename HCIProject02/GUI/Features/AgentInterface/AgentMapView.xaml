@@ -7,6 +7,8 @@
              xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF"  
              xmlns:local="clr-namespace:HCIProject02.GUI.Features.AgentInterface"
              xmlns:behaviors="clr-namespace:HCIProject02.GUI.Behaviors"
+             xmlns:l="clr-namespace:HCIProject02.HelpSystem"
+             l:HelpProvider.HelpKey="MainMap" 
              mc:Ignorable="d" 
              Background="{StaticResource DefaultBackground}"
              d:DesignHeight="430" d:DesignWidth="750">
@@ -15,7 +17,9 @@
             <converters:LatitudeLongitudeToLocationConverter x:Key="LatitudeLongitudeConverter"/>
         </ResourceDictionary>
     </UserControl.Resources>
-
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" Executed="CommandBinding_Executed"/>
+    </UserControl.CommandBindings>
 
     <Grid>
         <Border Padding="15 0 15 15">
@@ -38,11 +42,13 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px"/>
-                    <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Attractions" IsChecked="{Binding ShowAttractions}"  Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
-                    <CheckBox Style="{StaticResource DefaulCheckbox}" Content="Restaurants" IsChecked="{Binding ShowRestaurants}"  Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
+
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Hotels" IsChecked="{Binding ShowHotels}"  Grid.Column="0" Grid.Row="0" Height="35px"  FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="80px"/>
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Attractions" IsChecked="{Binding ShowAttractions}"  Grid.Column="1" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
+                    <CheckBox l:HelpProvider.HelpKey="MainMap" Style="{StaticResource DefaulCheckbox}" Content="Restaurants" IsChecked="{Binding ShowRestaurants}"  Grid.Column="2" Grid.Row="0" Height="35px" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,0" Width="120px"/>
+
                 </Grid>
-                <Grid Grid.Row="1">
+                <Grid Grid.Row="1" l:HelpProvider.HelpKey="MainMap" >
                     <m:Map CredentialsProvider="YOUR_MAP_KEY" x:Name="myMap">
                         <m:MapItemsControl ItemsSource="{Binding PointsOfInterest}">
                             <m:MapItemsControl.ItemTemplate>
