@@ -154,7 +154,7 @@
                                 </StackPanel>
                                 <Path Height="150" Width="150" Grid.Column="1">
                                     <Path.Fill>
-                                        <ImageBrush ImageSource="{Binding Arrangement.ImagePath}" Stretch="UniformToFill" />
+                                        <ImageBrush ImageSource="{Binding Hotel.ImagePath}" Stretch="UniformToFill" />
                                     </Path.Fill>
                                     <Path.Data>
                                         <EllipseGeometry Center="75,75" RadiusX="75" RadiusY="75" />

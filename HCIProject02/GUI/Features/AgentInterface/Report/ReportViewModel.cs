@@ -261,7 +261,7 @@ namespace HCIProject02.GUI.Features.AgentInterface.Report
         private void GenerateArrangementChartData(List<Booking> bookings)
         {
             var groupedBookings = bookings
-                .GroupBy(booking => new { Month = booking.BookingTime.Month, Year = booking.BookingTime.Year })
+                .GroupBy(booking => new { Month = booking.CreatedAt.Month, Year = booking.CreatedAt.Year })
                 .OrderBy(group => group.Key.Year)
                 .ThenBy(group => group.Key.Month)
                 .ToList();

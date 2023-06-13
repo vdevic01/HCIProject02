@@ -187,12 +187,22 @@ namespace HCIProject02.GUI.Features.AgentInterface.Arrangements
                 ErrorMessage = "Image is required";
                 return;
             }
-            if (string.IsNullOrEmpty(SelectedHotel.Name))
+            if (SelectedHotel == null)
             {
                 ErrorMessage = "Pick a hotel";
                 return;
             }
-            if(ReturnDate < DepartureDate)
+            if (string.IsNullOrEmpty(Price))
+            {
+                ErrorMessage = "Enter a price";
+                return;
+            }
+            if ( Double.Parse(Price)  <= 0)
+            {
+                ErrorMessage = "Enter a positive value!";
+                return;
+            }
+            if (ReturnDate < DepartureDate)
             {
                 ErrorMessage = "Return date can not be before the departure date";
                 return;
